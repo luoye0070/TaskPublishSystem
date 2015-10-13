@@ -1,0 +1,35 @@
+<plugin name='resource-manage-plugin' version='0.2' grailsVersion='2.2 &gt; *'>
+  <author>Your name</author>
+  <title>Resource Manage Plugin Plugin</title>
+  <description>Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/resource-manage-plugin</documentation>
+  <type>ResourceManagePluginGrailsPlugin</type>
+  <resources>
+    <resource>com.lj.rmp.controller.ResourceFileController</resource>
+    <resource>com.lj.rmp.data.ResourceFileInfo</resource>
+    <resource>com.lj.rmp.service.ResourceFilesService</resource>
+    <resource>com.lj.rmp.service.UploadFileService</resource>
+    <resource>com.lj.rmp.service.WebUtilForRmpService</resource>
+    <resource>com.lj.rmp.tags.OneTagTagLib</resource>
+    <resource>com.lj.rmp.tags.SecondTagLib</resource>
+    <resource>com.lj.rmp.utils.CalendarUtil</resource>
+    <resource>com.lj.rmp.utils.FormatUtil</resource>
+    <resource>com.lj.rmp.utils.HttpSessionListenerCustom</resource>
+    <resource>com.lj.rmp.utils.I18nError</resource>
+    <resource>com.lj.rmp.utils.Number</resource>
+    <resource>com.lj.rmp.utils.StrCheckUtil</resource>
+    <resource>com.lj.rmp.utils.StringUtil</resource>
+    <resource>com.lj.rmp.utils.Time</resource>
+    <resource>com.lj.rmp.utils.TypeConversion</resource>
+    <resource>com.lj.rmp.utils.ValidationCode</resource>
+  </resources>
+  <repositories>
+    <repository name='grailsCentral' url='http://grails.org/plugins' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
+  </repositories>
+  <dependencies />
+  <plugins />
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>
