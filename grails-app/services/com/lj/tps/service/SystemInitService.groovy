@@ -16,9 +16,9 @@ class SystemInitService {
 
     //初始化Request
     void initRequest(){
-        if(!Requestmap.findByUrl("/")){
-            new Requestmap(url:'/',configAttribute:"authenticated").save(flush: true);
-            log.info("初始化之首页权限配置：/");
+        if(!Requestmap.findByUrl("/manage/**")){
+            new Requestmap(url:'/manage/**',configAttribute:"authenticated").save(flush: true);
+            log.info("初始化之管理后台权限配置：/");
         }
 //        if(!Requestmap.findByUrl("/dd/**")){
 //            new Requestmap(url:'/dd/**',configAttribute:"hasAnyRole('R_DEV','R_ADMIN','R_NORMAL_USER')").save(flush: true);
