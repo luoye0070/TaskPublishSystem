@@ -1,3 +1,7 @@
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.support.PropertiesLoaderUtils
+
+def propertiesdef = PropertiesLoaderUtils.loadProperties(new ClassPathResource("datasource.properties"))
 dataSource {
     pooled = true
     driverClassName = "org.h2.Driver"
@@ -13,8 +17,16 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+//            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "ljsj_2009"
+            password = "ljgzs2009LJ"
+            dialect = "org.hibernate.dialect.MySQLDialect"
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:mysql://115.28.150.164:3306/tps_dev?useUnicode=true&autoreconnect=true&characterEncoding=UTF-8"
+            logSql = true
         }
     }
     test {
@@ -25,8 +37,11 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = propertiesdef.getProperty("username");//"ljsj"
+            password = propertiesdef.getProperty("password");
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = propertiesdef.getProperty("url");//"jdbc:mysql://127.0.0.1:3306/piccxmcs?useUnicode=true&autoreconnect=true&characterEncoding=UTF-8"
             pooled = true
             properties {
                maxActive = -1
