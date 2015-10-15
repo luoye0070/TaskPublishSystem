@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>注册用户</title>
+    <title>用户信息修改</title>
     <link href="${resource(dir: 'js/bui/css', file: 'dpl-min.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir: 'js/bui/css', file: 'bui-min.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir: 'js/bui/css', file: 'page-min.css')}" rel="stylesheet" type="text/css"/>
@@ -32,7 +32,7 @@
 </div>
 <div id="create-tpsUser" style="margin: 10px;" role="main">
 
-    <g:form action="register" controller="userReg" class="form-horizontal" >
+    <g:form action="edit" controller="user" class="form-horizontal" >
         <%@ page import="com.lj.tps.data.TpsUser" %>
 
 
@@ -45,7 +45,7 @@
                 </label>
                 <div class="controls control-row-auto">
 
-                    <g:textField name="username" required="" value="${params.username}"/>
+                    <g:textField name="username" required="" value="${tpsUserInstance?.username}"/>
 
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 </label>
                 <div class="controls control-row-auto">
 
-                    <g:textField name="IDNumber" maxlength="24" required="" value="${params.IDNumber}"/>
+                    <g:textField name="IDNumber" maxlength="24" required="" value="${tpsUserInstance?.IDNumber}"/>
 
                 </div>
             </div>
@@ -71,7 +71,7 @@
                 </label>
                 <div class="controls control-row-auto">
 
-                    <g:textField name="mobileNumber" maxlength="16" required="" value="${params.mobileNumber}"/>
+                    <g:textField name="mobileNumber" maxlength="16" required="" value="${tpsUserInstance?.mobileNumber}"/>
 
                 </div>
             </div>
@@ -82,33 +82,7 @@
                 </label>
                 <div class="controls control-row-auto">
 
-                    <g:textField name="realName" value="${params.realName}"/>
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="control-group span12">
-                <label class="control-label" for="password">
-                    <s>*</s><g:message code="member.password.label" default="Password" />：
-                </label>
-                <div class="controls control-row-auto">
-
-                    <g:passwordField name="password" required="" value="${params.password}"/>
-
-                </div>
-            </div>
-
-            <div class="control-group span12">
-                <label class="control-label" for="password">
-                    <s>*</s><g:message code="member.rePassword.label" default="Password" />：
-                </label>
-                <div class="controls control-row-auto">
-
-                    <g:passwordField name="rePassword" required="" value="${params.rePassword}"/>
+                    <g:textField name="realName" value="${tpsUserInstance?.realName}"/>
 
                 </div>
             </div>
@@ -123,7 +97,7 @@
                 </label>
                 <div class="controls control-row-auto">
 
-                    <g:textField name="unitName" maxlength="128" value="${params.unitName}" style="width: 300px;"/>
+                    <g:textField name="unitName" maxlength="128" value="${tpsUserInstance?.unitName}" style="width: 300px;"/>
 
                 </div>
             </div>
@@ -135,7 +109,7 @@
             <label class="control-label">&nbsp;</label>
             <div class="controls">
                 <button type="submit" class="button">
-                    ${message(code: 'default.button.register.label', default: 'Register')}
+                    ${message(code: 'default.button.save.label', default: 'Save')}
                 </button>
             </div>
         </div>

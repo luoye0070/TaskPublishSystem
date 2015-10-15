@@ -11,7 +11,7 @@ class TpsUser extends Member {
         IDNumber(nullable: false,blank: false,maxSize: 24);
         mobileNumber(nullable: false,blank: false,maxSize: 16,validator: {
             if (it) {
-                if (!StrCheckUtil.chkStrFormat(it, "phone")) {
+                if (!StrCheckUtil.chkStrFormat(it, "mobile")) {
                     return ["formatError"]
                 }
             }

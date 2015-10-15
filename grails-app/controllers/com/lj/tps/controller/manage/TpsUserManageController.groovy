@@ -7,6 +7,7 @@ import com.lj.csp.data.Roles
 import com.lj.csp.data.RolesAuthority
 import com.lj.csp.enumCustom.ReCode
 import com.lj.tps.data.TpsUser
+import com.lj.utils.I18nError
 import com.lj.utils.TypeConversion
 import grails.converters.JSON
 
@@ -57,7 +58,8 @@ class TpsUserManageController {
 
                 if (!member.save(flush: true)) {
                     println member.errors
-                    render(ReCode.NEW_FAIL as JSON);
+                    def reInfo=[success:false,msg:I18nError.getMessage(g, member.errors.allErrors)];
+                    render(reInfo as JSON);
                     return
                 }else{
 
@@ -78,13 +80,12 @@ class TpsUserManageController {
 
                     }
                     render(([member:member] << ReCode.NEW_SUCCESS) as JSON)
-                    return
                 }
             }catch(Exception e){
                 println e
                 status.setRollbackOnly()
-                render(ReCode.NEW_FAIL as JSON);
-                return
+                def reInfo=[success:false,msg:e.getMessage()];
+                render(reInfo as JSON);
             }
         }
 
@@ -105,7 +106,7 @@ class TpsUserManageController {
             params.passwordExpired=false;
         }
         System.out.println("params1->"+params);
-        def member = TpsUser.get(params.id);
+        TpsUser member = TpsUser.get(params.id);
         if (!member) {
             render(ReCode.NO_RECORD as JSON);
             return
@@ -149,7 +150,9 @@ class TpsUserManageController {
                 }
 
                 if (!member.save(flush: true)) {
-                    render(ReCode.UPDATE_FAIL as JSON);
+                    println(member.errors.allErrors);
+                    def reInfo=[success:false,msg:I18nError.getMessage(g, member.errors.allErrors)];
+                    render(reInfo as JSON);
                     return
                 }
 
@@ -164,12 +167,11 @@ class TpsUserManageController {
 
                 }
                 render(ReCode.UPDATE_SUCCESS as JSON)
-                return
             }catch(Exception e){
                 status.setRollbackOnly()
                 println e
-                render(ReCode.UPDATE_FAIL as JSON)
-                return
+                def reInfo=[success:false,msg:e.getMessage()];
+                render(reInfo as JSON);
             }
         }
     }

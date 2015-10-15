@@ -68,25 +68,25 @@
 			
 				<g:if test="${tpsUserInstance?.username}">
 				<li>
-					<span id="username-label" class="property-label"><g:message code="tpsUser.username.label" default="Username" /></span>
+					<span id="username-label" class="property-label"><g:message code="member.username.label" default="Username" /></span>
 					
 						<span class="property-value" aria-labelledby="username-label"><g:fieldValue bean="${tpsUserInstance}" field="username"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${tpsUserInstance?.password}">
-				<li>
-					<span id="password-label" class="property-label"><g:message code="tpsUser.password.label" default="Password" /></span>
-					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${tpsUserInstance}" field="password"/></span>
-					
-				</li>
-				</g:if>
+				%{--<g:if test="${tpsUserInstance?.password}">--}%
+				%{--<li>--}%
+					%{--<span id="password-label" class="property-label"><g:message code="member.password.label" default="Password" /></span>--}%
+					%{----}%
+						%{--<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${tpsUserInstance}" field="password"/></span>--}%
+					%{----}%
+				%{--</li>--}%
+				%{--</g:if>--}%
 			
 				<g:if test="${tpsUserInstance?.realName}">
 				<li>
-					<span id="realName-label" class="property-label"><g:message code="tpsUser.realName.label" default="Real Name" /></span>
+					<span id="realName-label" class="property-label"><g:message code="member.realName.label" default="Real Name" /></span>
 					
 						<span class="property-value" aria-labelledby="realName-label"><g:fieldValue bean="${tpsUserInstance}" field="realName"/></span>
 					
@@ -122,7 +122,7 @@
 			
 				<g:if test="${tpsUserInstance?.accountExpired}">
 				<li>
-					<span id="accountExpired-label" class="property-label"><g:message code="tpsUser.accountExpired.label" default="Account Expired" /></span>
+					<span id="accountExpired-label" class="property-label"><g:message code="member.accountExpired.label" default="Account Expired" /></span>
 					
 						<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${tpsUserInstance?.accountExpired}" /></span>
 					
@@ -131,7 +131,7 @@
 			
 				<g:if test="${tpsUserInstance?.accountLocked}">
 				<li>
-					<span id="accountLocked-label" class="property-label"><g:message code="tpsUser.accountLocked.label" default="Account Locked" /></span>
+					<span id="accountLocked-label" class="property-label"><g:message code="member.accountLocked.label" default="Account Locked" /></span>
 					
 						<span class="property-value" aria-labelledby="accountLocked-label"><g:formatBoolean boolean="${tpsUserInstance?.accountLocked}" /></span>
 					
@@ -140,7 +140,7 @@
 			
 				<g:if test="${tpsUserInstance?.enabled}">
 				<li>
-					<span id="enabled-label" class="property-label"><g:message code="tpsUser.enabled.label" default="Enabled" /></span>
+					<span id="enabled-label" class="property-label"><g:message code="member.enabled.label" default="Enabled" /></span>
 					
 						<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${tpsUserInstance?.enabled}" /></span>
 					
@@ -149,7 +149,7 @@
 			
 				<g:if test="${tpsUserInstance?.passwordExpired}">
 				<li>
-					<span id="passwordExpired-label" class="property-label"><g:message code="tpsUser.passwordExpired.label" default="Password Expired" /></span>
+					<span id="passwordExpired-label" class="property-label"><g:message code="member.passwordExpired.label" default="Password Expired" /></span>
 					
 						<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${tpsUserInstance?.passwordExpired}" /></span>
 					
@@ -158,16 +158,11 @@
 			
 				<g:if test="${tpsUserInstance?.roles}">
 				<li>
-					<span id="roles-label" class="property-label"><g:message code="tpsUser.roles.label" default="Roles" /></span>
+					<span id="roles-label" class="property-label"><g:message code="member.roles.label" default="Roles" /></span>
 					
 						<g:each in="${tpsUserInstance.roles}" var="r">
 						<span class="property-value" aria-labelledby="roles-label">
-                            %{--<g:link controller="roles" action="show" id="${r.id}">${r?.encodeAsHTML()}--}%
-                            %{--</g:link>--}%
-                            <a class="page-action" href="#" data-href="${createLink(controller:"roles",action: "show",params: [id:r.id])}"
-                            title="${message(code: 'roles.label', default: 'Roles')}详情-[${r.id}]" data-id="roles_show_menu${r.id}">
                             ${r?.encodeAsHTML()}
-                            </a>
                         </span>
 						</g:each>
 					
