@@ -24,9 +24,17 @@ class SystemInitService {
             new Requestmap(url:'/tpsUserManage/**',configAttribute:"hasAnyRole('R_DEV','R_ADMIN')").save(flush: true);
             log.info("初始化之用户管理权限配置：/tpsUserManage/**");
         }
+        if(!Requestmap.findByUrl("/resourceFile/**")){
+            new Requestmap(url:'/resourceFile/**',configAttribute:"hasAnyRole('R_DEV','R_ADMIN')").save(flush: true);
+            log.info("初始化之资源管理权限配置：/resourceFile/**");
+        }
         if(!Requestmap.findByUrl("/user/**")){
             new Requestmap(url:'/user/**',configAttribute:"authenticated").save(flush: true);
             log.info("初始化之用户管理权限配置：/user/**");
+        }
+        if(!Requestmap.findByUrl("/tpsResourceFile/**")){
+            new Requestmap(url:'/tpsResourceFile/**',configAttribute:"authenticated").save(flush: true);
+            log.info("初始化之用户资源管理权限配置：/tpsResourceFile/**");
         }
     }
 
