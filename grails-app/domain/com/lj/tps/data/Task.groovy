@@ -18,24 +18,21 @@ class Task {
     //要求完成日期
     Date crcd
     //联系方式 ，电话、qq、邮箱
-    Integer contactWay
+    Integer contactWay=ContactWay.PHONE.code
     //联系信息
     String contactInfo
-    //任务包附件
-    String attachment
 
     //任务包所属账号
     String username
     //竞标状态
-    Integer status
+    Integer status=TaskStatus.TASK_INIT.code
     static constraints = {
         simpleDesc blank: false,maxSize: 150
-        detailDesc blank: false,maxSize: 10240
+        detailDesc blank: false,maxSize: 1024*10
         price nullable: false,min: new BigDecimal(0)
         crcd nullable: false
         contactWay nullable:false,inList:ContactWay.values()*.code
         contactInfo blank: false
-        attachment blank: true,nullable: true,maxSize: 1024
 
         username blank: false
         status nullable: false, inList:TaskStatus.values()*.code

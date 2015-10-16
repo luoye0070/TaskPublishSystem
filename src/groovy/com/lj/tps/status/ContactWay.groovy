@@ -17,4 +17,12 @@ public enum ContactWay {
         this.code = code
         this.label = label
     }
+
+    public static def getOptions(){
+        [
+                [code:PHONE.code,label:PHONE.label],
+                [code:QQ.code,label:QQ.label],
+                [code:EMAIL.code,label:EMAIL.label]
+        ]
+    }
 }
