@@ -96,5 +96,72 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function(){
+
+        var validform=$(".form-horizontal").Validform({
+            tiptype:3,
+            label:".label",
+            showAllError:true,
+            ajaxPost:false,
+            beforeCheck:function(curform){
+                var editor=$("textarea[name='skillDesc']");
+                if(editor.html()=='<br />' || editor.html()==''){
+                    $.Showmsg("请详细说明您的技术与优势!");
+                    return false;
+                }
+                return true;
+            }
+
+        });
+
+        validform.addRule([{
+            ele:"input[name='price']",
+            datatype:'n',
+            nullmsg:"请输入您要求的价格",
+            errormsg:"请输入数值！"
+        },{
+            ele:"input[name='contactInfo']",
+            datatype:'m',
+            nullmsg:"请输入联系方式！",
+            errormsg:"请输入您的手机号！"
+        }]);
+
+
+        $("select[name='contactWay']").bind("change",function(){
+            var v=$(this).val();
+            if(v=="2"){
+                validform.addRule([
+                    {
+                        ele:"input[name='contactInfo']",
+                        datatype:'n',
+                        nullmsg:"请输入您的QQ号码",
+                        errormsg:"请输入正确的QQ号码！"
+                    }]);
+            }else if(v=="3"){
+                validform.addRule([
+                    {
+                        ele:"input[name='contactInfo']",
+                        datatype:'e',
+                        nullmsg:"请输入您的Email！",
+                        errormsg:"请输入正确的Email！"
+                    }]);
+            } else{
+                validform.addRule([
+                    {
+                        ele:"input[name='contactInfo']",
+                        datatype:'m',
+                        nullmsg:"请输入联系方式！",
+                        errormsg:"请输入您的手机号！"
+                    }]);
+            }
+
+            $("input[name='contactInfo']").val("");
+            validform.check(false,"input[name='contactInfo']");
+        });
+    });
+
+</script>
+
 
 

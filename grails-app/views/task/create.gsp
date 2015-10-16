@@ -8,10 +8,12 @@
     <link href="${resource(dir: 'js/bui/css', file: 'bui-min.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir: 'js/bui/css', file: 'page-min.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir: 'js/kindeditor-4.1.10/themes/default', file: 'default.css')}" rel="stylesheet" type="text/css"/>
+    <link href="${resource(dir: 'css', file: 'Validform.css')}" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.8.1.min.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js/bui', file: 'bui-min.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js/kindeditor-4.1.10', file: 'kindeditor-min.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js/kindeditor-4.1.10/lang', file: 'zh_CN.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'Validform_v5.3.2_min.js')}"></script>
     <script type="text/javascript">
         var tip='请把任务再补充详细些吧。越清晰越具体，任务完成质量越高哦！您也可以插入图片和上传附件！';
 
@@ -59,8 +61,7 @@
                          editor.html('');
                      },
                 afterBlur : function(e){
-                  if (editor.html()=='<br />' || editor.html()=='')
-                     editor.html(tip);
+
                     this.sync();
                  }
             });
@@ -114,7 +115,7 @@
         <div class="span22 offset2">
 
 
-    <g:form action="save" class="form-horizontal" >
+    <g:form action="save" class="form-horizontal">
     <g:render template="form"/>
     <div class="control-group">
         <label class="control-label">&nbsp;</label>
@@ -128,6 +129,8 @@
         </div>
     </div>
  </div>
+
+
 
 
 </body>
