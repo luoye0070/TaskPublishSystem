@@ -2,6 +2,7 @@ package com.lj.tps.service
 
 import com.lj.tps.data.Bid
 import com.lj.tps.data.Task
+import com.lj.tps.data.TpsUser
 import com.lj.tps.status.BidStatus
 import com.lj.tps.status.TaskStatus
 import com.lj.utils.I18nError
@@ -381,5 +382,17 @@ class TaskService {
         }
 
         return false
+    }
+
+    /**
+     * 获取登陆用户其他信息（手机号，邮箱）
+     */
+    def getUserInfo(){
+        def member = springSecurityService.currentUser
+        if(member){
+            return TpsUser.get(id)
+         }
+
+        return null
     }
 }

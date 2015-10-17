@@ -2,6 +2,7 @@ package com.lj.tps.service
 
 import com.lj.tps.data.Bid
 import com.lj.tps.data.Task
+import com.lj.tps.data.TpsUser
 import com.lj.utils.I18nError
 import com.lj.utils.TypeConversion
 
@@ -49,7 +50,7 @@ class BidService {
             }
 
             if (params.showMyBid) {
-                eq("username",springSecurityService.currentUser?.username?:'fala');
+                eq("username",springSecurityService?.currentUser?.username?:'fala');
             }
 
             String task = params.get("task.id");
@@ -100,7 +101,7 @@ class BidService {
      */
     def newBid(){
         def newBid=new Bid()
-        //newBid.contactInfo=springSecurityService?.currentUser?.phone?:""
+        newBid.contactInfo=getUserInfo()?.mobileNumber
         return newBid
     }
 
@@ -129,5 +130,17 @@ class BidService {
 
         res.success=true
         return res
+    }
+
+    /**
+     * 获取登陆用户其他信息（手机号，邮箱）
+     */
+    def getUserInfo(){
+        def member = springSecurityService.currentUser
+        if(member){
+            return TpsUser.get(id)
+        }
+
+        return null
     }
 }
