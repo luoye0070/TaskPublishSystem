@@ -22,7 +22,9 @@ class FormatUtil {
     }
     //格式化日期
     public static String dateFormat(Date date){
-        String dateFormat="1971-01-01";
+        String dateFormat=null;
+        if(!date)
+            date=new Date();
         try {
             SimpleDateFormat sdfDate=new SimpleDateFormat("yyyy-MM-dd");
             dateFormat=sdfDate.format(date);
