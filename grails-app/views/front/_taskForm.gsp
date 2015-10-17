@@ -34,9 +34,8 @@
         <s>*</s><g:message code="task.price.label" default="Price" />：
     </label>
     <div class="controls control-row-auto">
+        <input type="number" name="price" id="price"  value="${taskInstance?.price}" />
 
-        <g:textField name="price" required="" value="${taskInstance?.price}"/>
-        
     </div>
 </div>
 
@@ -113,7 +112,7 @@
             errormsg:"任务标题填写错误，2-50字"
         },{
             ele:"input[name='price']",
-            datatype:'n',
+            datatype:'*',
             nullmsg:"请输入您要求的价格",
             errormsg:"请输入数值！"
         },{
