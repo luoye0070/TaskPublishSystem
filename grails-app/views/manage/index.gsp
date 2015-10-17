@@ -72,7 +72,7 @@
                     {
                         text: '用户',
                         items: [
-                            {id: 'user_menu', text: '用户管理', href: '${createLink(controller:"userApi",action:'member')}'}
+                            {id: 'user_menu', text: '用户管理', href: '${createLink(controller:"tpsUserManage",action:'member')}'}
                             <sec:ifAnyGranted roles="R_DEV">,
                             {id: 'roles_menu', text: '角色管理', href: '${createLink(controller:"userApi",action:'roles')}'},
                             {id: 'authority_menu', text: 'Authority', href: '${createLink(controller:"userApi",action:'authority')}'},

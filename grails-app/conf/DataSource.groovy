@@ -26,7 +26,7 @@ environments {
             dialect = "org.hibernate.dialect.MySQLDialect"
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://115.28.150.164:3306/tps_dev?useUnicode=true&autoreconnect=true&characterEncoding=UTF-8"
-            logSql = true
+            //logSql = true
         }
     }
     test {
