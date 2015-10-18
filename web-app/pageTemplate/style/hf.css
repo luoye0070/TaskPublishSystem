@@ -1,0 +1,126 @@
+/**********头部导航条**********/
+img.logo-before {width: 25px;height: 25px;display: block;background: url(../images/icons.png) no-repeat 5px -114px;}
+.navbar-search {
+    margin-bottom: 0;
+    margin-top: 6px;
+    position: relative;
+    background: url(../images/icons.png) no-repeat 0 -394px;
+    width: 169px;
+    height: 27px;
+}
+.navbar-search .search-query {
+    border-radius: 0;
+    font-family: "微软雅黑",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    margin-bottom: 0;
+    padding: 4px 10px;
+    background: none;
+    border: 0;
+    width: 127px;
+    height: 18px;
+    font-size: 14px;
+}
+.navbar-search .search-btn {width: 22px;height: 27px;display: block;}
+.navbar .nav.library-fun {padding-top: 6px;}
+.navbar .nav.library-fun li a {
+    color: #FFF;
+    float: none;
+    padding: 2px 8px 4px;
+    #padding: 5px 8px 2px;
+    text-decoration: none;
+    border-radius: 4px;
+    background: #2E2E2E;
+}
+.navbar .nav.library-fun li a:hover, .navbar .nav.library-fun li.active a {background: #666;}
+.navbar .nav li.dropdownID {position: relative;z-index: 999999;}
+.navbar .nav li .other-icon {padding: 12px;}
+.navbar .nav li .other-icon span {height: 16px;overflow: hidden;width: 16px;background: url(../images/icons.png) no-repeat;display: inline-block;#cursor: pointer;}
+.navbar .nav li .other-icon span.write-icon {background-position: 0 2px;}
+.navbar .nav li .other-icon span.info-icon {background-position: -50px -150px;}
+.navbar .nav li .other-icon span.setting-icon {background-position: -66px -151px;}
+.navbar .nav li .other-icon span.out-icon {background-position: -74px -118px;}
+.navbar .nav li .other-icon span.infoicons {height: 9px;overflow: hidden;width: 9px;background-position: -98px -121px;position: absolute;top: 9px;right: 6px;}
+.dropdown-bio {
+    background: #FFF;
+    border: 1px solid #333;
+    border-top: 0;
+    font-size: 14px;
+    padding: 5px 0 5px;
+    position: absolute;
+    z-index: 10000000;
+    top: 40px;
+    right: 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 2px 0 2px 2px;
+    display: none;
+    min-width: 138px;
+}
+ul.dropdown-bio  {list-style: none;width: 138px;margin: 0;padding: 5px 0 5px;min-width: 138px;}
+ul.dropdown-bio li {width: 138px;margin: 0;padding: 0;}
+ul.dropdown-bio li a {
+    display: block;
+    padding: 0 15px;
+    height: 28px;
+    line-height: 28px;
+    _height: 10px;
+    _line-height: 10px;
+    #width: 108px;
+}
+ul.dropdown-bio li a:hover {background: #E6E6E6;}
+.popup-div {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top: none;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 7px 0 10px;
+    width: 170px;
+    position: absolute;
+    right: 0;
+    top: 39px;
+    z-index: 1000;
+    background: #FFF;
+    border: 1px solid #333;
+    font-size: 14px;
+}
+.popup-div a.icon_close {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    font-size: 10px;
+    line-height: 10px;
+    color: #999;
+    padding: 2px 3px;
+}
+.popup-div a:hover.icon_close {color: #FFF;background: #999;}
+.popup-div .tips_list {padding: 3px 0 0;list-style: none;}
+.popup-div .tips_list li {line-height: 21px;padding: 0 15px;font-size: 12px;font-family: Arial;}
+.popup-div .tips_list li a {color: #0A8CD2;}
+.popup-div .tips_list li a:hover {color: #0A8CD2;text-decoration: underline;}
+.popup-div .tips_list li.line {
+    border-bottom: 1px dashed #CCC;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    margin: 5px 0;
+}
+/*************底部样式*****************/
+
+.footer{height:48px; line-height:48px;}
+.footer ul {margin:0;list-style:none; line-height:48px; margin:0 auto; width:680px;  }
+.footer ul.about-ul li {float: left;  height:48px; line-height:48px; font-weight:bold;}
+.footer ul.about-ul li a:hover{color:#3399CC;}
+.footer ul.about-ul li span {color: #999;padding: 0 8px;}
+.footer ul.about-ul li.down-class, .footer ul.about-ul li.up-class {background: url(../images/icons.png) no-repeat;padding-right: 10px;}
+
+.footer ul.about-ul li.fc666{color:#3399CC; font-size:18px;}
+
+.footer ul.about-ul li.down-class {background-position: 60px 24px;}
+.footer p{text-align:center; color:#999; margin:0px; padding:0px; height:90px; line-height:30px;}
+.footer ul.about-ul li.up-class {background-position: 60px -8px;}
+.footer .friend-link {background: #FFF;padding: 10px 15px 2px;}
+.footer .friend-link ul{width:100%}
+.footer .friend-link ul li {float: left;margin-bottom: 10px;}
+.footer .friend-link ul li a {white-space:nowrap;}
+.footer .friend-link ul li span {color: #999;padding: 0 8px;}

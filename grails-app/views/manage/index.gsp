@@ -23,8 +23,8 @@
 <div class="content">
     <div class="dl-main-nav">
         <ul id="J_Nav" class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">用户管理</div></li>
             <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">内容管理</div></li>
-            <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">用户</div></li>
             <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">网站配置</div></li>
         </ul>
     </div>
@@ -37,35 +37,6 @@
 <script>
     BUI.use('common/main', function () {
         var config = [
-            {
-                id: 'contentsManage',
-                menu: [
-                    {
-                        text: '内容类别管理',
-                        items: [
-                            {id: 'contentClass_list_menu', text: '内容类别列表', href: '${createLink(controller:"contentsManage",action:'contentClassList')}'},
-                            {id: 'contentClass_add_menu', text: '内容类别添加', href: '${createLink(controller:"contentsManage",action:'editContentClass')}'}
-                        ]
-                    }
-                     ,
-                    {
-                        text: '内容管理',
-                        items: [
-                            {id: 'contents_list_menu', text: '内容列表', href: '${createLink(controller:"contentsManage",action:'contentsList')}'},
-                            {id: 'contents_add_menu', text: '内容添加', href: '${createLink(controller:"contentsManage",action:'editContents')}'}
-                        ]
-                    }
-                    ,
-                    {
-                        text: '资源文件管理',
-                        items: [
-                            {id: 'resource_list_menu', text: '资源文件列表', href: '${createLink(controller:"resourceFile",action:'list')}'},
-                            {id: 'resource_upload_menu', text: '资源文件上传', href: '${createLink(controller:"resourceFile",action:'diyUploadPage')}'}
-                        ]
-                    }
-                ]
-            }
-            ,
             {
                 id: 'user',
                 menu: [
@@ -85,6 +56,36 @@
             }
             ,
             {
+                id: 'contentsManage',
+                menu: [
+                    %{--{--}%
+                        %{--text: '内容类别管理',--}%
+                        %{--items: [--}%
+                            %{--{id: 'contentClass_list_menu', text: '内容类别列表', href: '${createLink(controller:"contentsManage",action:'contentClassList')}'},--}%
+                            %{--{id: 'contentClass_add_menu', text: '内容类别添加', href: '${createLink(controller:"contentsManage",action:'editContentClass')}'}--}%
+                        %{--]--}%
+                    %{--}--}%
+                     %{--,--}%
+                    %{--{--}%
+                        %{--text: '内容管理',--}%
+                        %{--items: [--}%
+                            %{--{id: 'contents_list_menu', text: '内容列表', href: '${createLink(controller:"contentsManage",action:'contentsList')}'},--}%
+                            %{--{id: 'contents_add_menu', text: '内容添加', href: '${createLink(controller:"contentsManage",action:'editContents')}'}--}%
+                        %{--]--}%
+                    %{--}--}%
+                    %{--,--}%
+                    {
+                        text: '资源文件管理',
+                        items: [
+                            {id: 'resource_list_menu', text: '资源文件列表', href: '${createLink(controller:"resourceFile",action:'list')}'},
+                            {id: 'resource_upload_menu', text: '资源文件上传', href: '${createLink(controller:"resourceFile",action:'diyUploadPage')}'}
+                        ]
+                    }
+                ]
+            }
+            ,
+
+            {
                 id: 'webSiteConfig',
                 menu: [
                     {
@@ -93,13 +94,13 @@
                             {id: 'webSiteConfig_siteInfo_menu', text: '网站信息', href: '${createLink(controller:"siteManage",action:'editWebSiteInfo')}'}
                         ]
                     }
-                    ,
-                    {
-                        text: '内容块管理',
-                        items: [
-                            {id: 'contentBlock_list_menu', text: '内容块列表', href: '${createLink(controller:"siteManage",action:'contentBlockList')}'}
-                        ]
-                    }
+                    %{--,--}%
+                    %{--{--}%
+                        %{--text: '内容块管理',--}%
+                        %{--items: [--}%
+                            %{--{id: 'contentBlock_list_menu', text: '内容块列表', href: '${createLink(controller:"siteManage",action:'contentBlockList')}'}--}%
+                        %{--]--}%
+                    %{--}--}%
                     ,
                     {
                         text: '测试生成的页面',
