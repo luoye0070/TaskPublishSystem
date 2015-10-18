@@ -33,6 +33,24 @@ public enum TaskStatus {
         ]
     }
 
+    public static def getMyTaskStatus(){
+        [
+                [code:TASK_INIT.code,label:TASK_INIT.label],
+                [code:TASK_EXPIRE.code,label:TASK_EXPIRE.label],
+                [code:TASK_CANCEL.code,label:TASK_CANCEL.label],
+                [code:TASK_BIDING.code,label:TASK_BIDING.label]
+        ]
+    }
+
+    public static def getMySelectorStatus(){
+        [
+                [code:TASK_BIDED.code,label:TASK_BIDED.label],
+                [code:TASK_COMPLETE.code,label:TASK_COMPLETE.label],
+                [code:TASK_FAILURE.code,label:TASK_FAILURE.label]
+        ]
+    }
+
+
     public static String getLabel(Integer code){
         switch (code){
             case TASK_INIT.code:

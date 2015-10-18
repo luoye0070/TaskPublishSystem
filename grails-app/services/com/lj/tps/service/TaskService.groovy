@@ -68,6 +68,10 @@ class TaskService {
                 eq("username", springSecurityService?.currentUser?.username?:"fala");
             }
 
+            if(params.statusList){
+                'in'('status',params.statusList)
+            }
+
             if (params.status) {
                 int status = 0;
                 try {
@@ -77,6 +81,7 @@ class TaskService {
                     eq("status", status);
                 }
             }
+
         }
 
         def taskInstanceList = Task.createCriteria().list(params, conditions)
@@ -96,6 +101,17 @@ class TaskService {
      */
     def myTasks(def params){
         params.showMyTask=true
+        params.statusList=TaskStatus.getMyTaskStatus()
+        return list(params)
+    }
+
+    /**
+     * 获取登陆用户中标
+     * @param params
+     */
+    def mySelectors(def params){
+        params.showMyTask=true
+        params.statusList=TaskStatus.getMySelectorStatus()
         return list(params)
     }
     /**

@@ -9,9 +9,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <script type="text/javascript" src="${resource(dir: "pageTemplate")}/js/jquery1.4.js"></script>
-    <title>什什么发包创新网</title>
-    <meta name="Keywords" content="什什么发包创新网"/>
-    <meta name="Description" content="什什么发包创新网"/>
+    <title>任务发布平台</title>
+    <meta name="Keywords" content="任务发布平台"/>
+    <meta name="Description" content="任务发布平台"/>
     <link href="${resource(dir: 'js/bui/css', file: 'dpl-min.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir: 'js/bui/css', file: 'bui-min.css')}" rel="stylesheet" type="text/css"/>
     <!-- Le styles -->
@@ -25,7 +25,7 @@
     <!--[if IE 6]>
     <script type="text/javascript" src="${resource(dir: "pageTemplate")}/js/DD_belatedPNG.js"></script>
     <script type="text/javascript">
-    DD_belatedPNG.fix('img,.ie6png');
+         DD_belatedPNG.fix('img,.ie6png');
     </script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="${resource(dir: "pageTemplate")}/style/biobox2.css" />
@@ -46,14 +46,12 @@
             </a>
             <div class="nav-collapse">
                 <ul class="nav" id="navID">
-
                     <li class="active"><a href="index.html"><b>首页</b></a></li>
-                    <li class=""><a href="cxzx_list.html"><b>创新咨讯</b></a></li>
-                    <li class=""><a href="cxfw_list.html"><b>创新服务</b></a></li>
-                    <li class=""><a href="xmdata.html"><b>项目数据库</b></a></li>
-                    <li class=""><a href="tzjg_list.html"><b>投资机构</b></a></li>
-                    <li class=""><a href="xm_write.html"><b>项目发布</b></a></li>
-
+                    <li class=""><a href="cxzx_list.html"><b>发布任务</b></a></li>
+                    <sec:ifLoggedIn>
+                        <li class=""><a href="cxzx_list.html"><b>我的任务</b></a></li>
+                        <li class=""><a href="cxfw_list.html"><b>我的竞标</b></a></li>
+                    </sec:ifLoggedIn>
                 </ul>
             </div><!--/.nav-collapse -->
             <ul class="nav pull-right login-none nav-tips">
@@ -124,7 +122,9 @@
 
 
             <ul class="nav pull-right pl-20 myul">
-                <li class=""><a href="${createLink(controller: "userReg",action: "register")}">注册</a></li>
+                <sec:ifNotLoggedIn>
+                   <li class=""><a href="${createLink(controller: "userReg",action: "register")}">注册</a></li>
+                </sec:ifNotLoggedIn>
                 <sec:ifLoggedIn>
                     <li class="" style="height: 40px;margin-left: 5px;margin-right: 5px;">
                     <div class="hy" style="height: 40px;line-height: 40px;color: white">

@@ -27,6 +27,13 @@ class FrontController {
     }
 
     /**
+     *用户中标
+     */
+    def mySelector(){
+        render(view:"mySelector",model:taskService.mySelectors(params))
+    }
+
+    /**
      * 显示我的任务详情
      * @param id
      */
@@ -42,7 +49,9 @@ class FrontController {
      * @return
      */
     def createTask(){
-        [taskInstance: new Task(params)]
+        def taskInstance=new Task(params)
+        taskInstance.contactInfo=taskService.getUserInfo()?.mobileNumber
+        [taskInstance: taskInstance]
     }
 
     /**
@@ -69,6 +78,17 @@ class FrontController {
         res << [params:params]
         res << bidList
         println res
+        res
+    }
+
+    /**
+     * 显示中标详情
+     */
+    def showMySelector(){
+        def taskId=params.id as Long
+        def res=taskService.get(taskId)
+        def myBid=bidService.getMyBid4Task(taskId)
+        res << [myBid:myBid]
         res
     }
 
