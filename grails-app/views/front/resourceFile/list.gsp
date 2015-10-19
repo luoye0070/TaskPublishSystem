@@ -9,12 +9,14 @@
 <%@ page import="com.lj.rmp.utils.FormatUtil;com.lj.rmp.enumcustom.ResourceType;" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <script type="text/javascript" src="${resource(dir: "js", file: "jquery-1.8.1.min.js")}"></script>
-    <link href="${resource(dir: "js/bui/css", file: "dpl-min.css")}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: "js/bui/css", file: "bui-min.css")}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: "js/bui/css", file: "page-min.css")}" rel="stylesheet" type="text/css"/>
+    <meta name="layout" content="front_main"/>
+    %{--<script type="text/javascript" src="${resource(dir: "js", file: "jquery-1.8.1.min.js")}"></script>--}%
+    %{--<link href="${resource(dir: "js/bui/css", file: "dpl-min.css")}" rel="stylesheet" type="text/css"/>--}%
+    %{--<link href="${resource(dir: "js/bui/css", file: "bui-min.css")}" rel="stylesheet" type="text/css"/>--}%
+    %{--<link href="${resource(dir: "js/bui/css", file: "page-min.css")}" rel="stylesheet" type="text/css"/>--}%
     <script type="text/javascript" src="${resource(dir: "js/bui", file: "bui-min.js")}"></script>
-    <script type="text/javascript" src="${resource(dir: "js/bui/common", file: "page-min.js")}"></script>
+    %{--<script type="text/javascript" src="${resource(dir: "js/bui/common", file: "page-min.js")}"></script>--}%
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate")}/style/zx_info.css"/>
     <script type="text/javascript">
         BUI.use('common/page');
     </script>
@@ -48,131 +50,144 @@
 </head>
 
 <body>
-<!--消息-->
-<div style="margin: 10px;">
-    <g:if test="${errors || flash.errors}">
-        <div class="tips tips-small tips-warning">
-            <span class="x-icon x-icon-small x-icon-error"><i class="icon icon-white icon-warning"></i></span>
 
-            <div class="tips-content">${errors}${flash.errors}</div>
-        </div>
-    </g:if>
-    <g:if test="${msgs || flash.msgs}">
-        <div class="tips tips-small tips-info">
-            <span class="x-icon x-icon-small x-icon-info"><i class="icon icon-white icon-info"></i></span>
 
-            <div class="tips-content">${msgs}${flash.msgs}</div>
-        </div>
-    </g:if>
-    <g:if test="${warnings || flash.warnings}">
-        <div class="tips tips-small tips-warning">
-            <span class="x-icon x-icon-small x-icon-warning"><i class="icon icon-white icon-bell"></i></span>
-            <div class="tips-content">${flash.warnings}${warnings}</div>
-        </div>
-    </g:if>
-    <g:if test="${success || flash.success}">
-        <div class="tips tips-small  tips-success">
-            <span class="x-icon x-icon-small x-icon-success"><i class="icon icon-white icon-ok"></i></span>
-            <div class="tips-content">${flash.success}${success}</div>
-        </div>
-    </g:if>
-    <g:if test="${question || flash.question}">
-        <div class="tips tips-small">
-            <span class="x-icon x-icon-small x-icon-warning"><i class="icon icon-white icon-question"></i></span>
-            <div class="tips-content">${flash.question}${question}</div>
-        </div>
-    </g:if>
-</div>
-<!--列表-->
-<div style="margin: 10px;">
-    <div class="form-links">
-        <ul class="nav-tabs">
-            <li class="${(com.lj.rmp.utils.Number.toInteger(params.type)==0)?"active":""}"><a href="${createLink(controller: "tpsResourceFile",action: "list",params: [type:0])}">全部</a></li>
-            <g:each in="${com.lj.rmp.enumcustom.ResourceType.types}" var="resourceType">
-                <li class="${(com.lj.rmp.utils.Number.toInteger(params.type)==resourceType.code)?"active":""}"><a href="${createLink(controller: "tpsResourceFile",action: "list",params: [type:resourceType.code])}">${resourceType.label}</a></li>
-            </g:each>
-        </ul>
+<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+<div class="container pb-15">
+    <!-- Example row of columns -->
+    <div class="row">
+
+        <!--右侧代码-->
+        <g:render template="/layouts/left_menu"/>
+
+
+        <div class="span12">
+            <!--内容页面-->
+            <div class="label-div b-30 border-all pt-5 t-20" style="position: relative; padding-left: 0;display: table">
+                %{--<div class="mmdh pull-left"><a href="">首页</a> > <a href="">投资机构</a> > <a href="">机构标题</a></div>--}%
+                %{--<div class="mmkey pull-right"><b><a href="">关键字</a></b><b><a href="">关键字</a></b><b><a href="">关键字</a></b><div class="mmclear"></div></div>--}%
+                <div class="mmclear"></div>
+                <div style="margin-top: 14px;" class="clearfix pb-12 pl-25 pr-25">
+                    <h1 class="pull-left r-10">资源文件列表</h1>
+                    %{--<div class="pull-left pt-5 none-768" style="_margin-top:-33px; _margin-left:-10px;">--}%
+                    %{--<span class="like-plug-gz clearfix pull-left r-15">--}%
+                    %{--<a title="感兴趣，关注一下吧" href="javascript:void(0);" class="like-btn pull-right ie6png">关注本文</a>--}%
+                    %{--<span class="count pull-left t-5 d-none"></span>--}%
+                    %{--</span>--}%
+                    %{--</div>--}%
+                </div>
+
+    <div id="msg" style="margin-left: 25px;">
+        <g:render template="/layouts/msgs_and_errors"/>
     </div>
-    <g:if test="${resourceFileInfoList}">
-        <div>
-            <!--订单列表-->
-            <table class="table table-striped table-bordered table-condensed">
-                <thead>
-                <tr>
-                    <g:sortableColumn property="id" title="${message(code: 'resourceFileInfo.id.label', default: 'id')}"
-                                      params="${params}"/>
 
-                    <g:sortableColumn property="type"
-                                      title="${message(code: 'resourceFileInfo.type.label', default: 'Type')}"
-                                      params="${params}"/>
-
-                    %{--<g:sortableColumn property="fileFullName"--}%
-                                      %{--title="${message(code: 'resourceFileInfo.fileFullName.label', default: 'File Full Name')}"--}%
-                                      %{--params="${params}"/>--}%
-
-                    <g:sortableColumn property="fileName"
-                                      title="${message(code: 'resourceFileInfo.fileName.label', default: 'File Name')}"
-                                      params="${params}"/>
-
-                    <g:sortableColumn property="size"
-                                      title="${message(code: 'resourceFileInfo.size.label', default: 'Size')}"
-                                      params="${params}"/>
-
-                    <g:sortableColumn property="uploadTime"
-                                      title="${message(code: 'resourceFileInfo.uploadTime.label', default: 'UploadTime')}"
-                                      params="${params}"/>
-                    <th>URL</th>
-                    <th>文件预览</th>
-                </tr>
-                </thead>
-                <g:form name="form1" action="delete" params="${params}">
-                <tbody>
-                <g:each in="${resourceFileInfoList}" status="i" var="resourceFile">
-                    <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                        <td>
-                            <input type="checkbox" name="ids" value="${resourceFile.id}"/>
-                        </td>
-                        <td>${ResourceType.getLable(resourceFile.type)}</td>
-                        %{--<td>${resourceFile.fileFullName}</td>--}%
-                        <td>${resourceFile.fileName}</td>
-                        <td>${FormatUtil.byteToKB(resourceFile.size)}</td>
-                        <td>${FormatUtil.dateTimeFormat(resourceFile.uploadTime)}</td>
-                        <td><rmp:resourceFileUrl fileFullName="${resourceFile.fileFullName}"/></td>
-                        <td><rmp:resourceFilePreview id="${resourceFile.id}"/></td>
-                    </tr>
+    <!--列表-->
+    <div style="margin: 10px;">
+        <div class="form-links">
+            <ul class="nav-tabs">
+                <li class="${(com.lj.rmp.utils.Number.toInteger(params.type)==0)?"active":""}"><a href="${createLink(controller: "tpsResourceFile",action: "list",params: [type:0])}">全部</a></li>
+                <g:each in="${com.lj.rmp.enumcustom.ResourceType.types}" var="resourceType">
+                    <li class="${(com.lj.rmp.utils.Number.toInteger(params.type)==resourceType.code)?"active":""}"><a href="${createLink(controller: "tpsResourceFile",action: "list",params: [type:resourceType.code])}">${resourceType.label}</a></li>
                 </g:each>
-                </tbody>
-                </g:form>
-            </table>
-
+            </ul>
+        </div>
+        <g:if test="${resourceFileInfoList}">
             <div>
-                <ul class="toolbar pull-left">
-                    <li><label class="checkbox"><input type="checkbox" id="allCheck"><a href="#">全选</a></label></li>
-                    <li><button class="button button-danger" id="deleteBt"><i class="icon-white icon-trash"></i>批量删除</button></li>
-                </ul>
+                <!--订单列表-->
+                <table class="table table-striped table-bordered table-condensed" style="max-width: 910px;">
+                    <thead>
+                    <tr>
+                        <g:sortableColumn property="id" title="${message(code: 'resourceFileInfo.id.label', default: 'id')}"
+                                          params="${params}"/>
 
-                <div class="pagination pull-right">
-                    <!--分页-->
-                    <rmp:paginateInBui action="list" total="${totalCount ?: 0}" prev="&larr;" next="&rarr;"
-                                      params="${params}"/>
+                        <g:sortableColumn property="type"
+                                          title="${message(code: 'resourceFileInfo.type.label', default: 'Type')}"
+                                          params="${params}"/>
+
+                        %{--<g:sortableColumn property="fileFullName"--}%
+                        %{--title="${message(code: 'resourceFileInfo.fileFullName.label', default: 'File Full Name')}"--}%
+                        %{--params="${params}"/>--}%
+
+                        <g:sortableColumn property="fileName"
+                                          title="${message(code: 'resourceFileInfo.fileName.label', default: 'File Name')}"
+                                          params="${params}"/>
+
+                        <g:sortableColumn property="size"
+                                          title="${message(code: 'resourceFileInfo.size.label', default: 'Size')}"
+                                          params="${params}"/>
+
+                        <g:sortableColumn property="uploadTime"
+                                          title="${message(code: 'resourceFileInfo.uploadTime.label', default: 'UploadTime')}"
+                                          params="${params}"/>
+                        <th>URL</th>
+                        <th>文件预览</th>
+                    </tr>
+                    </thead>
+                    <g:form name="form1" action="delete" params="${params}">
+                        <tbody>
+                        <g:each in="${resourceFileInfoList}" status="i" var="resourceFile">
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                <td style="width: 30px;">
+                                    <input type="checkbox" name="ids" value="${resourceFile.id}"/>
+                                </td>
+                                <td style="width: 30px;">${ResourceType.getLable(resourceFile.type)}</td>
+                                %{--<td>${resourceFile.fileFullName}</td>--}%
+                                <td style="width: 180px;word-wrap:break-word;word-break:break-all;">${resourceFile.fileName}</td>
+                                <td style="width: 60px;">${FormatUtil.byteToKB(resourceFile.size)}</td>
+                                <td style="width: 60px;">${FormatUtil.dateTimeFormat(resourceFile.uploadTime)}</td>
+                                <td style="width: 300px;word-wrap:break-word;word-break:break-all;"><rmp:resourceFileUrl fileFullName="${resourceFile.fileFullName}"/></td>
+                                <td style="width: 160px;"><tps:resourceFilePreview id="${resourceFile.id}"/></td>
+                            </tr>
+                        </g:each>
+                        </tbody>
+                    </g:form>
+                </table>
+
+                <div>
+                    <ul class="toolbar pull-left">
+                        <li><label class="checkbox"><input type="checkbox" id="allCheck"><a href="#">全选</a></label></li>
+                        <li><button class="button button-danger" id="deleteBt"><i class="icon-white icon-trash"></i>批量删除</button></li>
+                    </ul>
+
+                    <div class="pagination pull-right">
+                        <!--分页-->
+                        <rmp:paginateInBui action="list" total="${totalCount ?: 0}" prev="&larr;" next="&rarr;"
+                                           params="${params}"/>
+                    </div>
                 </div>
             </div>
-        </div>
-    </g:if>
-    <g:else>
-        <div class="tips tips-large tips-info tips-no-icon" style="text-align: center">
-            <div class="tips-content">
-                <h2>还没有资源文件哦</h2>
+        </g:if>
+        <g:else>
+            <div class="tips tips-large tips-info tips-no-icon" style="text-align: center;width: 875px;">
+                <div class="tips-content">
+                    <h2>还没有资源文件哦</h2>
 
-                <p class="auxiliary-text">
-                    你可以：
-                    <a class="page-action" href="${createLink(controller: "tpsResourceFile",action: "upload")}" data-href=""
-                       title="上传资源文件" data-id="resource_upload_menu">去上传资源文件</a>
-                    %{--<a class="direct-lnk" title="编辑用户个性化功能权限" href="${createLink(controller: "tpsResourceFile",action: "upload")}">去上传资源文件</a>--}%
-                </p>
+                    <p class="auxiliary-text">
+                        你可以：
+                        <a class="page-action" href="${createLink(controller: "tpsResourceFile",action: "upload")}" data-href=""
+                           title="上传资源文件" data-id="resource_upload_menu">去上传资源文件</a>
+                        %{--<a class="direct-lnk" title="编辑用户个性化功能权限" href="${createLink(controller: "tpsResourceFile",action: "upload")}">去上传资源文件</a>--}%
+                    </p>
+                </div>
+            </div>
+        </g:else>
+    </div>
+
             </div>
         </div>
-    </g:else>
+    </div>
 </div>
+
+
+
+<!-- /container -->
+
+<div class="container">
+
+    <div class="hr"></div>
+
+</div>
+
+
 </body>
 </html>

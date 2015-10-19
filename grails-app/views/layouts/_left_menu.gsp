@@ -85,6 +85,12 @@
     background: #0080c4;
     color: #fff;
 }
+
+.menuList div .active {
+    color: #f30;
+    background: #0080c4;
+    color: #fff;
+}
 </style>
 
 %{--<script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.8.1.min.js')}"></script>--}%
@@ -134,8 +140,8 @@
             </div>
             <div class="menuList">
                 %{--<div> <a href="${createLink(controller: "user",action: "show")}">我的信息</a></div>--}%
-                <div> <a href="${createLink(controller: "user",action: "changePW")}">密码修改 </a> </div>
-                <div> <a href="${createLink(controller: "user",action: "edit")}">信息修改</a></div>
+                <div> <a class="${(controllerName=="user"&&actionName=="changePW")?"active":""}" href="${createLink(controller: "user",action: "changePW")}">密码修改 </a> </div>
+                <div> <a class="${(controllerName=="user"&&actionName=="edit")?"active":""}" href="${createLink(controller: "user",action: "edit")}">信息修改</a></div>
             </div>
         </div>
         <div class="menuParent">
@@ -146,10 +152,8 @@
                 </div>
             </div>
             <div class="menuList">
-                <div> <a href="#">我的课程</a></div>
-                <div> <a href="#">课程资源</a></div>
-                <div> <a href="#">班级统计</a></div>
-                <div> <a href="#">课程题库</a></div>
+                <div> <a class="${(controllerName=="tpsResourceFile"&&actionName=="list")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "list")}">文件列表</a></div>
+                <div> <a class="${(controllerName=="tpsResourceFile"&&actionName=="diyUploadPage")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "diyUploadPage")}">上传文件</a></div>
             </div>
         </div>
         <div class="menuParent">
@@ -160,10 +164,10 @@
                 </div>
             </div>
             <div class="menuList">
-                <div> <a href="#">我的帖子</a></div>
-                <div> <a href="#">新回复</a></div>
-                <div> <a href="#">课程板块</a></div>
-                <div> <a href="#">问答中心</a></div>
+                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">我的帖子</a></div>
+                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">新回复</a></div>
+                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">课程板块</a></div>
+                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">问答中心</a></div>
             </div>
         </div>
         %{--<div class="menuParent">--}%
