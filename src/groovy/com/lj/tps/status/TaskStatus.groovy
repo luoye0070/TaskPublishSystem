@@ -5,7 +5,7 @@ package com.lj.tps.status
  * 20151014 fala created
  */
 public enum TaskStatus {
-    TASK_INIT(-1, "初始状态"),
+    TASK_INIT(-1, "未开始竞标"),
     TASK_EXPIRE(1,"竞标结束"),
     TASK_CANCEL(2,"任务取消"),
     TASK_BIDING(3,"竞标中"),
@@ -34,19 +34,14 @@ public enum TaskStatus {
     }
 
     public static def getMyTaskStatus(){
-        [
-                [code:TASK_INIT.code,label:TASK_INIT.label],
-                [code:TASK_EXPIRE.code,label:TASK_EXPIRE.label],
-                [code:TASK_CANCEL.code,label:TASK_CANCEL.label],
-                [code:TASK_BIDING.code,label:TASK_BIDING.label]
+        [   TASK_INIT.code,TASK_EXPIRE.code,TASK_CANCEL.code,TASK_BIDING.code
+
         ]
     }
 
     public static def getMySelectorStatus(){
-        [
-                [code:TASK_BIDED.code,label:TASK_BIDED.label],
-                [code:TASK_COMPLETE.code,label:TASK_COMPLETE.label],
-                [code:TASK_FAILURE.code,label:TASK_FAILURE.label]
+        [     TASK_BIDED.code,TASK_COMPLETE.code,TASK_FAILURE.code
+
         ]
     }
 

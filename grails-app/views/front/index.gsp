@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>任务发布平台-首页</title>
     <meta name="layout" content="front_main"/>
+    <title>任务发布平台-首页</title>
     <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style",file:"cxzx_list.css")}"/>
     <script type="text/javascript" src="${resource(dir: "js",file:"list.js")}"></script>
 
@@ -24,7 +24,6 @@
 </head>
 <body>
 
-<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
 <div class="container pb-15">
     <div class="row">
         <div class="span16">
@@ -45,13 +44,14 @@
                      <div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
                          <div class="news-list">
                              <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;color:red">
-                                 <a class="tags-box l-10 fc999 pull-left" title="" href="#"><g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/>完成</a>
+                                 <a class="tags-box l-10 fc999 pull-left" title="" href="#">${TaskStatus.getLabel(taskInstance.status)}</a>
+                                 <a class="tags-box l-10 fc999 pull-left" title="" href="#"><g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/>前完成</a>
                              </div>
                              <div class="clearfix pt-3">
-                                 <div class="index-news-img spanm3 pull-left pt-5" style="color:red">
+                                 <div class="index-news-img span2 pull-left pt-5" style="color:red">
                                      ¥&nbsp;&nbsp;${taskInstance.price}
                                  </div>
-                                 <div class="offset3 intro">
+                                 <div class="offset1 intro">
                                      <h1>
                                          <a  target="_blank" href="${createLink(action: "showTask",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
                                      </h1>

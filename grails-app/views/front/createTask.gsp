@@ -2,15 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}"/>
     <title>发布任务</title>
-    <link href="${resource(dir: 'js/bui/css', file: 'dpl-min.css')}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: 'js/bui/css', file: 'bui-min.css')}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: 'js/bui/css', file: 'page-min.css')}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: 'js/kindeditor-4.1.10/themes/default', file: 'default.css')}" rel="stylesheet" type="text/css"/>
+    <meta name="layout" content="front_main"/>
     <link href="${resource(dir: 'css', file: 'Validform.css')}" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.8.1.min.js')}"></script>
+    <link href="${resource(dir: 'js/kindeditor-4.1.10/themes/default', file: 'default.css')}" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style", file: "xm_write.css")}"/>
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style", file: "cxzx_list.css")}"/>
     <script type="text/javascript" src="${resource(dir: 'js/bui', file: 'bui-min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: "js/bui/common", file: "page-min.js")}"></script>
     <script type="text/javascript" src="${resource(dir: 'js/kindeditor-4.1.10', file: 'kindeditor-min.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js/kindeditor-4.1.10/lang', file: 'zh_CN.js')}"></script>
     <script type="text/javascript" src="${resource(dir: 'js', file: 'Validform_v5.3.2_min.js')}"></script>
@@ -110,17 +110,21 @@
     </div>
 
 </div>
-<div id="create-task" style="margin: 10px;" role="main">
+
+<div class="container pb-15">
     <div class="row">
-        <div class="span22 offset2">
-
-
+        <div class="span16">
+            <div class="clearfix pb-5" style=" position:relative;">
+                <div class="pull-left classifyDIV pt-10">
+                    <a class="pull-left type-css nosel">发布任务</a>
+                </div>
+            </div>
             <g:form action="saveTask" class="form-horizontal">
                 <g:render template="taskForm"/>
-                <div class="control-group">
+                <div class="control-group pt-10">
                     <label class="control-label">&nbsp;</label>
                     <div class="controls">
-                        <button type="submit" class="button">
+                        <button type="submit" class="button button-primary button-large ">
                             ${message(code: 'default.button.save.label', default: 'Save')}
                         </button>
                     </div>

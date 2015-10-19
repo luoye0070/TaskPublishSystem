@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <script type="text/javascript" src="${resource(dir: "pageTemplate")}/js/jquery1.4.js"></script>
-    <title>任务发布平台</title>
+    <title><g:layoutTitle/></title>
     <meta name="Keywords" content="任务发布平台"/>
     <meta name="Description" content="任务发布平台"/>
     <link href="${resource(dir: 'js/bui/css', file: 'dpl-min.css')}" rel="stylesheet" type="text/css"/>
@@ -46,12 +46,14 @@
             </a>
             <div class="nav-collapse">
                 <ul class="nav" id="navID">
-                    <li class="active"><a href="index.html"><b>首页</b></a></li>
-                    <li class=""><a href="cxzx_list.html"><b>发布任务</b></a></li>
+                    <li class="${(controllerName=="front"&&actionName=="index")?"active":""}"><a href="${createLink(controller:"front",action:'index')}"><b>首页</b></a></li>
+
                     <sec:ifLoggedIn>
-                        <li class=""><a href="cxzx_list.html"><b>我的任务</b></a></li>
-                        <li class=""><a href="cxfw_list.html"><b>我的竞标</b></a></li>
+                        <li class="${(controllerName=="front"&&actionName=="myTask")?"active":""}"><a href="${createLink(controller:"front",action:'myTask')}"><b>我的任务</b></a></li>
+                        <li class="${(controllerName=="front"&&actionName=="mySelector")?"active":""}"><a href="${createLink(controller:"front",action:'mySelector')}"><b>我的中标</b></a></li>
+                        <li class="${(controllerName=="front"&&actionName=="myBid")?"active":""}"><a href="${createLink(controller:"front",action:'myBid')}"><b>我的竞标</b></a></li>
                     </sec:ifLoggedIn>
+                        <li class="${(controllerName=="front"&&actionName=="editTask")?"active":""}"><a href="${createLink(controller:"front",action:'editTask')}"><b>发布任务</b></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
             <ul class="nav pull-right login-none nav-tips">
@@ -146,12 +148,6 @@
 <div class="top-div">
     <div class="container clearfix">
 
-        <div class="span3 logo-div logo-img" style="margin-left:0px;">
-            <a href="/" title="什什么发包创新网">
-                %{--<img src="${resource(dir: "pageTemplate")}/images/logo.jpg" class="ie6png" style="display: block;"/>--}%
-            </a>
-        </div>
-
         <div class="span11 pull-right top-ad" style="position: relative;_float: right;_height: 80px;_overflow: hidden;">
 
             <a href="#" class="pull-left" target="_blank" rel="nofollow">
@@ -167,13 +163,6 @@
             </div>
 
         </div>
-
-
-
-
-
-
-
 
     </div>
 </div>

@@ -134,6 +134,21 @@
         <div class="menuParent">
             <div class="ListTitlePanel">
                 <div class="ListTitle">
+                    <strong>任务中心</strong>
+                    <div class="leftbgbt2"> </div>
+                </div>
+            </div>
+            <div class="menuList">
+                <div> <a class="${(controllerName=="front"&&actionName=="myTask")?"active":""}" href="${createLink(controller:"front",action:'myTask')}">我的任务</a></div>
+                <div> <a class="${(controllerName=="front"&&actionName=="mySelector")?"active":""}" href="${createLink(controller:"front",action:'mySelector')}">我的中标</a></div>
+                <div> <a class="${(controllerName=="front"&&actionName=="myBid")?"active":""}" href="${createLink(controller:"front",action:'myBid')}">我的竞标</a></div>
+                <div> <a class="${(controllerName=="front"&&actionName=="createTask")?"active":""}" href="${createLink(controller:"front",action:'createTask')}">发布任务</a></div>
+            </div>
+        </div>
+
+        <div class="menuParent">
+            <div class="ListTitlePanel">
+                <div class="ListTitle">
                     <strong>个人中心</strong>
                     <div class="leftbgbt"> </div>
                 </div>
@@ -156,32 +171,6 @@
                 <div> <a class="${(controllerName=="tpsResourceFile"&&actionName=="diyUploadPage")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "diyUploadPage")}">上传文件</a></div>
             </div>
         </div>
-        <div class="menuParent">
-            <div class="ListTitlePanel">
-                <div class="ListTitle">
-                    <strong>任务中心</strong>
-                    <div class="leftbgbt2"> </div>
-                </div>
-            </div>
-            <div class="menuList">
-                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">我的帖子</a></div>
-                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">新回复</a></div>
-                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">课程板块</a></div>
-                <div> <a class="${(controllerName==""&&actionName=="")?"active":""}" href="#">问答中心</a></div>
-            </div>
-        </div>
-        %{--<div class="menuParent">--}%
-            %{--<div class="ListTitlePanel">--}%
-                %{--<div class="ListTitle">--}%
-                    %{--<strong>资源中心</strong>--}%
-                    %{--<div class="leftbgbt2"> </div>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-            %{--<div class="menuList">--}%
-                %{--<div> <a href="#">教学资源</a></div>--}%
-                %{--<div> <a href="#">教学经历</a></div>--}%
-            %{--</div>--}%
-        %{--</div>--}%
     </div>
 </div>
 

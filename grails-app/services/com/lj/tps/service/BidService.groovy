@@ -138,7 +138,7 @@ class BidService {
     def getUserInfo(){
         def member = springSecurityService.currentUser
         if(member){
-            return TpsUser.get(id)
+            return TpsUser.get(member.id)
         }
 
         return null

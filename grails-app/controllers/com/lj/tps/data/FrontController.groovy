@@ -62,7 +62,8 @@ class FrontController {
         def taskId=params.id as Long
         def res=taskService.get(taskId)
         params <<["task.id":taskId]
-        def bidList=bidService.list(params)
+        //def bidList=bidService.list(params)
+        //res << bidList
         def isSelfTask=taskService.isSelfTask(res.taskInstance)
         if(!isSelfTask){
             def myBid=bidService.getMyBid4Task(taskId)
@@ -76,7 +77,6 @@ class FrontController {
             }
         }
         res << [params:params]
-        res << bidList
         println res
         res
     }

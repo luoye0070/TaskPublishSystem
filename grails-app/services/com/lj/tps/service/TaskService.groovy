@@ -83,7 +83,7 @@ class TaskService {
             }
 
         }
-
+         println params
         def taskInstanceList = Task.createCriteria().list(params, conditions)
         //状态转换
         for(Task task in taskInstanceList){
@@ -406,7 +406,7 @@ class TaskService {
     def getUserInfo(){
         def member = springSecurityService.currentUser
         if(member){
-            return TpsUser.get(id)
+            return TpsUser.get(member.id)
          }
 
         return null

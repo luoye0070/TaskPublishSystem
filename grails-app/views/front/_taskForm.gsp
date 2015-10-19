@@ -2,90 +2,74 @@
 
 
 
-<div class="row">
-<h2>明确需求标题和详情</h2>
-<div class="control-group span12">
 
+<div class="control-group">
+    <label class="control-label" for="simpleDesc">标题：</label>
     <div class="controls">
-       <label for="simpleDesc"></label>
         <g:textField name="simpleDesc" maxlength="150"  value="${taskInstance?.simpleDesc}" class="input-large"
-                       placeholder="请用一句话概括您要做什么？比如打车App开发"
-                 />
-
+                     placeholder="请用一句话概括您要做什么？比如打车App开发"
+        />
     </div>
+    <div class="mmclear"></div>
 </div>
 
 
-<div class="control-group span22">
-
-    <g:textArea name="detailDesc"  maxlength="10240"  id="detailDesc">
-        ${null==taskInstance?.detailDesc?"请把任务再补充详细些吧。越清晰越具体，任务完成质量越高哦！您也可以插入图片和上传附件！":taskInstance.detailDesc}
-    </g:textArea>
-    <br/>
-</div>
-
-
-</div>
-
-<div class="row">
-
-<div class="control-group span12">
-    <label class="control-label" for="price">
-        <s>*</s><g:message code="task.price.label" default="Price" />：
-    </label>
-    <div class="controls control-row-auto">
+<div class="control-group">
+    <label class="control-label" for="price"><s>*</s><g:message code="task.price.label" default="Price" />：</label>
+    <div class="controls">
         <input type="number" name="price" id="price"  value="${taskInstance?.price}" />
-
     </div>
+    <div class="mmclear"></div>
 </div>
 
-
-<div class="control-group span12">
-    <label class="control-label" for="crcd">
-        <s>*</s><g:message code="task.crcd.label" default="Crcd" />：
-    </label>
-    <div class="controls control-row-auto">
-        
-            <g:textField name="crcd" value="${com.lj.utils.FormatUtil.dateFormat(taskInstance?.crcd)}"/>
-            <!-- script start -->
-            <script type="text/javascript">
-                BUI.use('bui/calendar',function(Calendar){
-                    var datepicker = new Calendar.DatePicker({
-                        trigger:'#crcd',
-                        showTime:false,
-                        autoRender : true ,
-                        minDate:new Date()
-                    });
+<div class="control-group">
+    <label class="control-label" for="crcd"><s>*</s><g:message code="task.crcd.label" default="Crcd" />：</label>
+    <div class="controls">
+        <g:textField name="crcd" value="${com.lj.utils.FormatUtil.dateFormat(taskInstance?.crcd)}"/>
+        <!-- script start -->
+        <script type="text/javascript">
+            BUI.use('bui/calendar',function(Calendar){
+                var datepicker = new Calendar.DatePicker({
+                    trigger:'#crcd',
+                    showTime:false,
+                    autoRender : true ,
+                    minDate:new Date()
                 });
-            </script>
-            <!-- script end -->
-        
+            });
+        </script>
+        <!-- script end -->
     </div>
+    <div class="mmclear"></div>
 </div>
 
 
-</div>
+<div class="control-group">
+    <label class="control-label" for="contactWay"><s>*</s><g:message code="bid.contactWay.label" default="Contact Way"/></label>
+    <div class="controls">
+        <g:select name="contactWay" from="${ContactWay.getOptions()}" required="" optionKey="code"
+                  optionValue="label"
+                  value="${fieldValue(bean: newBid, field: 'contactWay')}"
+                  valueMessagePrefix="bid.contactWay" style="width:100px" class="input-xlarge"/>
 
-<div class="row">
-    <h2>留下联系方式</h2>
-    <div class="control-group span12">
-        <label class="control-label" for="contactInfo">
 
-            <g:select name="contactWay" from="${ContactWay.getOptions()}" required="" optionKey="code" optionValue="label"
-                      value="${fieldValue(bean: taskInstance, field: 'contactWay')}"
-                      valueMessagePrefix="task.contactWay"
-                      style="width:60px"
-            />
-
-        </label>
-        <div class="controls control-row-auto">
-
-            <g:textField name="contactInfo" required="" value="${taskInstance?.contactInfo}"/>
-
-        </div>
     </div>
-
+    <div class="mmclear"></div>
 </div>
+
+<div class="control-group ">
+    <label class="control-label" for="contactInfo"><s>*</s><g:message code="bid.contactInfo.label" default="Contact Info"/>：</label>
+    <div class="controls">
+        <g:textField name="contactInfo" required="" value="${newBid?.contactInfo}" class="input-xlarge"/>
+    </div>
+    <div class="mmclear"></div>
+</div>
+
+
+<g:textArea name="detailDesc"  maxlength="10240"  id="detailDesc">
+    ${null==taskInstance?.detailDesc?"请把任务再补充详细些吧。越清晰越具体，任务完成质量越高哦！您也可以插入图片和上传附件！":taskInstance.detailDesc}
+</g:textArea>
+
+
 
 <script type="text/javascript">
     $(function(){
