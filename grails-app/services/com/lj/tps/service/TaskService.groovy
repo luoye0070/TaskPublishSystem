@@ -393,7 +393,7 @@ class TaskService {
             return false
 
         //判断任务是否是自己，如果是自己，不能竞标
-        if(task.username && !(springSecurityService?.currentUser?.username) && task.username.equals(springSecurityService.currentUser.username)){
+        if(task.username && !(springSecurityService?.currentUser?.username) && task.username.equals(springSecurityService?.currentUser?.username)){
             return true
         }
 
