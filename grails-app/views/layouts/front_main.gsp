@@ -53,7 +53,7 @@
                         <li class="${(controllerName=="front"&&actionName=="mySelector")?"active":""}"><a href="${createLink(controller:"front",action:'mySelector')}"><b>我的中标</b></a></li>
                         <li class="${(controllerName=="front"&&actionName=="myBid")?"active":""}"><a href="${createLink(controller:"front",action:'myBid')}"><b>我的竞标</b></a></li>
                     </sec:ifLoggedIn>
-                        <li class="${(controllerName=="front"&&actionName=="editTask")?"active":""}"><a href="${createLink(controller:"front",action:'editTask')}"><b>发布任务</b></a></li>
+                        <li class="${(controllerName=="front"&&actionName=="editTask")?"active":""}"><a href="${createLink(controller:"front",action:'createTask')}"><b>发布任务</b></a></li>
                 </ul>
             </div><!--/.nav-collapse -->
             <ul class="nav pull-right login-none nav-tips">

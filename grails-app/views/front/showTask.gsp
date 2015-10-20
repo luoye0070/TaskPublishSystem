@@ -82,7 +82,7 @@
     <div class="pull-left classifyDIV pt-10">
         <a  class="pull-left type-css tags" href="javascript:void(0)" >要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></a>
         <a  class="pull-left type-css tags" href="javascript:void(0)">${TaskStatus.getLabel(taskInstance.status)}</a>
-        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;${taskInstance.price}</a>
+        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></a>
     </div>
 </div>
 
@@ -95,7 +95,7 @@
 
     KindEditor.ready(function (K) {
         K.create('textarea[name="taskArea"]', {
-            readonly:true,
+            readonlyMode : true,
             allowFileManager: true,
             langType: 'zh_CN',
             items: [ ],
@@ -105,6 +105,7 @@
     });
 </script>
 
+<sec:ifLoggedIn>
 <g:if test="${newBid}">
 
 <div class="clearfix pb-15" style=" position:relative;">
@@ -300,7 +301,8 @@
         <div class="pull-left classifyDIV pt-10">
             <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
             <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
-            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;${myBid.price}</a>
+            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;
+                <g:formatNumber number="${myBid.price}" format="#.##" /></a>
         </div>
     </div>
     <textarea name="myBidArea">
@@ -311,77 +313,18 @@
 
         KindEditor.ready(function (K) {
             K.create('textarea[name="myBidArea"]', {
-                readonly:true,
+                readonlyMode : true,
                 allowFileManager: true,
                 langType: 'zh_CN',
                 items: [ ],
                 width: '900px',
-                height: "300px"
+                height: "100px"
             });
         });
     </script>
 </g:if>
-%{--<g:if test="${bidInstanceList}">--}%
-    %{--<div class="clearfix pb-15" style=" position:relative;">--}%
-        %{--<div class="pull-left classifyDIV pt-10">--}%
-            %{--<a class="pull-left type-css nosel">所有竞标</a>--}%
-        %{--</div>--}%
-    %{--</div>--}%
 
-
-    %{--<div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">--}%
-        %{--<div>--}%
-            %{--<table class="table table-striped table-bordered">--}%
-                %{--<thead>--}%
-                %{--<tr>--}%
-
-                    %{--<g:sortableColumn property="skillDesc"--}%
-                                      %{--title="${message(code: 'bid.skillDesc.label', default: 'Skill Desc')}"--}%
-                                      %{--params="${params}"/>--}%
-
-
-                    %{--<g:sortableColumn property="gcd"--}%
-                                      %{--title="${message(code: 'bid.gcd.label', default: 'Gcd')}" params="${params}"/>--}%
-
-                    %{--<g:sortableColumn property="username"--}%
-                                      %{--title="${message(code: 'bid.username.label', default: 'Username')}"--}%
-                                      %{--params="${params}"/>--}%
-
-
-                    %{--<g:sortableColumn property="status"--}%
-                                      %{--title="${message(code: 'bid.status.label', default: 'Status')}"--}%
-                                      %{--params="${params}"/>--}%
-
-                %{--</tr>--}%
-                %{--</thead>--}%
-                %{--<g:form name="form1" action="delete" params="${params}">--}%
-                    %{--<tbody>--}%
-
-                    %{--<g:each in="${bidInstanceList}" status="i" var="bidInstance">--}%
-                        %{--<tr>--}%
-                            %{--<td>${bidInstance.skillDesc ?: ""}</td>--}%
-                            %{--<td><g:formatDate date="${bidInstance.gcd}" format="yyyy-MM-dd"/></td>--}%
-
-                            %{--<td>${fieldValue(bean: bidInstance, field: "username")}</td>--}%
-
-                            %{--<td>${com.lj.tps.status.BidStatus.getLabel(bidInstance.status ?: -1)}</td>--}%
-                        %{--</tr>--}%
-                    %{--</g:each>--}%
-                    %{--</tbody>--}%
-                %{--</g:form>--}%
-            %{--</table>--}%
-            %{--<div class="clearfix pb-15" style=" position:relative;">--}%
-                %{--<div class="pagination pull-right">--}%
-                    %{--<rmp:paginateInBui action="showMyTask" total="${bidInstanceTotal}" prev="&larr;"--}%
-                                       %{--next="&rarr;"--}%
-                                       %{--params="${params}"/>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-
-        %{--</div>--}%
-
-    %{--</div>--}%
-%{--</g:if>--}%
+</sec:ifLoggedIn>
 
 </div>
 </div>

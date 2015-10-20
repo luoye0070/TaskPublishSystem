@@ -3,28 +3,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}" />
-    <title>${taskInstance?.simpleDesc}中标详情</title>
-    <link href="${resource(dir: 'js/bui/css', file: 'dpl-min.css')}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: 'js/bui/css', file: 'bui-min.css')}" rel="stylesheet" type="text/css"/>
-    <link href="${resource(dir: 'js/bui/css', file: 'page-min.css')}" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.8.1.min.js')}"></script>
+
+    <title>${taskInstance?.simpleDesc}</title>
+    <meta name="layout" content="front_main"/>
+
+    <link href="${resource(dir: 'css', file: 'Validform.css')}" rel="stylesheet" type="text/css"/>
+    <link href="${resource(dir: 'js/kindeditor-4.1.10/themes/default', file: 'default.css')}" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style", file: "xm_write.css")}"/>
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style", file: "cxzx_list.css")}"/>
     <script type="text/javascript" src="${resource(dir: 'js/bui', file: 'bui-min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: "js/bui/common", file: "page-min.js")}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js/kindeditor-4.1.10', file: 'kindeditor-min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js/kindeditor-4.1.10/lang', file: 'zh_CN.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'Validform_v5.3.2_min.js')}"></script>
     <script type="text/javascript">
         BUI.use('common/page');
-        $(function(){
-            var timeOut=setTimeout(function(){
+        $(function () {
+            var timeOut = setTimeout(function () {
                 $("#msg").hide(1000);
-            },10000);
+            }, 10000);
         });
 
+        function startBid(id){
+            $.ajax({
+                dataType:'json',
+                type:'post',
+                url:"${createLink(controller: 'front',action:'updTaskStatus',params:[status: TaskStatus.TASK_BIDING.code])}",
+                data:{id:id},
+                success:function(data){
+                    if(data.success){
+                        window.location.href="${createLink(controller:'front',action:'showMySelector',params:[id:taskInstance.id])}";
+                    }else{
+                        alert("操作失败");
+                    }
+                }
+            });
+        }
+
+        function cancelTask(id){
+            $.ajax({
+                dataType:'json',
+                type:'post',
+                url:"${createLink(controller: 'front',action:'updTaskStatus',params:[status: TaskStatus.TASK_CANCEL.code])}",
+                data:{id:id},
+                success:function(data){
+                    if(data.success){
+                        window.location.href="${createLink(controller:'front',action:'showMySelector',params:[id:taskInstance.id])}";
+                    }else{
+                        alert("操作失败");
+                    }
+                }
+            });
+        }
+
+        function taskSuccess(id){
+            $.ajax({
+                dataType:'json',
+                type:'post',
+                url:"${createLink(controller: 'front',action:'updTaskStatus',params:[status: TaskStatus.TASK_COMPLETE.code])}",
+                data:{id:id},
+                success:function(data){
+                    if(data.success){
+                        window.location.href="${createLink(controller:'front',action:'showMySelector',params:[id:taskInstance.id])}";
+                    }else{
+                        alert("操作失败");
+                    }
+                }
+            });
+        }
+
+        function taskFailure(id){
+            $.ajax({
+                dataType:'json',
+                type:'post',
+                url:"${createLink(controller: 'front',action:'updTaskStatus',params:[status: TaskStatus.TASK_FAILURE.code])}",
+                data:{id:id},
+                success:function(data){
+                    if(data.success){
+                        window.location.href="${createLink(controller:'front',action:'showMySelector',params:[id:taskInstance.id])}";
+                    }else{
+                        alert("操作失败");
+                    }
+                }
+            });
+        }
     </script>
 </head>
+
 <body>
 <!--消息-->
 <div style="margin: 10px;">
     <div id="msg">
-    %{--<g:render template="/layouts/msgs_and_errors"/>--}%
         <g:if test="${errors || flash.errors}">
             <div class="tips tips-small tips-warning">
                 <span class="x-icon x-icon-small x-icon-error"><i class="icon icon-white icon-warning"></i></span>
@@ -42,129 +112,171 @@
         <g:if test="${warnings || flash.warnings}">
             <div class="tips tips-small tips-warning">
                 <span class="x-icon x-icon-small x-icon-warning"><i class="icon icon-white icon-bell"></i></span>
+
                 <div class="tips-content">${flash.warnings}${warnings}</div>
             </div>
         </g:if>
         <g:if test="${success || flash.success}">
             <div class="tips tips-small  tips-success">
                 <span class="x-icon x-icon-small x-icon-success"><i class="icon icon-white icon-ok"></i></span>
+
                 <div class="tips-content">${flash.success}${success}</div>
             </div>
         </g:if>
         <g:if test="${question || flash.question}">
             <div class="tips tips-small">
                 <span class="x-icon x-icon-small x-icon-warning"><i class="icon icon-white icon-question"></i></span>
+
                 <div class="tips-content">${flash.question}${question}</div>
             </div>
         </g:if>
     </div>
 </div>
-<div id="show-task" style="margin: 10px;" role="main">
-    <div class="panel">
-        <div class="panel-header">
-            <h3>${message(code: 'task.label', default: 'Task')}-详情</h3>
-        </div>
-        <div class="panel-body">
-            <ol>
 
-                <g:if test="${taskInstance?.simpleDesc}">
-                    <li>
-                        <span id="simpleDesc-label" class="property-label"><g:message code="task.simpleDesc.label" default="Simple Desc" /></span>
+<div class="container pb-15">
+    <div class="row">
+        <div class="span16">
 
-                        <span class="property-value" aria-labelledby="simpleDesc-label"><g:fieldValue bean="${taskInstance}" field="simpleDesc"/></span>
+            <div class="clearfix pb-5" style=" position:relative;">
+                <div class="pull-left classifyDIV pt-10">
+                    <a class="pull-left type-css nosel">任务详情--${taskInstance?.simpleDesc}</a>
+                </div>
+            </div>
 
-                    </li>
+            <div class="clearfix pb-5" style=" position:relative;">
+                <div class="pull-left classifyDIV pt-10">
+                    <a  class="pull-left type-css tags" href="javascript:void(0)" >要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></a>
+                    <a  class="pull-left type-css tags" href="javascript:void(0)">${TaskStatus.getLabel(taskInstance.status)}</a>
+                    <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></a>
+                </div>
+            </div>
+
+
+            <textarea name="taskArea">
+                ${taskInstance?.detailDesc}
+            </textarea>
+
+            <script type="text/javascript">
+
+                KindEditor.ready(function (K) {
+                    K.create('textarea[name="taskArea"]', {
+                        readonlyMode : true,
+                        allowFileManager: true,
+                        langType: 'zh_CN',
+                        items: [ ],
+                        width: '900px',
+                        height: "300px"
+                    });
+                });
+            </script>
+
+            <div style="margin-top: 5px;margin-left: 30px">
+                <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
+                    <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_self" class="button button-primary button-large">
+                        编辑
+                    </a>
+                    <a href="javascript:void(0)" id="startBid" class="button button-primary button-large" onclick="startBid(${taskInstance.id});">
+                        开始竞标
+                    </a>
+                </g:if>
+                <g:if  test="${ taskInstance.status in [com.lj.tps.status.TaskStatus.TASK_INIT.code, com.lj.tps.status.TaskStatus.TASK_BIDING.code]}">
+                    <a href="javascript:void(0)"  id="cancelTask"  class="button button-primary button-large" onclick="cancelTask(${taskInstance.id});">
+                        取消任务
+                    </a>
+                </g:if>
+                <g:if  test="${ taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
+                    <a href="javascript:void(0)"   id="taskSuccess"  class="button button-primary button-large" onclick="taskSuccess(${taskInstance.id});">
+                        任务成功
+                    </a>
+                </g:if>
+                <g:if  test="${params.handler=='taskFailure' && taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
+                    <a href="javascript:void(0)"   id="taskFailure"  class="button button-primary button-large" onclick="taskFailure(${taskInstance.id});">
+                        任务失败
+                    </a>
                 </g:if>
 
-                <g:if test="${taskInstance?.detailDesc}">
-                    <li>
-                        <span id="detailDesc-label" class="property-label"><g:message code="task.detailDesc.label" default="Detail Desc" /></span>
-
-                        <span class="property-value" aria-labelledby="detailDesc-label"></span>
-
-                        ${taskInstance?.detailDesc}
-                    </li>
-
-                </g:if>
-
-                <g:if test="${taskInstance?.price}">
-                    <li>
-                        <span id="price-label" class="property-label"><g:message code="task.price.label" default="Price" /></span>
-
-                        <span class="property-value" aria-labelledby="price-label"><g:fieldValue bean="${taskInstance}" field="price"/></span>
-
-                    </li>
-                </g:if>
-
-                <g:if test="${taskInstance?.crcd}">
-                    <li>
-                        <span id="crcd-label" class="property-label"><g:message code="task.crcd.label" default="Crcd" /></span>
-
-                        <span class="property-value" aria-labelledby="crcd-label"><g:formatDate date="${taskInstance?.crcd}" /></span>
-
-                    </li>
-                </g:if>
-
-                <g:if test="${taskInstance?.contactWay}">
-                    <li>
-                        <span id="contactWay-label" class="property-label"><g:message code="task.contactWay.label" default="Contact Way" /></span>
-
-                        <span class="property-value" aria-labelledby="contactWay-label"><g:fieldValue bean="${taskInstance}" field="contactWay"/></span>
-
-                    </li>
-                </g:if>
-
-                <g:if test="${taskInstance?.contactInfo}">
-                    <li>
-                        <span id="contactInfo-label" class="property-label"><g:message code="task.contactInfo.label" default="Contact Info" /></span>
-
-                        <span class="property-value" aria-labelledby="contactInfo-label"><g:fieldValue bean="${taskInstance}" field="contactInfo"/></span>
-
-                    </li>
-                </g:if>
+            </div>
 
 
+            <g:if test="${winBid}">
 
-                <g:if test="${taskInstance?.status}">
-                    <li>
-                        <span id="status-label" class="property-label"><g:message code="task.status.label" default="Status" /></span>
+                <div class="clearfix pb-5" style=" position:relative;">
+                    <div class="pull-left classifyDIV pt-10">
+                        <a class="pull-left type-css nosel">中标信息</a>
+                    </div>
+                </div>
+                <div class="clearfix pb-5" style=" position:relative;">
+                    <div class="pull-left classifyDIV pt-10">
+                        <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${winBid.username}</a>
+                        <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${winBid.gcd}" format="yyyy-MM-dd"/></a>
+                        <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(winBid.status ?: -1)}</a>
+                        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;
+                            <g:formatNumber number="${winBid.price}" format="#.##" /></a>
+                    </div>
+                </div>
+                <textarea name="winBidArea">
+                    ${winBid.skillDesc ?: ""}
+                </textarea>
 
-                        <span class="property-value" aria-labelledby="status-label">${TaskStatus.getLabel(taskInstance.status)}</span>
+                <div style="margin-top: 5px;margin-left: 30px">
+                    <a href="" class="button button-primary button-large">用户评价入口</a>
 
-                    </li>
-                </g:if>
+                </div>
 
-            </ol>
+                <script type="text/javascript">
+
+                    KindEditor.ready(function (K) {
+                        K.create('textarea[name="winBidArea"]', {
+                            readonlyMode : true,
+                            allowFileManager: true,
+                            langType: 'zh_CN',
+                            items: [ ],
+                            width: '900px',
+                            height: "100px"
+                        });
+                    });
+                </script>
+            </g:if>
+
+
+            <g:if test="${otherBids}">
+                <div class="clearfix pb-5" style=" position:relative;">
+                    <div class="pull-left classifyDIV pt-10">
+                        <a class="pull-left type-css nosel">其他竞标</a>
+                    </div>
+                </div>
+                <g:each in="${otherBids}" status="i" var="myBid">
+                    <div class="clearfix pb-5" style=" position:relative;">
+                        <div class="pull-left classifyDIV pt-5">
+                            <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${myBid.username}</a>
+                            <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
+                            <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
+                            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
+
+                        </div>
+                    </div>
+                    <textarea name="myBidArea_${i}">
+                        ${myBid.skillDesc ?: ""}
+                    </textarea>
+
+                    <script type="text/javascript">
+
+                        KindEditor.ready(function (K) {
+                            K.create('textarea[name="myBidArea_${i}"]', {
+                                readonlyMode : true,
+                                allowFileManager: true,
+                                langType: 'zh_CN',
+                                items: [ ],
+                                width: '900px',
+                                height: "100px"
+                            });
+                        });
+                    </script>
+                </g:each>
+            </g:if>
         </div>
     </div>
-    <g:if test="${params.handler=='startBid' && taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
-        <a id="startBid" class="page-action" href="javascipt:void(0);"  onclick="startBid(${taskInstance.id});">用户评价</a>
-    </g:if>
-
-    <br/>
-
-    <!--显示竞标信息-->
-    <g:if test="${myBid}">
-        <div class="panel">
-            <div class="panel-header">
-                <h3>我的竞标</h3>
-            </div>
-            <div class="panel-body">
-                ${myBid.skillDesc?:""}
-                <br/>
-                ${fieldValue(bean: myBid, field: "username")}
-                <br/>
-                <g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/>
-                <br/>
-                ${com.lj.tps.status.BidStatus.getLabel(myBid.status?:-1)}
-                <br/>
-                ${fieldValue(bean: myBid, field: "price")}
-            </div>
-        </div>
-    </g:if>
 </div>
-
-
 
 </body>
 </html>

@@ -47,7 +47,7 @@
                         </div>
                         <div class="clearfix pt-3">
                             <div class="index-news-img span2 pull-left pt-5" style="color:red">
-                                ¥&nbsp;&nbsp;${bidInstance.price}
+                                ¥&nbsp;&nbsp;<g:formatNumber number="${bidInstance.price}" format="#.##" />
                             </div>
                             <div class="offset1 intro">
                                 <h1>
@@ -68,7 +68,7 @@
         <g:else>
             <div class="tips tips-large tips-info tips-no-icon" style="text-align: center">
                 <div class="tips-content">
-                    <h2>还没有任务哦</h2>
+                    <h2>还没有参与竞标哦</h2>
                 </div>
             </div>
         </g:else>

@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="offset1 intro">
                                         <h1>
-                                            <a  target="_blank" href="${createLink(action: "showTask",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
+                                            <a  target="_blank" href="${createLink(action: "showMySelector",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
                                         </h1>
                                     </div>
                                 </div>

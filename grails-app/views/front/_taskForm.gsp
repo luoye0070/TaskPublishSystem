@@ -17,7 +17,7 @@
 <div class="control-group">
     <label class="control-label" for="price"><s>*</s><g:message code="task.price.label" default="Price" />：</label>
     <div class="controls">
-        <input type="number" name="price" id="price"  value="${taskInstance?.price}" />
+        <input type="input" name="price" id="price"  value="<g:formatNumber number="${taskInstance.price}"/>" />
     </div>
     <div class="mmclear"></div>
 </div>
@@ -44,12 +44,12 @@
 
 
 <div class="control-group">
-    <label class="control-label" for="contactWay"><s>*</s><g:message code="bid.contactWay.label" default="Contact Way"/></label>
+    <label class="control-label" for="contactWay"><s>*</s><g:message code="task.contactWay.label" default="Contact Way"/></label>
     <div class="controls">
         <g:select name="contactWay" from="${ContactWay.getOptions()}" required="" optionKey="code"
                   optionValue="label"
-                  value="${fieldValue(bean: newBid, field: 'contactWay')}"
-                  valueMessagePrefix="bid.contactWay" style="width:100px" class="input-xlarge"/>
+                  value="${fieldValue(bean: taskInstance, field: 'contactWay')}"
+                  valueMessagePrefix="task.contactWay" style="width:100px" class="input-xlarge"/>
 
 
     </div>
@@ -57,9 +57,9 @@
 </div>
 
 <div class="control-group ">
-    <label class="control-label" for="contactInfo"><s>*</s><g:message code="bid.contactInfo.label" default="Contact Info"/>：</label>
+    <label class="control-label" for="contactInfo"><s>*</s><g:message code="task.contactInfo.label" default="Contact Info"/>：</label>
     <div class="controls">
-        <g:textField name="contactInfo" required="" value="${newBid?.contactInfo}" class="input-xlarge"/>
+        <g:textField name="contactInfo" required="" value="${taskInstance?.contactInfo}" class="input-xlarge"/>
     </div>
     <div class="mmclear"></div>
 </div>
@@ -91,7 +91,7 @@
 
         validform.addRule([{
             ele:"input[name='simpleDesc']",
-            datatype:"s2-50",
+            datatype:"*2-50",
             nullmsg:"任务标题最多50字",
             errormsg:"任务标题填写错误，2-50字"
         },{

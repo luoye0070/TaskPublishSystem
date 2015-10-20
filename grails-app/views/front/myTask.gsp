@@ -62,7 +62,7 @@
                     </div>
                     <div class="clearfix pt-3">
                         <div class="index-news-img span2 pull-left pt-5" style="color:red">
-                            ¥&nbsp;&nbsp;${taskInstance.price}
+                            ¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" />
                         </div>
                         <div class="offset1 intro">
                             <h1>

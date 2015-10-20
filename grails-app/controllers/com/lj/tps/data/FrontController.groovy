@@ -72,10 +72,14 @@ class FrontController {
                 newBid.price=res.taskInstance?.price
                 newBid.gcd=res.taskInstance?.crcd
                 res << [newBid:newBid]
+                println newBid.contactInfo
             }else{
                 res << [myBid:myBid]
             }
         }
+
+        println res
+
         res << [params:params]
         println res
         res
@@ -87,8 +91,7 @@ class FrontController {
     def showMySelector(){
         def taskId=params.id as Long
         def res=taskService.get(taskId)
-        def myBid=bidService.getMyBid4Task(taskId)
-        res << [myBid:myBid]
+        res<<bidService.getBid4Task(taskId)
         res
     }
 
@@ -98,9 +101,9 @@ class FrontController {
     def saveTask(){
         def res=taskService.save(params)
         if(!res.success)
-        render(view:"createTask",model:taskService.save(params))
+        render(view:"createTask",model:res)
         else
-            redirect(action:"myTask")
+            redirect(action:"showMyTask",params:[id:res.taskInstance.id])
     }
 
     /**
@@ -124,8 +127,7 @@ class FrontController {
         if(!res.success)
             render(view:'editTask',model:res)
         else{
-            redirect(action:"myTask")
-            return
+            redirect(action:"showMyTask",params:[id:res.taskInstance.id])
         }
     }
 

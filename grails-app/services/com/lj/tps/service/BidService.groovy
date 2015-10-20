@@ -3,6 +3,7 @@ package com.lj.tps.service
 import com.lj.tps.data.Bid
 import com.lj.tps.data.Task
 import com.lj.tps.data.TpsUser
+import com.lj.tps.status.BidStatus
 import com.lj.utils.I18nError
 import com.lj.utils.TypeConversion
 
@@ -94,6 +95,36 @@ class BidService {
         if(list.size()>0)
             return list.get(0)
         return null
+    }
+
+    //查找该任务的中标人
+    def getWinBid4Task(Long taskId){
+        def list=Bid.createCriteria().list{
+            eq("task.id",taskId)
+            eq('status', BidStatus.BID_WIN.code)
+        }
+
+        if(list.size()>0)
+            return list.get(0)
+        return null
+    }
+
+    //查找该任务的竞标信息
+    def getBid4Task(Long taskId){
+        def res=[winBid:null,otherBids:null]
+        def list=Bid.createCriteria().list{
+            eq("task.id",taskId)
+            eq('status', BidStatus.BID_WIN.code)
+        }
+
+        if(list.size()>0)
+            res.winBid= list.get(0)
+
+        res.otherBids=Bid.createCriteria().list{
+            eq("task.id",taskId)
+            ne('status', BidStatus.BID_WIN.code)
+        }
+        return res
     }
 
     /**

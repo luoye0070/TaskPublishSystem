@@ -33,8 +33,7 @@
                     data:{id:id},
                     success:function(data){
                         if(data.success){
-                            alert("操作成功");
-                            $("#startBid").remove();
+                            window.location.href="${createLink(controller:'front',action:'showMyTask',params:[id:taskInstance.id])}";
                         }else{
                             alert("操作失败");
                         }
@@ -50,8 +49,7 @@
                     data:{id:id},
                     success:function(data){
                         if(data.success){
-                            alert("操作成功");
-                            $("#cancelTask").remove();
+                            window.location.href="${createLink(controller:'front',action:'showMyTask',params:[id:taskInstance.id])}";
                         }else{
                             alert("操作失败");
                         }
@@ -67,8 +65,7 @@
                     data:{id:id},
                     success:function(data){
                         if(data.success){
-                            alert("操作成功");
-                            $("#cancelTask").remove();
+                            window.location.href="${createLink(controller:'front',action:'showMyTask',params:[id:taskInstance.id])}";
                         }else{
                             alert("操作失败");
                         }
@@ -84,8 +81,7 @@
                     data:{id:id},
                     success:function(data){
                         if(data.success){
-                            alert("操作成功");
-                            $("#cancelTask").remove();
+                            window.location.href="${createLink(controller:'front',action:'showMyTask',params:[id:taskInstance.id])}";
                         }else{
                             alert("操作失败");
                         }
@@ -151,7 +147,7 @@
     <div class="pull-left classifyDIV pt-10">
         <a  class="pull-left type-css tags" href="javascript:void(0)" >要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></a>
         <a  class="pull-left type-css tags" href="javascript:void(0)">${TaskStatus.getLabel(taskInstance.status)}</a>
-        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;${taskInstance.price}</a>
+        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></a>
     </div>
 </div>
 
@@ -164,7 +160,7 @@
 
     KindEditor.ready(function (K) {
         K.create('textarea[name="taskArea"]', {
-            readonly:true,
+            readonlyMode : true,
             allowFileManager: true,
             langType: 'zh_CN',
             items: [ ],
@@ -176,7 +172,7 @@
 
     <div style="margin-top: 5px;margin-left: 30px">
         <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
-            <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_blank" class="button button-primary button-large">
+            <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_self" class="button button-primary button-large">
                 编辑
             </a>
             <a href="javascript:void(0)" id="startBid" class="button button-primary button-large" onclick="startBid(${taskInstance.id});">
@@ -216,7 +212,7 @@
                 <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${myBid.username}</a>
                 <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
                 <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
-                <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;${myBid.price}</a>
+                <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
 
             </div>
         </div>
@@ -228,7 +224,7 @@
 
             KindEditor.ready(function (K) {
                 K.create('textarea[name="myBidArea_${i}"]', {
-                    readonly:true,
+                    readonlyMode : true,
                     allowFileManager: true,
                     langType: 'zh_CN',
                     items: [ ],
