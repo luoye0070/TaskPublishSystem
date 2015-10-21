@@ -9,32 +9,29 @@
     /*font-family: "Microsoft Yahei", Verdana, Arial, Helvetica, sans-serif*/
 /*}*/
 .leftMenu {
-    min-width:220px;
-    width:288px;
-    /*margin:40px auto 0 auto;*/
-    float: left;
+
 }
 .menu {
     border: #bdd7f2 1px solid;
     border-top: #0080c4 4px solid;
     border-bottom: #0080c4 4px solid;
     background: #f4f9ff url(images/leftdhbg.jpg) repeat-y right;
-    margin-left: 10px;
+    width:296px;
+    min-width: 218px;
+    +width:218px;
 }
 .menu .ListTitle {
     border-bottom: 1px #98c9ee solid;
     display: block;
-    text-align: center;
-    /*position: relative;*/
     height: 38px;
     line-height: 38px;
     cursor: pointer;
-    /*+min-width:220px;*/
-
-+width:100%;
+    width:100%;
 }
 .ListTitlePanel {
-    position: relative;
+    width:296px;
+    min-width: 218px;
+    +width:218px;
 }
 .leftbgbt {
     position: absolute;
@@ -44,17 +41,7 @@
     left: -11px;
     top: -4px;
 }
-    /*.leftbgbt {
-        float:left;
-        background: url(images/leftbgbt.jpg) no-repeat;
-        width: 11px;
-        height: 52px;
-        left: 0px;
-        top: 0px;
-        zoom:1;
-        z-index:200px;
-    }
-    */.leftbgbt2 {
+.leftbgbt2 {
           position: absolute;
           background: url(images/leftbgbt2.jpg) no-repeat;
           width: 11px;
@@ -91,6 +78,9 @@
     background: #0080c4;
     color: #fff;
 }
+
+
+
 </style>
 
 %{--<script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.8.1.min.js')}"></script>--}%
@@ -123,18 +113,18 @@
     %{--</dl>--}%
     %{--</div>--}%
 
-    <div class="label-div t-20 border-all">
-        <div class="l-15">
+    <div class="label-div t-20 border-all" >
+        <div class="l-10">
             <h3 class="label-title border-b b-15 small clearfix" style="padding-bottom: 14px;">个人后台</h3>
         </div>
-        <div class="label-main tody-hot l-15" style="display: table;margin-left: 0px;" >
+        <div class="label-main tody-hot l-10" style="display: table;margin-left: 0px;" >
 
 <div class="leftMenu">
-    <div class="menu">
+    <div class="menu" >
         <div class="menuParent">
             <div class="ListTitlePanel">
                 <div class="ListTitle">
-                    <strong>任务中心</strong>
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;任务中心</strong>
                     <div class="leftbgbt2"> </div>
                 </div>
             </div>
@@ -149,7 +139,7 @@
         <div class="menuParent">
             <div class="ListTitlePanel">
                 <div class="ListTitle">
-                    <strong>个人中心</strong>
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;个人中心</strong>
                     <div class="leftbgbt"> </div>
                 </div>
             </div>
@@ -162,7 +152,7 @@
         <div class="menuParent">
             <div class="ListTitlePanel">
                 <div class="ListTitle">
-                    <strong>文件中心</strong>
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;文件中心</strong>
                     <div class="leftbgbt2"> </div>
                 </div>
             </div>

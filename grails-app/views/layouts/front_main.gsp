@@ -5,6 +5,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 <head>
+    <link rel="icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
@@ -23,7 +24,7 @@
     %{--<link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate")}/style/comment.css"/>--}%
     <script type="text/javascript" src="${resource(dir: "pageTemplate")}/js/function.js"></script>
     <!--[if IE 6]>
-    <script type="text/javascript" src="${resource(dir: "pageTemplate")}/js/DD_belatedPNG.js"></script>
+    <script type="text/javascript" src="${resource(dir: "pageTemplate/js",file:"DD_belatedPNG.js")}"></script>
     <script type="text/javascript">
          DD_belatedPNG.fix('img,.ie6png');
     </script>
@@ -57,9 +58,9 @@
                 </ul>
             </div><!--/.nav-collapse -->
             <ul class="nav pull-right login-none nav-tips">
-                <li class="ie6png divider-vertical" style="_width: 30px;_height: 40px;_background: url(${resource(dir: "pageTemplate")}/images/icons.png) no-repeat 10px -106px;">
+                <li class="ie6png divider-vertical" style="_width: 30px;_height: 40px;_background: url(${resource(dir: "pageTemplate/images",file:"icons.png")}) no-repeat 10px -106px;">
                     <a class="dropdown-toggle clearfix" href="#" style="padding: 7px 5px;">
-                    <img class="logo-before pull-left" src="${resource(dir: "pageTemplate")}/images/avatar-icon.png" /></a></li>
+                    <img class="logo-before pull-left" src="${resource(dir: "pageTemplate/images",file:"avatar-icon.png")}" /></a></li>
             </ul>
             <div class="popup-div tips-div" style="position: absolute;z-index: 10000001;display: none;"></div>
             <script type="text/javascript">
@@ -151,10 +152,10 @@
         <div class="span11 pull-right top-ad" style="position: relative;_float: right;_height: 80px;_overflow: hidden;">
 
             <a href="#" class="pull-left" target="_blank" rel="nofollow">
-                <img alt="" src="${resource(dir: "pageTemplate")}/images/img1.jpg" style="width: 100%; display: block;"/></a>
+                <img alt="" src="${resource(dir: "pageTemplate/images",file:"img1.jpg")}" style="width: 100%; display: block;"/></a>
 
             <a href="#" class="pull-left" style="display:none;" target="_blank">
-                <img alt="" src="${resource(dir: "pageTemplate")}/images/img2.jpg" style="width: 100%; display: block;"/></a>
+                <img alt="" src="${resource(dir: "pageTemplate/images",file:"img2.jpg")}" style="width: 100%; display: block;"/></a>
 
 
             <div class="slides-icon-ad slides-ad-point" style="position: absolute;right:60px;">

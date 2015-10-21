@@ -189,7 +189,7 @@
                         任务成功
                     </a>
                 </g:if>
-                <g:if  test="${params.handler=='taskFailure' && taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
+                <g:if  test="${taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
                     <a href="javascript:void(0)"   id="taskFailure"  class="button button-primary button-large" onclick="taskFailure(${taskInstance.id});">
                         任务失败
                     </a>
