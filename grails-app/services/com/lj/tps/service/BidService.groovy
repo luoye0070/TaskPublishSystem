@@ -70,6 +70,9 @@ class BidService {
                     eq("status", status);
                 }
             }
+
+            if(!params.order)
+            order("id","desc")
         }
 
         def bidInstanceList = Bid.createCriteria().list(params, conditions);
@@ -110,7 +113,8 @@ class BidService {
     }
 
     //查找该任务的竞标信息
-    def getBid4Task(Long taskId){
+    def getBid4Task(def params){
+        def taskId=params.get("task.id") as Long
         def res=[winBid:null,otherBids:null]
         def list=Bid.createCriteria().list{
             eq("task.id",taskId)
@@ -120,10 +124,20 @@ class BidService {
         if(list.size()>0)
             res.winBid= list.get(0)
 
-        res.otherBids=Bid.createCriteria().list{
+        if(!params.sort){
+            params.order="desc"
+            params.sort="id"
+        }
+
+        res.otherBids=Bid.createCriteria().list(params){
             eq("task.id",taskId)
             ne('status', BidStatus.BID_WIN.code)
         }
+
+        res << [bidTotalCount: Bid.createCriteria().count({
+            eq("task.id",taskId)
+            ne('status', BidStatus.BID_WIN.code)
+        })]
         return res
     }
 

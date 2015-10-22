@@ -150,25 +150,25 @@
                     <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></a>
                 </div>
             </div>
+            ${taskInstance?.detailDesc}
 
+            %{--<textarea name="taskArea">--}%
+                %{--${taskInstance?.detailDesc}--}%
+            %{--</textarea>--}%
 
-            <textarea name="taskArea">
-                ${taskInstance?.detailDesc}
-            </textarea>
+            %{--<script type="text/javascript">--}%
 
-            <script type="text/javascript">
-
-                KindEditor.ready(function (K) {
-                    K.create('textarea[name="taskArea"]', {
-                        readonlyMode : true,
-                        allowFileManager: true,
-                        langType: 'zh_CN',
-                        items: [ ],
-                        width: '900px',
-                        height: "300px"
-                    });
-                });
-            </script>
+                %{--KindEditor.ready(function (K) {--}%
+                    %{--K.create('textarea[name="taskArea"]', {--}%
+                        %{--readonlyMode : true,--}%
+                        %{--allowFileManager: true,--}%
+                        %{--langType: 'zh_CN',--}%
+                        %{--items: [ ],--}%
+                        %{--width: '900px',--}%
+                        %{--height: "300px"--}%
+                    %{--});--}%
+                %{--});--}%
+            %{--</script>--}%
 
             <div style="margin-top: 5px;margin-left: 30px">
                 <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
@@ -202,40 +202,42 @@
 
                 <div class="clearfix pb-5" style=" position:relative;">
                     <div class="pull-left classifyDIV pt-10">
-                        <a class="pull-left type-css nosel">中标信息</a>
+                        <a class="pull-left type-css nosel">中标人</a>
                     </div>
                 </div>
                 <div class="clearfix pb-5" style=" position:relative;">
                     <div class="pull-left classifyDIV pt-10">
                         <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${winBid.username}</a>
-                        <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${winBid.gcd}" format="yyyy-MM-dd"/></a>
+                        <a  class="pull-left type-css tags" href="javascript:void(0)" >完成日期：<g:formatDate date="${winBid.gcd}" format="yyyy-MM-dd"/></a>
                         <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(winBid.status ?: -1)}</a>
-                        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;
+                        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;
                             <g:formatNumber number="${winBid.price}" format="#.##" /></a>
                     </div>
                 </div>
-                <textarea name="winBidArea">
-                    ${winBid.skillDesc ?: ""}
-                </textarea>
+                ${winBid.skillDesc ?: ""}
+
+                %{--<textarea name="winBidArea">--}%
+                    %{--${winBid.skillDesc ?: ""}--}%
+                %{--</textarea>--}%
 
                 <div style="margin-top: 5px;margin-left: 30px">
                     <a href="" class="button button-primary button-large">用户评价入口</a>
 
                 </div>
 
-                <script type="text/javascript">
+                %{--<script type="text/javascript">--}%
 
-                    KindEditor.ready(function (K) {
-                        K.create('textarea[name="winBidArea"]', {
-                            readonlyMode : true,
-                            allowFileManager: true,
-                            langType: 'zh_CN',
-                            items: [ ],
-                            width: '900px',
-                            height: "100px"
-                        });
-                    });
-                </script>
+                    %{--KindEditor.ready(function (K) {--}%
+                        %{--K.create('textarea[name="winBidArea"]', {--}%
+                            %{--readonlyMode : true,--}%
+                            %{--allowFileManager: true,--}%
+                            %{--langType: 'zh_CN',--}%
+                            %{--items: [ ],--}%
+                            %{--width: '900px',--}%
+                            %{--height: "100px"--}%
+                        %{--});--}%
+                    %{--});--}%
+                %{--</script>--}%
             </g:if>
 
 
@@ -249,30 +251,38 @@
                     <div class="clearfix pb-5" style=" position:relative;">
                         <div class="pull-left classifyDIV pt-5">
                             <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${myBid.username}</a>
-                            <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
+                            <a  class="pull-left type-css tags" href="javascript:void(0)" >完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
                             <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
-                            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
+                            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
 
                         </div>
                     </div>
-                    <textarea name="myBidArea_${i}">
-                        ${myBid.skillDesc ?: ""}
-                    </textarea>
 
-                    <script type="text/javascript">
+                    ${myBid.skillDesc ?: ""}
+                    %{--<textarea name="myBidArea_${i}">--}%
+                        %{--${myBid.skillDesc ?: ""}--}%
+                    %{--</textarea>--}%
 
-                        KindEditor.ready(function (K) {
-                            K.create('textarea[name="myBidArea_${i}"]', {
-                                readonlyMode : true,
-                                allowFileManager: true,
-                                langType: 'zh_CN',
-                                items: [ ],
-                                width: '900px',
-                                height: "100px"
-                            });
-                        });
-                    </script>
+                    %{--<script type="text/javascript">--}%
+
+                        %{--KindEditor.ready(function (K) {--}%
+                            %{--K.create('textarea[name="myBidArea_${i}"]', {--}%
+                                %{--readonlyMode : true,--}%
+                                %{--allowFileManager: true,--}%
+                                %{--langType: 'zh_CN',--}%
+                                %{--items: [ ],--}%
+                                %{--width: '900px',--}%
+                                %{--height: "100px"--}%
+                            %{--});--}%
+                        %{--});--}%
+                    %{--</script>--}%
                 </g:each>
+
+                <div class="pagination pull-right">
+                    <rmp:paginateInBui action="showMySelector" total="${bidTotalCount}" prev="&larr;"
+                                       next="&rarr;"
+                                       params="${params}"/>
+                </div>
             </g:if>
         </div>
     </div>

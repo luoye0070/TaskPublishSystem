@@ -82,8 +82,11 @@ class TaskService {
                 }
             }
 
+            if(!params.order)
+            order("id","desc")
+
         }
-         println params
+
         def taskInstanceList = Task.createCriteria().list(params, conditions)
         //状态转换
         for(Task task in taskInstanceList){

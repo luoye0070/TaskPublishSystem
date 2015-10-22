@@ -151,24 +151,24 @@
     </div>
 </div>
 
-
-<textarea name="taskArea">
     ${taskInstance?.detailDesc}
-</textarea>
+%{--<textarea name="taskArea">--}%
 
-<script type="text/javascript">
+%{--</textarea>--}%
 
-    KindEditor.ready(function (K) {
-        K.create('textarea[name="taskArea"]', {
-            readonlyMode : true,
-            allowFileManager: true,
-            langType: 'zh_CN',
-            items: [ ],
-            width: '900px',
-            height: "300px"
-        });
-    });
-</script>
+%{--<script type="text/javascript">--}%
+
+    %{--KindEditor.ready(function (K) {--}%
+        %{--K.create('textarea[name="taskArea"]', {--}%
+            %{--readonlyMode : true,--}%
+            %{--allowFileManager: true,--}%
+            %{--langType: 'zh_CN',--}%
+            %{--items: [ ],--}%
+            %{--width: '900px',--}%
+            %{--height: "300px"--}%
+        %{--});--}%
+    %{--});--}%
+%{--</script>--}%
 
     <div style="margin-top: 5px;margin-left: 30px">
         <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
@@ -210,29 +210,31 @@
         <div class="clearfix pb-5" style=" position:relative;">
             <div class="pull-left classifyDIV pt-5">
                 <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${myBid.username}</a>
-                <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
+                <a  class="pull-left type-css tags" href="javascript:void(0)" >完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
                 <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
-                <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
+                <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
 
             </div>
         </div>
-        <textarea name="myBidArea_${i}">
-            ${myBid.skillDesc ?: ""}
-        </textarea>
 
-        <script type="text/javascript">
+        ${myBid.skillDesc ?: ""}
+        %{--<textarea name="myBidArea_${i}">--}%
+            %{--${myBid.skillDesc ?: ""}--}%
+        %{--</textarea>--}%
 
-            KindEditor.ready(function (K) {
-                K.create('textarea[name="myBidArea_${i}"]', {
-                    readonlyMode : true,
-                    allowFileManager: true,
-                    langType: 'zh_CN',
-                    items: [ ],
-                    width: '900px',
-                    height: "100px"
-                });
-            });
-        </script>
+        %{--<script type="text/javascript">--}%
+
+            %{--KindEditor.ready(function (K) {--}%
+                %{--K.create('textarea[name="myBidArea_${i}"]', {--}%
+                    %{--readonlyMode : true,--}%
+                    %{--allowFileManager: true,--}%
+                    %{--langType: 'zh_CN',--}%
+                    %{--items: [ ],--}%
+                    %{--width: '900px',--}%
+                    %{--height: "100px"--}%
+                %{--});--}%
+            %{--});--}%
+        %{--</script>--}%
 
 
 

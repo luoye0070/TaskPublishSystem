@@ -39,7 +39,8 @@ class FrontController {
      */
     def showMyTask(){
         def res=taskService.get(params.id as Long)
-        params <<["task.id":params.id]
+        if(!params.getProperty("task.id"))
+        params.setProperty("task.id",params.id)
         res << bidService.list(params)
         res << [params:params]
     }
@@ -59,11 +60,12 @@ class FrontController {
      * @param id
      */
     def showTask(){
+
         def taskId=params.id as Long
         def res=taskService.get(taskId)
         params <<["task.id":taskId]
-        //def bidList=bidService.list(params)
-        //res << bidList
+        def bidList=bidService.list(params)
+        res << bidList
         def isSelfTask=taskService.isSelfTask(res.taskInstance)
         if(!isSelfTask){
             def myBid=bidService.getMyBid4Task(taskId)
@@ -78,8 +80,6 @@ class FrontController {
             }
         }
 
-        println res
-
         res << [params:params]
         println res
         res
@@ -91,7 +91,9 @@ class FrontController {
     def showMySelector(){
         def taskId=params.id as Long
         def res=taskService.get(taskId)
-        res<<bidService.getBid4Task(taskId)
+        if(!params.getProperty("task.id"))
+        params.setProperty("task.id",taskId)
+        res<<bidService.getBid4Task(params)
         res
     }
 

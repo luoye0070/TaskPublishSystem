@@ -86,24 +86,24 @@
     </div>
 </div>
 
+${taskInstance?.detailDesc}
+%{--<textarea name="taskArea">--}%
+    %{--${taskInstance?.detailDesc}--}%
+%{--</textarea>--}%
 
-<textarea name="taskArea">
-    ${taskInstance?.detailDesc}
-</textarea>
+%{--<script type="text/javascript">--}%
 
-<script type="text/javascript">
-
-    KindEditor.ready(function (K) {
-        K.create('textarea[name="taskArea"]', {
-            readonlyMode : true,
-            allowFileManager: true,
-            langType: 'zh_CN',
-            items: [ ],
-            width: '900px',
-            height: "300px"
-        });
-    });
-</script>
+    %{--KindEditor.ready(function (K) {--}%
+        %{--K.create('textarea[name="taskArea"]', {--}%
+            %{--readonlyMode : true,--}%
+            %{--allowFileManager: true,--}%
+            %{--langType: 'zh_CN',--}%
+            %{--items: [ ],--}%
+            %{--width: '900px',--}%
+            %{--height: "300px"--}%
+        %{--});--}%
+    %{--});--}%
+%{--</script>--}%
 
 <sec:ifLoggedIn>
 <g:if test="${newBid}">
@@ -299,32 +299,82 @@
     </div>
     <div class="clearfix pb-5" style=" position:relative;">
         <div class="pull-left classifyDIV pt-10">
-            <a  class="pull-left type-css tags" href="javascript:void(0)" >保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
+            <a  class="pull-left type-css tags" href="javascript:void(0)" >完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
             <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
-            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">保证价格：¥&nbsp;&nbsp;
+            <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;
                 <g:formatNumber number="${myBid.price}" format="#.##" /></a>
         </div>
     </div>
-    <textarea name="myBidArea">
-        ${myBid.skillDesc ?: ""}
-    </textarea>
 
-    <script type="text/javascript">
+    ${myBid.skillDesc ?: ""}
+    %{--<textarea name="myBidArea">--}%
+        %{--${myBid.skillDesc ?: ""}--}%
+    %{--</textarea>--}%
 
-        KindEditor.ready(function (K) {
-            K.create('textarea[name="myBidArea"]', {
-                readonlyMode : true,
-                allowFileManager: true,
-                langType: 'zh_CN',
-                items: [ ],
-                width: '900px',
-                height: "100px"
-            });
-        });
-    </script>
+    %{--<script type="text/javascript">--}%
+
+        %{--KindEditor.ready(function (K) {--}%
+            %{--K.create('textarea[name="myBidArea"]', {--}%
+                %{--readonlyMode : true,--}%
+                %{--allowFileManager: true,--}%
+                %{--langType: 'zh_CN',--}%
+                %{--items: [ ],--}%
+                %{--width: '900px',--}%
+                %{--height: "100px"--}%
+            %{--});--}%
+        %{--});--}%
+    %{--</script>--}%
 </g:if>
 
 </sec:ifLoggedIn>
+
+<g:if test="${bidInstanceList}">
+    <div class="clearfix pb-5" style=" position:relative;">
+        <div class="pull-left classifyDIV pt-10">
+            <a class="pull-left type-css nosel">${null==myBid?"所有竞标":"其他竞标"}</a>
+        </div>
+    </div>
+    <g:each in="${bidInstanceList}" status="i" var="curBid">
+        <g:if test="${null==myBid || myBid.id.longValue()!=curBid.id.longValue()}">
+            <div class="clearfix pb-5" style=" position:relative;">
+                <div class="pull-left classifyDIV pt-5">
+                    <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${curBid.username}</a>
+                    <a  class="pull-left type-css tags" href="javascript:void(0)" >完成日期：<g:formatDate date="${curBid.gcd}" format="yyyy-MM-dd"/></a>
+                    <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(curBid.status ?: -1)}</a>
+                    <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${curBid.price}" format="#.##" /></a>
+
+                </div>
+            </div>
+
+            ${curBid.skillDesc ?: ""}
+
+            %{--<textarea name="curBidArea_${i}">--}%
+                %{--${curBid.skillDesc ?: ""}--}%
+            %{--</textarea>--}%
+
+            %{--<script type="text/javascript">--}%
+
+                %{--KindEditor.ready(function (K) {--}%
+                    %{--K.create('textarea[name="curBidArea_${i}"]', {--}%
+                        %{--readonlyMode : true,--}%
+                        %{--allowFileManager: true,--}%
+                        %{--langType: 'zh_CN',--}%
+                        %{--items: [ ],--}%
+                        %{--width: '900px',--}%
+                        %{--height: "100px"--}%
+                    %{--});--}%
+                %{--});--}%
+            %{--</script>--}%
+        </g:if>
+    </g:each>
+
+    <div class="pagination pull-right">
+        <rmp:paginateInBui action="showTask" total="${bidInstanceTotal}" prev="&larr;"
+                           next="&rarr;"
+                           params="${params}"/>
+    </div>
+
+</g:if>
 
 </div>
 </div>
