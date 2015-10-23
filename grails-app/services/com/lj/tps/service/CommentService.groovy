@@ -55,6 +55,7 @@ class CommentService {
     def createBidComment(def params) {
         String commentContent=params.commentContent;
         long bidId=Number.toLong(params.bidId);
+        int grade=Number.toInteger(params.grade);
         def member=springSecurityService.currentUser;
         if(member){
             Bid bid= Bid.get(bidId);
@@ -65,6 +66,7 @@ class CommentService {
                     bidComment.setBid(bid);
                     bidComment.setCommentContent(commentContent);
                     bidComment.setTpsUser(tpsUser);
+                    bidComment.setGrade(grade);
                     if(!bidComment.save(flush: true)){
                         return [recode:ReCode.SAVE_FAILED,errors:I18nError.getMessage(g, bidComment.errors.allErrors)];
                     }else{

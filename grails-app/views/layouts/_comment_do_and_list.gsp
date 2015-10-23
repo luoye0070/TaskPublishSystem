@@ -110,6 +110,7 @@
 
     <div id="pl"></div>
 
+    <g:if test="${canComment}">
     <div class="view-main t-20 pl-25 pr-25">
         %{--<table style="width: 100%;" class="fc333 border-all">--}%
         %{--<tbody><tr>--}%
@@ -195,7 +196,7 @@
         </div>
 
     </div>
-
+    </g:if>
                 <!--警告：切勿删除-->
                 <!--[if IE 6]> <a class="follow-btn ie6png mmmzw"></a><![endif]-->
 
