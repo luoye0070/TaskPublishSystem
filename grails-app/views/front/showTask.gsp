@@ -379,5 +379,9 @@ ${taskInstance?.detailDesc}
 </div>
 </div>
 </div>
+
+
+
+<g:render template="/layouts/comment_do_and_list"/>
 </body>
 </html>

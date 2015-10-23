@@ -10,7 +10,8 @@ import grails.converters.JSON
 class FrontController {
     def taskService
     def bidService
-
+    def commentService;
+    def springSecurityService;
     /**
      * 首页入口
      */
@@ -43,6 +44,19 @@ class FrontController {
         params.setProperty("task.id",params.id)
         res << bidService.list(params)
         res << [params:params]
+
+        //获取评论
+        def taskId=params.id as Long
+        def taskComments=commentService.getTaskComment([taskId:taskId])
+        res << [taskComments:taskComments.taskComments]
+        if(res.taskInstance?.username!=springSecurityService.currentUser?.username){
+            res<<[canComment:true];
+        }else{
+            res<<[canComment:false];
+        }
+        //获取提交评论地址
+        def doTaskCommentUrl=createLink(controller: "comment",action: "doTaskComment",params: [backUrl:createLink(absolute: true,controller: "front",action: "showTask",params: [id:taskId])+"#pl"]);
+        res << [doTaskCommentUrl:doTaskCommentUrl]
     }
 
     /**
@@ -81,6 +95,18 @@ class FrontController {
         }
 
         res << [params:params]
+
+        //获取评论
+        def taskComments=commentService.getTaskComment([taskId:taskId])
+        res << [taskComments:taskComments.taskComments]
+        if(res.taskInstance?.username!=springSecurityService.currentUser?.username){
+            res<<[canComment:true];
+        }else{
+            res<<[canComment:false];
+        }
+        //获取提交评论地址
+        def doTaskCommentUrl=createLink(controller: "comment",action: "doTaskComment",params: [backUrl:createLink(absolute: true,controller: "front",action: "showTask",params: [id:taskId])+"#pl"]);
+        res << [doTaskCommentUrl:doTaskCommentUrl]
         println res
         res
     }

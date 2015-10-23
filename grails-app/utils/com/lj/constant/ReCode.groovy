@@ -27,4 +27,8 @@ public class ReCode {
     public final static def FILE_IS_TOO_BIG=[code:-13,label:"上传文件大小超过限制"];
     public final static def FILE_EXT_NOT_ALLOW=[code:-14,label:"上传文件扩展名是不允许的扩展名"];
     public final static def UPLOAD_FILE_FAILED=[code:-15,label:"上传文件失败"];
+    public final static def NOT_FOUND_BID=[code:-16,label:"没有找到指定的竞标信息"];
+    public final static def BID_CAN_NOT_COMMENT=[code:-17,label:"竞标当前状态不能评论"];
+    public final static def TASK_CAN_NOT_COMMENT=[code:-18,label:"取消的和失败的任务不能评论"];
+    public final static def NOT_FOUND_TASK=[code:-19,label:"没有找到指定的任务信息"];
 }
