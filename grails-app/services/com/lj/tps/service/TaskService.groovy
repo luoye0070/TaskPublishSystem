@@ -11,7 +11,7 @@ import grails.converters.JSON
 
 class TaskService {
     def springSecurityService
-
+    def bidEvaluationService
 
     /**
      * 获取任务列表
@@ -82,8 +82,12 @@ class TaskService {
                 }
             }
 
+            if(!params.order){
+                order("id","desc")
+            }
+
         }
-         println params
+
         def taskInstanceList = Task.createCriteria().list(params, conditions)
         //状态转换
         for(Task task in taskInstanceList){
@@ -365,9 +369,12 @@ class TaskService {
             res.errors="该竞标不存在"
             return res
         }
+
+        Bid bider
         for(Bid bid in bidList){
             if(bid.id==bidId){
                 bid.status=BidStatus.BID_WIN.code
+                bider=bid
             }else{
                 bid.status=BidStatus.BID_LOSE.code
             }
@@ -377,10 +384,13 @@ class TaskService {
 
         //设置任务竞标结束
         taskInstance.status=TaskStatus.TASK_BIDED.code
-        taskInstance.save(flush: true)
+        if(taskInstance.save(flush: true)){
+            //统计用户中标数
+            //bidEvaluationService.recordTaskCount(1,bider.username)
+            res.msg="操作成功"
+            res.success=true
+        }
 
-        res.msg="操作成功"
-        res.success=true
         return res
     }
 

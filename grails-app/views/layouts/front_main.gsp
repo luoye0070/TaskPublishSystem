@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
-    <script type="text/javascript" src="${resource(dir: "pageTemplate")}/js/jquery1.4.js"></script>
+    <script type="text/javascript" src="${resource(dir: "js",file:"jquery-1.8.1.min.js")}"></script>
     <title><g:layoutTitle/></title>
     <meta name="Keywords" content="任务发布平台"/>
     <meta name="Description" content="任务发布平台"/>
@@ -35,7 +35,7 @@
     <r:layoutResources />
 </head>
 <body>
-
+<script type="text/javascript" src="js/borsertocss.js"> </script><!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->
 <!--头部代码开始-->
 <div class="navbar navbar-fixed-top" style="_position: relative;_z-index: 10000;">
     <div class="navbar-inner">

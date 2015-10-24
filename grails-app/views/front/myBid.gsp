@@ -35,25 +35,22 @@
                         <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}" href="${createLink(controller: 'front',action:'myBid',params: [sort:'price',order:'asc'])}">价格↑</a>
                     </div>
 
-                </div>
+            </div>
 
         <g:if test="${bidInstanceList}">
             <g:each in="${bidInstanceList}" status="i" var="bidInstance">
                 <div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
                     <div class="news-list">
                         <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;color:red">
-                            <a class="tags-box l-10 fc999 pull-left" title="" href="#">${BidStatus.getLabel(bidInstance.status)}</a>
-                            <a class="tags-box l-10 fc999 pull-left" title="" href="#">保证完成日期：<g:formatDate date="${bidInstance.gcd}" format="yyyy-MM-dd"/></a>
+                            <span class="label label-success">${BidStatus.getLabel(bidInstance.status)}</span>
+                            <span class="label label-success">保证完成日期：<g:formatDate date="${bidInstance.gcd}" format="yyyy-MM-dd"/></span>
                         </div>
                         <div class="clearfix pt-3">
-                            <div class="index-news-img span2 pull-left pt-5" style="color:red">
-                                ¥&nbsp;&nbsp;<g:formatNumber number="${bidInstance.price}" format="#.##" />
+                            <div class="index-news-img span14 pull-left pt-5" style="color:red">
+                                ¥&nbsp;&nbsp;<g:formatNumber number="${bidInstance.price}" format="#.##" />&nbsp;&nbsp;
+                                <a  target="_blank"  style="font-weight: bold" href="${createLink(action: "showTask",params: [id:bidInstance.task?.id])}">${bidInstance.task?.simpleDesc?:""}</a>
                             </div>
-                            <div class="offset1 intro">
-                                <h1>
-                                    <a  target="_blank" href="${createLink(action: "showTask",params: [id:bidInstance.task?.id])}">${bidInstance.task?.simpleDesc?:""}</a>
-                                </h1>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -68,7 +65,7 @@
         <g:else>
             <div class="tips tips-large tips-info tips-no-icon" style="text-align: center">
                 <div class="tips-content">
-                    <h2>还没有参与竞标哦</h2>
+                    <h4>还没有参与竞标哦</h4>
                 </div>
             </div>
         </g:else>

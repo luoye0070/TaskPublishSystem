@@ -48,7 +48,7 @@
                     'flash', 'media','insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
                     'anchor', 'link', 'unlink'
                 ],
-                width:'700px',
+                width: $("#container").width(),
                 height:"300px",
                 imageSizeLimit:'2M',
                 imageUploadLimit:5,
@@ -103,7 +103,7 @@
 </div>
 
 
-<div class="container pb-15">
+<div class="container pb-15" id="container">
     <div class="row">
         <div class="span16">
             <div class="clearfix pb-5" style=" position:relative;">

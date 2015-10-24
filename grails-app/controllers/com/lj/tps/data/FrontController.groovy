@@ -12,6 +12,7 @@ class FrontController {
     def bidService
     def commentService;
     def springSecurityService;
+    def bidEvaluationService
     /**
      * 首页入口
      */
@@ -83,7 +84,7 @@ class FrontController {
         def isSelfTask=taskService.isSelfTask(res.taskInstance)
         if(!isSelfTask){
             def myBid=bidService.getMyBid4Task(taskId)
-            if(!myBid){
+            if(!myBid && res.taskInstance?.status==TaskStatus.TASK_BIDING.code){
                 def newBid=bidService.newBid()
                 newBid.price=res.taskInstance?.price
                 newBid.gcd=res.taskInstance?.crcd
@@ -191,4 +192,31 @@ class FrontController {
         params.showMyBid=true
         bidService.list(params)
     }
+    /**
+     * 显示评价
+     * @return
+     */
+    def showEvaluation(){
+        if(!params.evaluationLevel)
+            params.evaluationLevel=1
+        bidEvaluationService.getEvaluations(params)
+    }
+
+    //发表评价
+    def createEvaluation(){
+        params
+    }
+
+    //保存评价
+    def saveEvaluation(){
+         def res=bidEvaluationService.createEvaluation(params)
+        if(res.success){
+            redirect(action:'showEvaluation',params:[evaluatedPerson:params.evaluatedPerson])
+        }else{
+            flash.errors=res.msg
+            redirect(action:"showEvaluation",params:params)
+        }
+    }
+
+
 }

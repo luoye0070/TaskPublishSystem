@@ -975,7 +975,7 @@ a.backToTop:hover {background-color: #333;}
 	.label-main .video-list {width: 100%;margin-bottom: 20px;}
 	.home-index .news-list {margin-left: 15px;}
 	.news-list .clearfix.pt-5 {padding-left: 20px;}
-	.news-list .intro {margin-left: 0;margin-top: 5px;}
+	.news-list .intro {margin-left: 0;margin-top: 0;padding: 0}
 	.topic-list {margin-left: 15px;}
 	.topic-list .intro {margin-left: 0;margin-top: 5px;}
 	.group-list {margin-left: 15px;}

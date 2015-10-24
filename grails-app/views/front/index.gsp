@@ -44,18 +44,16 @@
                      <div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
                          <div class="news-list">
                              <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;color:red">
-                                 <a class="tags-box l-10 fc999 pull-left" title="" href="#">${TaskStatus.getLabel(taskInstance.status)}</a>
-                                 <a class="tags-box l-10 fc999 pull-left" title="" href="#"><g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/>前完成</a>
+                                 <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
+                                 <span class="label label-success"><g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/>前完成</span>
+
                              </div>
                              <div class="clearfix pt-3">
-                                 <div class="index-news-img span2 pull-left pt-5" style="color:red">
-                                     ¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" />
+                                 <div class="index-news-img span14 pull-left pt-5" style="color:red">
+                                     ¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /> &nbsp;&nbsp;
+                                     <a  target="_blank" style="font-weight: bold" href="${createLink(action: "showTask",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
                                  </div>
-                                 <div class="offset1 intro">
-                                     <h1>
-                                         <a  target="_blank" href="${createLink(action: "showTask",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
-                                     </h1>
-                                 </div>
+
                              </div>
                          </div>
                      </div>

@@ -10,7 +10,7 @@
         <link href="${resource(dir: 'css', file: 'Validform.css')}" rel="stylesheet" type="text/css"/>
         <link href="${resource(dir: 'js/kindeditor-4.1.10/themes/default', file: 'default.css')}" rel="stylesheet"
               type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style", file: "xm_write.css")}"/>
+
         <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate/style", file: "cxzx_list.css")}"/>
         <script type="text/javascript" src="${resource(dir: 'js/bui', file: 'bui-min.js')}"></script>
         <script type="text/javascript" src="${resource(dir: "js/bui/common", file: "page-min.js")}"></script>
@@ -21,6 +21,7 @@
             BUI.use('common/page');
             $(function () {
                 var timeOut = setTimeout(function () {
+                    if($("#msg").html()!='')
                     $("#msg").hide(1000);
                 }, 10000);
             });
@@ -133,108 +134,116 @@
     </div>
 </div>
 
-<div class="container pb-15">
+<div class="container pb-15" id="container">
 <div class="row">
 <div class="span16">
 
 <div class="clearfix pb-5" style=" position:relative;">
     <div class="pull-left classifyDIV pt-10">
-        <a class="pull-left type-css nosel">任务详情--${taskInstance?.simpleDesc}</a>
+        <a class="pull-left nosel">任务详情--${taskInstance?.simpleDesc}</a>
     </div>
 </div>
 
 <div class="clearfix pb-5" style=" position:relative;">
     <div class="pull-left classifyDIV pt-10">
-        <a  class="pull-left type-css tags" href="javascript:void(0)" >要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></a>
-        <a  class="pull-left type-css tags" href="javascript:void(0)">${TaskStatus.getLabel(taskInstance.status)}</a>
-        <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></a>
-    </div>
-</div>
-
-    ${taskInstance?.detailDesc}
-%{--<textarea name="taskArea">--}%
-
-%{--</textarea>--}%
-
-%{--<script type="text/javascript">--}%
-
-    %{--KindEditor.ready(function (K) {--}%
-        %{--K.create('textarea[name="taskArea"]', {--}%
-            %{--readonlyMode : true,--}%
-            %{--allowFileManager: true,--}%
-            %{--langType: 'zh_CN',--}%
-            %{--items: [ ],--}%
-            %{--width: '900px',--}%
-            %{--height: "300px"--}%
-        %{--});--}%
-    %{--});--}%
-%{--</script>--}%
-
-    <div style="margin-top: 5px;margin-left: 30px">
+        <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
+        <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
+        <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
         <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
-            <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_self" class="button button-primary button-large">
+            <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_self" class="type-button pull-left">
                 编辑
             </a>
-            <a href="javascript:void(0)" id="startBid" class="button button-primary button-large" onclick="startBid(${taskInstance.id});">
+            <a href="javascript:void(0)" id="startBid" class="type-button  pull-left" onclick="startBid(${taskInstance.id});">
                 开始竞标
             </a>
         </g:if>
         <g:if  test="${ taskInstance.status in [com.lj.tps.status.TaskStatus.TASK_INIT.code, com.lj.tps.status.TaskStatus.TASK_BIDING.code]}">
-            <a href="javascript:void(0)"  id="cancelTask"  class="button button-primary button-large" onclick="cancelTask(${taskInstance.id});">
+            <a href="javascript:void(0)"  id="cancelTask"  class="type-button  pull-left" onclick="cancelTask(${taskInstance.id});">
                 取消任务
             </a>
         </g:if>
         <g:if  test="${ taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
-            <a href="javascript:void(0)"   id="taskSuccess"  class="button button-primary button-large" onclick="taskSuccess(${taskInstance.id});">
+            <a href="javascript:void(0)"   id="taskSuccess"  class="type-button  pull-left" onclick="taskSuccess(${taskInstance.id});">
                 任务成功
             </a>
         </g:if>
         <g:if  test="${taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
-            <a href="javascript:void(0)"   id="taskFailure"  class="button button-primary button-large" onclick="taskFailure(${taskInstance.id});">
+            <a href="javascript:void(0)"   id="taskFailure"  class="type-button  pull-left" onclick="taskFailure(${taskInstance.id});">
                 任务失败
             </a>
         </g:if>
-
     </div>
+</div>
+
+    %{--${taskInstance?.detailDesc}--}%
+<textarea name="taskArea">
+    ${taskInstance?.detailDesc}
+</textarea>
+
+<script type="text/javascript">
+
+    KindEditor.ready(function (K) {
+        var editor=K.create('textarea[name="taskArea"]', {
+            readonlyMode : true,
+            allowFileManager: true,
+            langType: 'zh_CN',
+            items: [ ],
+            width: $("#container").width()
+        });
+
+        var autoheight=editor.edit.doc.body.scrollHeight;
+        editor.edit.setHeight(autoheight);
+    });
+</script>
+
 
 
 <g:if test="${bidInstanceList}">
     <div class="clearfix pb-5" style=" position:relative;">
         <div class="pull-left classifyDIV pt-10">
-            <a class="pull-left type-css nosel">所有竞标</a>
+            <a class="pull-left  nosel">所有竞标</a>
+            <br/>
             <a  class="pull-left type-css tags ${params.sort=='gcd'?'selected':''}" readonly="true" href="${createLink(controller: 'front',action:'showMyTask',params: [id:taskInstance.id,sort:'gcd',order:'asc'])}">保证完成日期↑</a>
             <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}" href="${createLink(controller: 'front',action:'showMyTask',params: [id:taskInstance.id,sort:'price',order:'asc'])}">价格↑</a>
+
         </div>
     </div>
     <g:each in="${bidInstanceList}" status="i" var="myBid">
         <div class="clearfix pb-5" style=" position:relative;">
             <div class="pull-left classifyDIV pt-5">
-                <a  class="pull-left type-css tags" href="javascript:void(0)" >竞标人：${myBid.username}</a>
-                <a  class="pull-left type-css tags" href="javascript:void(0)" >完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></a>
-                <a  class="pull-left type-css tags" href="javascript:void(0)">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</a>
-                <a  class="pull-left type-css tags" style="color:red" href="javascript:void(0)">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></a>
+                <span class="label label-success">竞标人：${myBid.username}</span>
+                <span class="label label-success">保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></span>
+                <g:if test="${curBid.status!=-1}">
+                    <span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>
+                </g:if>
+                %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%
+                <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></span>
 
+                <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
             </div>
         </div>
 
-        ${myBid.skillDesc ?: ""}
-        %{--<textarea name="myBidArea_${i}">--}%
-            %{--${myBid.skillDesc ?: ""}--}%
-        %{--</textarea>--}%
+        %{--${myBid.skillDesc ?: ""}--}%
+        <textarea name="myBidArea_${i}">
+            ${myBid.skillDesc ?: ""}
+        </textarea>
 
-        %{--<script type="text/javascript">--}%
+        <script type="text/javascript">
 
-            %{--KindEditor.ready(function (K) {--}%
-                %{--K.create('textarea[name="myBidArea_${i}"]', {--}%
-                    %{--readonlyMode : true,--}%
-                    %{--allowFileManager: true,--}%
-                    %{--langType: 'zh_CN',--}%
-                    %{--items: [ ],--}%
-                    %{--width: '900px',--}%
-                    %{--height: "100px"--}%
-                %{--});--}%
-            %{--});--}%
-        %{--</script>--}%
+            KindEditor.ready(function (K) {
+                var editor=K.create('textarea[name="myBidArea_${i}"]', {
+                    readonlyMode : true,
+                    allowFileManager: true,
+                    langType: 'zh_CN',
+                    items: [ ],
+                    width: $("#container").width(),
+                    minHeight: "50px"
+                });
+
+                var autoheight=editor.edit.doc.body.scrollHeight;
+                editor.edit.setHeight(autoheight);
+            });
+        </script>
 
 
 
@@ -254,6 +263,6 @@
 
 
 
-<g:render template="/layouts/comment_do_and_list"/>
+%{--<g:render template="/layouts/comment_do_and_list"/>--}%
 	</body>
 </html>

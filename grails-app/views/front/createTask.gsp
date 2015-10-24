@@ -17,18 +17,11 @@
     <script type="text/javascript">
         var tip='请把任务再补充详细些吧。越清晰越具体，任务完成质量越高哦！您也可以插入图片和上传附件！';
 
-        $(function(){
-            <g:if test="${isSaveOk}">
-            if(top.topManager){
-                //打开左侧菜单中配置过的页面
-                top.topManager.reloadPage("contents_list_menu");
-            }
-            </g:if>
 
-        });
 
         $(function(){
             var timeOut=setTimeout(function(){
+                if($("#msg").html()!='')
                 $("#msg").hide(1000);
             },10000);
         });
@@ -52,7 +45,7 @@
                     'flash', 'media','insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
                     'anchor', 'link', 'unlink'
                 ],
-                width:'700px',
+                width:$("#container").width(),
                 height:"300px",
                 imageSizeLimit:'2M',
                 imageUploadLimit:5,
@@ -111,7 +104,7 @@
 
 </div>
 
-<div class="container pb-15">
+<div class="container pb-15" id="container">
     <div class="row">
         <div class="span16">
             <div class="clearfix pb-5" style=" position:relative;">

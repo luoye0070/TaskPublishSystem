@@ -101,6 +101,15 @@ class SystemInitService {
             log.info("初始化之任务管理权限配置：/front/myBid/**");
         }
 
+        if(!Requestmap.findByUrl("/front/saveEvaluation/**")){
+            new Requestmap(url:'/front/saveEvaluation/**',configAttribute:"authenticated").save(flush: true);
+            log.info("初始化之任务管理权限配置：/front/saveEvaluation/**");
+        }
+
+        if(!Requestmap.findByUrl("/front/createEvaluation/**")){
+            new Requestmap(url:'/front/createEvaluation/**',configAttribute:"authenticated").save(flush: true);
+            log.info("初始化之任务管理权限配置：/front/createEvaluation/**");
+        }
     }
 
     //初始话authority

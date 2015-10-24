@@ -132,6 +132,7 @@
                 <div> <a class="${(controllerName=="front"&&actionName=="myTask")?"active":""}" href="${createLink(controller:"front",action:'myTask')}">我的任务</a></div>
                 <div> <a class="${(controllerName=="front"&&actionName=="mySelector")?"active":""}" href="${createLink(controller:"front",action:'mySelector')}">我的中标</a></div>
                 <div> <a class="${(controllerName=="front"&&actionName=="myBid")?"active":""}" href="${createLink(controller:"front",action:'myBid')}">我的竞标</a></div>
+                <div> <a class="${(controllerName=="front"&&actionName=="showEvaluation")?"active":""}" href="${createLink(controller:"front",action:'showEvaluation')}">我的评价</a></div>
                 <div> <a class="${(controllerName=="front"&&actionName=="createTask")?"active":""}" href="${createLink(controller:"front",action:'createTask')}">发布任务</a></div>
             </div>
         </div>

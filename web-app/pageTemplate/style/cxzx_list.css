@@ -1,3 +1,13 @@
+.classifyDIV a.type-button {
+    padding: 6px 10px 8px;
+    #padding: 8px 9px 6px;
+    color: #1269b0;
+    line-height: 15px;
+    margin: 10px 10px 0 0;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
 @CHARSET "UTF-8";
 .offset3 {margin-left: 165px;}
 .logo-div .logo-img {width:100%;}
@@ -121,7 +131,7 @@
 }
 .classifyDIV a.type-css.selected {border: 1px #DE2B1F solid;background: #DE2B1F;color: #FFF}
 
-.classifyDIV a.nosel{color:#1F6599; font-size:18px; font-weight:bold; border:none; background:none;}
+.classifyDIV a.nosel{font-size:18px; font-weight:bold; border:none; background:none;}
 
 .classifyDIV a:hover.type-css.selected {color: #FFF}
 input.search-input {
@@ -928,7 +938,7 @@ a.fc333 {color:#333;text-decoration:none;}
 a:focus.fc666, a:hover.fc666 {color:#CF261F;}
 a.fc666 {color:#666;text-decoration:none;}
 a:focus.fc999, a:hover.fc999 {color:#1E6495;}
-a.fc999 {color:#999;text-decoration:none;}
+a.fc999 {color:#1269b0;text-decoration:none;}
 a:focus.fcccc, a:hover.fcccc {color:#CF261F;}
 a.fcccc {color:#CCC;text-decoration:none;}
 a:focus.fcccf, a:hover.fcccf {color:#FFF;text-decoration:none;}

@@ -24,6 +24,8 @@ class Bid {
     //任务包状态
     Integer status=BidStatus.BID_INIT.code
 
+    Boolean evaluated=false
+
     static constraints = {
         contactWay nullable:false,inList:ContactWay.values()*.code
         contactInfo blank: false
