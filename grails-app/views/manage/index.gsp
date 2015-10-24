@@ -25,7 +25,7 @@
         <ul id="J_Nav" class="nav-list ks-clear">
             <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">用户管理</div></li>
             <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">内容管理</div></li>
-            <li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">网站配置</div></li>
+            %{--<li class="nav-item dl-selected"><div class="nav-item-inner nav-storage">网站配置</div></li>--}%
         </ul>
     </div>
     <ul id="J_NavContent" class="dl-tab-conten">
@@ -83,17 +83,17 @@
                     }
                 ]
             }
-            ,
+            %{--,--}%
 
-            {
-                id: 'webSiteConfig',
-                menu: [
-                    {
-                        text: '网站信息',
-                        items: [
-                            {id: 'webSiteConfig_siteInfo_menu', text: '网站信息', href: '${createLink(controller:"siteManage",action:'editWebSiteInfo')}'}
-                        ]
-                    }
+            %{--{--}%
+                %{--id: 'webSiteConfig',--}%
+                %{--menu: [--}%
+                    %{--{--}%
+                        %{--text: '网站信息',--}%
+                        %{--items: [--}%
+                            %{--{id: 'webSiteConfig_siteInfo_menu', text: '网站信息', href: '${createLink(controller:"siteManage",action:'editWebSiteInfo')}'}--}%
+                        %{--]--}%
+                    %{--}--}%
                     %{--,--}%
                     %{--{--}%
                         %{--text: '内容块管理',--}%
@@ -101,15 +101,15 @@
                             %{--{id: 'contentBlock_list_menu', text: '内容块列表', href: '${createLink(controller:"siteManage",action:'contentBlockList')}'}--}%
                         %{--]--}%
                     %{--}--}%
-                    ,
-                    {
-                        text: '测试生成的页面',
-                        items: [
-                            {id: 'testd_list_menu', text: '内容块列表', href: '${createLink(controller:"testD",action:'list')}'}
-                        ]
-                    }
-                ]
-            }
+                    %{--,--}%
+                    %{--{--}%
+                        %{--text: '测试生成的页面',--}%
+                        %{--items: [--}%
+                            %{--{id: 'testd_list_menu', text: '内容块列表', href: '${createLink(controller:"testD",action:'list')}'}--}%
+                        %{--]--}%
+                    %{--}--}%
+                %{--]--}%
+            %{--}--}%
         ];
         new PageUtil.MainPage({
             modulesConfig: config
