@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="com.lj.rmp.utils.FormatUtil;com.lj.rmp.enumcustom.ResourceType;" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.lj.rmp.utils.FormatUtil;com.lj.tps.enumcustom.ResourceType;" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="front_main"/>
@@ -86,7 +86,7 @@
         <div class="form-links">
             <ul class="nav-tabs">
                 <li class="${(com.lj.rmp.utils.Number.toInteger(params.type)==0)?"active":""}"><a href="${createLink(controller: "tpsResourceFile",action: "list",params: [type:0])}">全部</a></li>
-                <g:each in="${com.lj.rmp.enumcustom.ResourceType.types}" var="resourceType">
+                <g:each in="${ResourceType.types}" var="resourceType">
                     <li class="${(com.lj.rmp.utils.Number.toInteger(params.type)==resourceType.code)?"active":""}"><a href="${createLink(controller: "tpsResourceFile",action: "list",params: [type:resourceType.code])}">${resourceType.label}</a></li>
                 </g:each>
             </ul>
@@ -112,13 +112,13 @@
                                           title="${message(code: 'resourceFileInfo.fileName.label', default: 'File Name')}"
                                           params="${params}"/>
 
-                        <g:sortableColumn property="size"
-                                          title="${message(code: 'resourceFileInfo.size.label', default: 'Size')}"
-                                          params="${params}"/>
+                        %{--<g:sortableColumn property="size"--}%
+                                          %{--title="${message(code: 'resourceFileInfo.size.label', default: 'Size')}"--}%
+                                          %{--params="${params}"/>--}%
 
-                        <g:sortableColumn property="uploadTime"
-                                          title="${message(code: 'resourceFileInfo.uploadTime.label', default: 'UploadTime')}"
-                                          params="${params}"/>
+                        %{--<g:sortableColumn property="uploadTime"--}%
+                                          %{--title="${message(code: 'resourceFileInfo.uploadTime.label', default: 'UploadTime')}"--}%
+                                          %{--params="${params}"/>--}%
                         <th>URL</th>
                         <th>文件预览</th>
                     </tr>
@@ -132,10 +132,10 @@
                                 </td>
                                 <td style="width: 30px;">${ResourceType.getLable(resourceFile.type)}</td>
                                 %{--<td>${resourceFile.fileFullName}</td>--}%
-                                <td style="width: 180px;word-wrap:break-word;word-break:break-all;">${resourceFile.fileName}</td>
-                                <td style="width: 60px;">${FormatUtil.byteToKB(resourceFile.size)}</td>
-                                <td style="width: 60px;">${FormatUtil.dateTimeFormat(resourceFile.uploadTime)}</td>
-                                <td style="width: 300px;word-wrap:break-word;word-break:break-all;"><rmp:resourceFileUrl fileFullName="${resourceFile.fileFullName}"/></td>
+                                <td style="width: 240px;word-wrap:break-word;word-break:break-all;">${resourceFile.fileName}</td>
+                                %{--<td style="width: 60px;">${FormatUtil.byteToKB(resourceFile.size)}</td>--}%
+                                %{--<td style="width: 60px;">${FormatUtil.dateTimeFormat(resourceFile.uploadTime)}</td>--}%
+                                <td style="width: 360px;word-wrap:break-word;word-break:break-all;"><rmp:resourceFileUrl fileFullName="${resourceFile.fileFullName}"/></td>
                                 <td style="width: 160px;"><tps:resourceFilePreview id="${resourceFile.id}"/></td>
                             </tr>
                         </g:each>

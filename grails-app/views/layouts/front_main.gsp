@@ -59,7 +59,7 @@
             </div><!--/.nav-collapse -->
             <ul class="nav pull-right login-none nav-tips">
                 <li class="ie6png divider-vertical" style="_width: 30px;_height: 40px;_background: url(${resource(dir: "pageTemplate/images",file:"icons.png")}) no-repeat 10px -106px;">
-                    <a class="dropdown-toggle clearfix" href="#" style="padding: 7px 5px;">
+                    <a class="dropdown-toggle clearfix" href="${createLink(controller:"user",action:'edit')}" style="padding: 7px 5px;">
                     <img class="logo-before pull-left" src="${resource(dir: "pageTemplate/images",file:"avatar-icon.png")}" /></a></li>
             </ul>
             <div class="popup-div tips-div" style="position: absolute;z-index: 10000001;display: none;"></div>
@@ -149,21 +149,21 @@
 <div class="top-div">
     <div class="container clearfix">
 
-        <div class="span11 pull-right top-ad" style="position: relative;_float: right;_height: 80px;_overflow: hidden;">
+        %{--<div class="span11 pull-right top-ad" style="position: relative;_float: right;_height: 80px;_overflow: hidden;">--}%
 
-            <a href="#" class="pull-left" target="_blank" rel="nofollow">
-                <img alt="" src="${resource(dir: "pageTemplate/images",file:"img1.jpg")}" style="width: 100%; display: block;"/></a>
+            %{--<a href="#" class="pull-left" target="_blank" rel="nofollow">--}%
+                %{--<img alt="" src="${resource(dir: "pageTemplate/images",file:"img1.jpg")}" style="width: 100%; display: block;"/></a>--}%
 
-            <a href="#" class="pull-left" style="display:none;" target="_blank">
-                <img alt="" src="${resource(dir: "pageTemplate/images",file:"img2.jpg")}" style="width: 100%; display: block;"/></a>
+            %{--<a href="#" class="pull-left" style="display:none;" target="_blank">--}%
+                %{--<img alt="" src="${resource(dir: "pageTemplate/images",file:"img2.jpg")}" style="width: 100%; display: block;"/></a>--}%
 
 
-            <div class="slides-icon-ad slides-ad-point" style="position: absolute;right:60px;">
-                <a href="javascript:void(0);" class="icon-css-on ie6png">&nbsp;</a>
-                <a href="javascript:void(0);" class="icon-css ie6png">&nbsp;</a>
-            </div>
+            %{--<div class="slides-icon-ad slides-ad-point" style="position: absolute;right:60px;">--}%
+                %{--<a href="javascript:void(0);" class="icon-css-on ie6png">&nbsp;</a>--}%
+                %{--<a href="javascript:void(0);" class="icon-css ie6png">&nbsp;</a>--}%
+            %{--</div>--}%
 
-        </div>
+        %{--</div>--}%
 
     </div>
 </div>
@@ -244,8 +244,8 @@
         <ul class="about-ul">
             <li class="fc666">客服电话 400-100-8884</li>
             <li><span>|</span></li>
-            <li><a title="广告投放" href="#" class="fc666" target="_blank">广告投放</a></li>
-            <li><span>|</span></li>
+            %{--<li><a title="广告投放" href="#" class="fc666" target="_blank">广告投放</a></li>--}%
+            %{--<li><span>|</span></li>--}%
             <li><a title="企业服务" href="#" class="fc666" target="_blank">企业服务</a></li>
             <li><span>|</span></li>
             <li><a title="公司博客" href="#" class="fc666" target="_blank" >公司博客</a></li>
@@ -253,13 +253,13 @@
             <li><a title="加入我们" href="#" class="fc666" target="_blank">加入我们</a></li>
             <li><span>|</span></li>
             <li><a title="服务协议" href="#" class="fc666" target="_blank">服务协议</a></li>
-            <li><span>|</span></li>
+            %{--<li><span>|</span></li>--}%
             <!-- <li id="zk_btn" class="ie6png down-class">
                    	 <a title="友情链接" href="javascript:void(0);" class="fc666">友情链接</a>
                     </li>-->
-            <li id="zk_btn" class="ie6png down-class">
-                <a title="友情链接" href="javascript:void(0);" class="fc666">友情链接</a>
-            </li>
+            %{--<li id="zk_btn" class="ie6png down-class">--}%
+                %{--<a title="友情链接" href="javascript:void(0);" class="fc666">友情链接</a>--}%
+            %{--</li>--}%
             <div class="clear"></div>
         </ul>
     </div>

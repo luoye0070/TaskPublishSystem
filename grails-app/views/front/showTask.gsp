@@ -303,7 +303,7 @@
     <div class="clearfix pb-5" style=" position:relative;">
         <div class="pull-left classifyDIV pt-10">
             <span class="label label-success">保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></span>
-            <g:if test="${curBid.status!=-1}">
+            <g:if test="${myBid.status!=-1}">
                 <span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>
             </g:if>
             %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%

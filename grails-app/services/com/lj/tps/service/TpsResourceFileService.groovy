@@ -1,11 +1,12 @@
 package com.lj.tps.service
 
 import com.lj.csp.data.Member
-import com.lj.rmp.enumcustom.FileExts
+//import com.lj.rmp.enumcustom.FileExts
 import com.lj.rmp.enumcustom.ReCode
 import com.lj.rmp.enumcustom.ResourceType
 import com.lj.rmp.utils.I18nError
 import com.lj.tps.data.TpsResourceFileInfo
+import com.lj.tps.enumcustom.FileExts
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile

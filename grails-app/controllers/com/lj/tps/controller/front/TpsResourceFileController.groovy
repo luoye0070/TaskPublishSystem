@@ -2,11 +2,12 @@ package com.lj.tps.controller.front
 
 import com.lj.csp.data.Member
 import com.lj.rmp.data.ResourceFileInfo
-import com.lj.rmp.enumcustom.FileExts
+//import com.lj.rmp.enumcustom.FileExts
 import com.lj.rmp.enumcustom.ReCode
 import com.lj.rmp.enumcustom.ResourceType
 import com.lj.rmp.utils.FormatUtil
 import com.lj.tps.data.TpsResourceFileInfo
+import com.lj.tps.enumcustom.FileExts
 import grails.converters.JSON
 import org.json.simple.JSONObject
 
