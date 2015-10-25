@@ -118,6 +118,16 @@
 	white-space: nowrap;
 	font-size: 14px;
 }
+
+.classifyDIV a.type-button {
+    padding: 6px 10px 8px;
+    #padding: 8px 9px 6px;
+    color: #1269b0;
+    line-height: 15px;
+    margin: 10px 10px 0 0;
+    white-space: nowrap;
+    font-size: 14px;
+}
 .classifyDIV a.type-css.selected {border: 1px #DE2B1F solid;background: #DE2B1F;color: #FFF}
 .classifyDIV a:hover.type-css.selected {color: #FFF}
 input.search-input {

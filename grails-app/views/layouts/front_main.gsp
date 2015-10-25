@@ -147,7 +147,7 @@
     </div>
 </div>
 <div class="top-div">
-    <div class="container clearfix">
+    %{--<div class="container clearfix">--}%
 
         %{--<div class="span11 pull-right top-ad" style="position: relative;_float: right;_height: 80px;_overflow: hidden;">--}%
 
@@ -165,7 +165,7 @@
 
         %{--</div>--}%
 
-    </div>
+    %{--</div>--}%
 </div>
 <script type="text/javascript">
     $(function(){

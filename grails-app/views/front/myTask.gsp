@@ -79,7 +79,7 @@
     <g:else>
         <div class="tips tips-large tips-info tips-no-icon" style="text-align: center">
             <div class="tips-content">
-                <h2>还没有任务哦</h2>
+                还没有任务哦
             </div>
         </div>
     </g:else>
