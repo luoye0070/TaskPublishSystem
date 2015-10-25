@@ -216,6 +216,9 @@
                         <g:if test="${taskInstance.status in [TaskStatus.TASK_COMPLETE.code,TaskStatus.TASK_FAILURE.code] && winBid.evaluated==false}">
                             <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'createEvaluation',params:[evaluatedPerson:winBid.username,taskId:taskInstance.id,bidId:winBid.id,simpleDesc:taskInstance.simpleDesc])}" >评价</a>
                         </g:if>
+                        <g:else>
+                            <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:winBid.username])}" target="_blank">查看评价</a>
+                        </g:else>
                     </div>
                 </div>
                 %{--${winBid.skillDesc ?: ""}--}%
@@ -256,7 +259,8 @@
                             <span class="label label-success">保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></span>
                             %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%
                             <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></span>
-                            %{--<a  class="type-button" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>--}%
+                            <br/>
+                            <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
                         </div>
                     </div>
 

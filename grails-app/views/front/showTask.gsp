@@ -83,6 +83,12 @@
         <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
         <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
         <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
+        <br/>
+        <g:if test="${canJoin}">
+            <a href="${createLink(controller: 'front',action:'joinBid',params:[id:taskInstance.id])}" target="_self" class="type-button pull-left">
+                参与竞标
+            </a>
+        </g:if>
     </div>
 </div>
 
@@ -109,189 +115,6 @@
 </script>
 
 <sec:ifLoggedIn>
-<g:if test="${newBid}">
-
-<div class="clearfix pb-15" style=" position:relative;">
-    <div class="pull-left classifyDIV pt-10">
-        <a class="pull-left nosel">参与竞标</a>
-    </div>
-</div>
-
-
-<g:form action="saveBid" method="post" class="form-horizontal">
-    <input type="hidden" name="task.id" value="${taskInstance.id}"/>
-
-    <div class="control-group">
-        <label class="control-label" for="contactWay"><s>*</s><g:message code="bid.contactWay.label" default="Contact Way"/></label>
-        <div class="controls">
-            <g:select name="contactWay" from="${ContactWay.getOptions()}" required="" optionKey="code"
-                      optionValue="label"
-                      value="${fieldValue(bean: newBid, field: 'contactWay')}"
-                      valueMessagePrefix="bid.contactWay" style="width:100px" class="input-xlarge"/>
-
-
-        </div>
-        <div class="mmclear"></div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label" for="contactInfo"><s>*</s><g:message code="bid.contactInfo.label" default="Contact Info"/>：</label>
-        <div class="controls">
-            <g:textField name="contactInfo" required="" value="${newBid?.contactInfo}" class="input-xlarge"/>
-        </div>
-        <div class="mmclear"></div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label" for="contactInfo"><s>*</s><g:message code="bid.price.label" default="Price"/>：</label>
-    <div class="controls">
-        <g:textField name="price" value="${fieldValue(bean: newBid, field: 'price')}" required="" class="input-xlarge"/>
-    </div>
-    <div class="mmclear"></div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label" for="contactInfo"><s>*</s><g:message code="bid.gcd.label" default="Gcd"/>：</label>
-        <div class="controls">
-            <g:textField name="gcd" value="${com.lj.utils.FormatUtil.dateFormat(newBid?.gcd)}" class="input-xlarge"/>
-            <!-- script start -->
-            <script type="text/javascript">
-                BUI.use('bui/calendar', function (Calendar) {
-                    var datepicker = new Calendar.DatePicker({
-                        trigger: '#gcd',
-                        showTime: false,
-                        autoRender: true,
-                        minDate: new Date()
-                    });
-                });
-            </script>
-            <!-- script end -->
-
-        </div>
-        <div class="mmclear"></div>
-    </div>
-
-    <g:textArea name="skillDesc" maxlength="10240" required="">
-        请详细说明您的技术与优势。愈真实中标率愈高哦！
-    </g:textArea>
-
-    <div style="margin-top: 5px;margin-left: 30px">
-    <button type="submit" class="button button-primary">
-        竞标
-    </button>
-    </div>
-</g:form>
-
-
-<script type="text/javascript">
-    $(function () {
-
-        var validform = $(".form-horizontal").Validform({
-            tiptype: 3,
-            label: ".label",
-            showAllError: true,
-            ajaxPost: true,
-            beforeCheck: function (curform) {
-                var editor = $("textarea[name='skillDesc']");
-                if (editor.html() == '<br />' || editor.html() == '') {
-                    $.Showmsg("请详细说明您的技术与优势!");
-                    return false;
-                }
-                return true;
-            }, callback: function (data) {
-                $.Hidemsg();
-                if (data.success) {
-                    window.location.href = "${createLink(controller: "front",action:"showTask",params:[id:taskInstance.id])}";
-                } else {
-                    alert(data.msg);
-                }
-            }
-
-        });
-
-        validform.addRule([
-            {
-                ele: "input[name='contactInfo']",
-                datatype: 'm',
-                nullmsg: "请输入联系方式！",
-                errormsg: "请输入您的手机号！"
-            }
-        ]);
-
-
-        $("select[name='contactWay']").bind("change", function () {
-            var v = $(this).val();
-            if (v == "2") {
-                validform.addRule([
-                    {
-                        ele: "input[name='contactInfo']",
-                        datatype: 'n',
-                        nullmsg: "请输入您的QQ号码",
-                        errormsg: "请输入正确的QQ号码！"
-                    }
-                ]);
-            } else if (v == "3") {
-                validform.addRule([
-                    {
-                        ele: "input[name='contactInfo']",
-                        datatype: 'e',
-                        nullmsg: "请输入您的Email！",
-                        errormsg: "请输入正确的Email！"
-                    }
-                ]);
-            } else {
-                validform.addRule([
-                    {
-                        ele: "input[name='contactInfo']",
-                        datatype: 'm',
-                        nullmsg: "请输入联系方式！",
-                        errormsg: "请输入您的手机号！"
-                    }
-                ]);
-            }
-
-            $("input[name='contactInfo']").val("");
-            validform.check(false, "input[name='contactInfo']");
-        });
-    });
-
-    var tip = '请详细说明您的技术与优势。愈真实中标率愈高哦！';
-
-    var editor;
-
-    KindEditor.ready(function (K) {
-        editor = K.create('textarea[name="skillDesc"]', {
-            uploadJson: '${createLink(controller: "tpsResourceFile",action: "uploadInEditor")}',
-            fileManagerJson: '${createLink(controller: "tpsResourceFile",action: "manageInEditor")}',
-            allowFileManager: true,
-            langType: 'zh_CN',
-            items: [
-                'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
-                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
-                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
-                'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-                'anchor', 'link', 'unlink'
-            ],
-            width: $("#container").width(),
-            height: "300px",
-            imageSizeLimit: '2M',
-            imageUploadLimit: 5,
-            afterFocus: function (e) {
-                if (editor.html() == tip)
-                    editor.html('');
-            },
-            afterBlur: function (e) {
-
-                this.sync();
-            }
-        });
-    });
-</script>
-</g:if>
-
 
 <g:if test="${myBid}">
 
@@ -355,7 +178,8 @@
                     </g:if>
                     <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${curBid.price}" format="#.##" /></span>
 
-                    %{--<a  class=" type-button pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:curBid.username])}" target="_blank">查看评价</a>--}%
+                    <br/>
+                    <a  class=" type-button pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:curBid.username])}" target="_blank">查看评价</a>
 
                 </div>
             </div>

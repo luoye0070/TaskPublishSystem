@@ -17,6 +17,7 @@ class FrontController {
      * 首页入口
      */
     def index(){
+       params.statusList=TaskStatus.getStatusNoCancel()
         taskService.list(params)
     }
 
@@ -84,32 +85,45 @@ class FrontController {
         def isSelfTask=taskService.isSelfTask(res.taskInstance)
         if(!isSelfTask){
             def myBid=bidService.getMyBid4Task(taskId)
-            if(!myBid && res.taskInstance?.status==TaskStatus.TASK_BIDING.code){
-                def newBid=bidService.newBid()
-                newBid.price=res.taskInstance?.price
-                newBid.gcd=res.taskInstance?.crcd
-                res << [newBid:newBid]
-                println newBid.contactInfo
-            }else{
+            if(myBid){
                 res << [myBid:myBid]
+                res << [canJoin:false]
+            } else{
+                res << [canJoin:true]
             }
         }
 
         res << [params:params]
 
-        //获取评论
-        def taskComments=commentService.getTaskComment([taskId:taskId])
-        res << [taskComments:taskComments.taskComments]
-        if(res.taskInstance?.username!=springSecurityService.currentUser?.username){
-            res<<[canComment:true];
-        }else{
-            res<<[canComment:false];
-        }
-        //获取提交评论地址
-        def doTaskCommentUrl=createLink(controller: "comment",action: "doTaskComment",params: [backUrl:createLink(absolute: true,controller: "front",action: "showTask",params: [id:taskId])+"#pl"]);
-        res << [doTaskCommentUrl:doTaskCommentUrl]
-        println res
         res
+    }
+
+    /**
+     * 参与竞标
+     * @return
+     */
+    def joinBid(){
+        def taskId=params.id as Long
+        def res=taskService.get(taskId)
+        params <<["task.id":taskId]
+
+        def isSelfTask=taskService.isSelfTask(res.taskInstance)
+        if(!isSelfTask){
+            def myBid=bidService.getMyBid4Task(taskId)
+            if(myBid){
+                redirect(action:'showTask',params:[id:taskId])
+            }else if(!myBid && res.taskInstance?.status==TaskStatus.TASK_BIDING.code){
+                def newBid=bidService.newBid()
+                newBid.price=res.taskInstance?.price
+                newBid.gcd=res.taskInstance?.crcd
+                res << [newBid:newBid]
+                res << [taskInstance:res.taskInstance]
+            }else{
+                redirect(action:'showTask',params:[id:taskId])
+            }
+        }else{
+            redirect(action:'showTask',params:[id:taskId])
+        }
     }
 
     /**

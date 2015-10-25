@@ -17,6 +17,12 @@ class BidService {
      */
     def list(def params){
         params.max = Math.min(params.max ?Integer.valueOf(params.max): 10, 100)
+
+        if(!params.order || !params.sort){
+            params.sort='id'
+            params.order='desc'
+        }
+
         def bidInstance = new Bid(params)
         def conditions = {
             if (params.contactWay) {

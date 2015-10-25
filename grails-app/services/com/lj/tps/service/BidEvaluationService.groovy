@@ -82,11 +82,13 @@ class BidEvaluationService {
 
     def getEvalutionList(def params){
         params.max = Math.min(params.max ?Integer.valueOf(params.max): 10, 100)
-
+        if(!params.order || !params.sort){
+            params.sort='id'
+            params.order='desc'
+        }
         def condition={
             eq('evaluatedPerson',params.evaluatedPerson)
-            if(!params.order)
-                order("id","desc")
+
             if(params.evaluationLevel)
              eq('evaluationLevel',params.evaluationLevel as int)
         }

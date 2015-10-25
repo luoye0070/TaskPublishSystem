@@ -110,6 +110,11 @@ class SystemInitService {
             new Requestmap(url:'/front/createEvaluation/**',configAttribute:"authenticated").save(flush: true);
             log.info("初始化之任务管理权限配置：/front/createEvaluation/**");
         }
+
+        if(!Requestmap.findByUrl("/front/joinBid/**")){
+            new Requestmap(url:'/front/joinBid/**',configAttribute:"authenticated").save(flush: true);
+            log.info("初始化之任务管理权限配置：/front/joinBid/**");
+        }
     }
 
     //初始话authority

@@ -45,6 +45,16 @@ public enum TaskStatus {
         ]
     }
 
+    public static def getStatusNoCancel(){
+        [
+                TASK_INIT.code,
+                TASK_BIDING.code,
+                TASK_BIDED.code,
+                TASK_COMPLETE.code,
+                TASK_FAILURE.code
+        ]
+    }
+
 
     public static String getLabel(Integer code){
         switch (code){

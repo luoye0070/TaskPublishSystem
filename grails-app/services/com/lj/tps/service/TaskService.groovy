@@ -18,8 +18,12 @@ class TaskService {
       * @param params
      */
     def  list(def params){
-        params.max = Math.min(params.max ?Integer.valueOf(params.max): 10, 100)
 
+        params.max = Math.min(params.max ?Integer.valueOf(params.max): 10, 100)
+        if(!params.order || !params.sort){
+            params.sort='id'
+            params.order='desc'
+        }
         def taskInstance=new Task(params)
         /**
          * 处理查询条件
@@ -82,9 +86,7 @@ class TaskService {
                 }
             }
 
-            if(!params.order){
-                order("id","desc")
-            }
+
 
         }
 
