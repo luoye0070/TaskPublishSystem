@@ -8,7 +8,13 @@ class TpsUser extends Member {
     String mobileNumber;//手机号码
     String unitName;//单位名称,选择性填写
     static constraints = {
-        IDNumber(nullable: false,blank: false,maxSize: 24);
+        IDNumber(nullable: false,blank: false,maxSize: 24,validator: {
+            if (it) {
+                if (!StrCheckUtil.chkStrFormat(it, "passport")) {
+                    return ["idFormatError"]
+                }
+            }
+        });
         mobileNumber(nullable: false,blank: false,maxSize: 16,validator: {
             if (it) {
                 if (!StrCheckUtil.chkStrFormat(it, "mobile")) {

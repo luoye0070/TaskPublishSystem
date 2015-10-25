@@ -43,7 +43,8 @@ class StrCheckUtil {
         if (type=='name')    {regex = /^[\u4e00-\u9fa5|A-Za-z|0-9]+\w*$/};
         if (type=='pwd')     {regex = /^[A-Za-z|\w]{6,20}$/};
         if (type=='email')   {regex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/};
-        if (type=='passport'){regex = /^\d{15}|\d{18}$/};
+        //if (type=='passport'){regex = /^\d{15}|\d{18}$/};
+        if (type=='passport'){regex = /^([1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3})|([1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X))$/};
         if (type=='mobile')  {regex = /^((13)|(14)|(15)|(18))\d{9}$/};
         if (type=='money')   {regex = /^[1-9]\d*(\.\d{1,2})?$)|(^[0]{1}(\.\d{1,2})?$/};
         if (type=="phone")   {regex = /(^((13)|(14)|(15)|(18))\d{9}$)|(^(\d{3,4}|\d{3,4}(-)?)?\d{7,8}$)/};
