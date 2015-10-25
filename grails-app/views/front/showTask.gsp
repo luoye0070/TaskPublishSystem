@@ -177,7 +177,7 @@
 
     <div style="margin-top: 5px;margin-left: 30px">
     <button type="submit" class="button button-primary">
-        提交
+        竞标
     </button>
     </div>
 </g:form>
@@ -337,7 +337,7 @@
 
 </sec:ifLoggedIn>
 
-<g:if test="${bidInstanceList}">
+<g:if test="${bidInstanceList && (myBid && bidInstanceList.size()>1 || (!myBid))}">
     <div class="clearfix pb-5" style=" position:relative;">
         <div class="pull-left classifyDIV pt-10">
             <a class="pull-left  nosel">${null==myBid?"所有竞标":"其他竞标"}</a>

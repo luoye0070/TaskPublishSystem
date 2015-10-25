@@ -149,6 +149,7 @@
         <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
         <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
         <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
+        <br/>
         <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
             <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_self" class="type-button pull-left">
                 编辑
@@ -162,16 +163,16 @@
                 取消任务
             </a>
         </g:if>
-        <g:if  test="${ taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
-            <a href="javascript:void(0)"   id="taskSuccess"  class="type-button  pull-left" onclick="taskSuccess(${taskInstance.id});">
-                任务成功
-            </a>
-        </g:if>
-        <g:if  test="${taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">
-            <a href="javascript:void(0)"   id="taskFailure"  class="type-button  pull-left" onclick="taskFailure(${taskInstance.id});">
-                任务失败
-            </a>
-        </g:if>
+        %{--<g:if  test="${ taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">--}%
+            %{--<a href="javascript:void(0)"   id="taskSuccess"  class="type-button  pull-left" onclick="taskSuccess(${taskInstance.id});">--}%
+                %{--任务成功--}%
+            %{--</a>--}%
+        %{--</g:if>--}%
+        %{--<g:if  test="${taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">--}%
+            %{--<a href="javascript:void(0)"   id="taskFailure"  class="type-button  pull-left" onclick="taskFailure(${taskInstance.id});">--}%
+                %{--任务失败--}%
+            %{--</a>--}%
+        %{--</g:if>--}%
     </div>
 </div>
 
@@ -218,8 +219,12 @@
                 </g:if>
                 %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%
                 <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></span>
-
+                <br/>
+                <g:if test="${(taskInstance.status in [TaskStatus.TASK_BIDING.code])}">
+                    <a href="${createLink(action: "setupWinner", params: [bidId: myBid.id,id:taskInstance.id])}" class="type-button  pull-left">中标</a>
+                </g:if>
                 <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
+
             </div>
         </div>
 
@@ -247,12 +252,7 @@
 
 
 
-        <div style="margin-top: 5px;margin-left: 30px">
 
-            <g:if test="${(taskInstance.status in [TaskStatus.TASK_BIDING.code])}">
-                <a href="${createLink(action: "setupWinner", params: [bidId: myBid.id,id:taskInstance.id])}" class="button button-primary button-large">中标</a>
-            </g:if>
-        </div>
      </g:each>
 
 

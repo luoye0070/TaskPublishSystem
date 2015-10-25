@@ -25,11 +25,13 @@
 
 
                 <g:if test="${evaluationList}">
-                    <div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
+
                     <g:each in="${evaluationList}"  var="evaluation">
+                        <div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
                         <div class="news-list">
                             <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;color:red">
-                                <span class="label label-success">${evaluation.evaluationTime}</span>
+                                <span class="label label-success">评价人：${evaluation.valuer}</span>
+                                <span class="label label-success">评价时间：${evaluation.evaluationTime}</span>
                             </div>
                             <div class="clearfix pt-3">
                                 <div class="index-news-img span16 pull-left pt-5" style="color:red">
@@ -43,13 +45,14 @@
 
                             </div>
                         </div>
+                        </div>
                     </g:each>
                         <div class="pagination pull-right">
                             <rmp:paginateInBui action="showEvaluation" total="${evaluationCount}" prev="&larr;"
                                                next="&rarr;"
                                                params="${params}"/>
                         </div>
-                    </div>
+
                 </g:if>
                 <g:else>
                     <div class="tips tips-large tips-info tips-no-icon" style="text-align: center">

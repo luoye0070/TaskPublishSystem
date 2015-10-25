@@ -46,18 +46,18 @@ class FrontController {
         res << bidService.list(params)
         res << [params:params]
 
-        //获取评论
-        def taskId=params.id as Long
-        def taskComments=commentService.getTaskComment([taskId:taskId])
-        res << [taskComments:taskComments.taskComments]
-        if(res.taskInstance?.username!=springSecurityService.currentUser?.username){
-            res<<[canComment:true];
-        }else{
-            res<<[canComment:false];
-        }
-        //获取提交评论地址
-        def doTaskCommentUrl=createLink(controller: "comment",action: "doTaskComment",params: [backUrl:createLink(absolute: true,controller: "front",action: "showTask",params: [id:taskId])+"#pl"]);
-        res << [doTaskCommentUrl:doTaskCommentUrl]
+//        //获取评论
+//        def taskId=params.id as Long
+//        def taskComments=commentService.getTaskComment([taskId:taskId])
+//        res << [taskComments:taskComments.taskComments]
+//        if(res.taskInstance?.username!=springSecurityService.currentUser?.username){
+//            res<<[canComment:true];
+//        }else{
+//            res<<[canComment:false];
+//        }
+//        //获取提交评论地址
+//        def doTaskCommentUrl=createLink(controller: "comment",action: "doTaskComment",params: [backUrl:createLink(absolute: true,controller: "front",action: "showTask",params: [id:taskId])+"#pl"]);
+//        res << [doTaskCommentUrl:doTaskCommentUrl]
     }
 
     /**
@@ -204,7 +204,19 @@ class FrontController {
 
     //发表评价
     def createEvaluation(){
-        params
+        def task=Task.get(params.taskId)
+        def bid=Bid.get(params.bidId)
+        if(task && bid){
+            if((task.status in [TaskStatus.TASK_COMPLETE.code,TaskStatus.TASK_FAILURE.code] && bid.evaluated==false)){
+                params
+            }else{
+                redirect(action:"showMySelector",params: [id:params.taskId])
+            }
+        }else{
+            redirect(action:"showMySelector",params: [id:params.taskId])
+        }
+
+
     }
 
     //保存评价

@@ -122,24 +122,35 @@ class BidEvaluationService {
             return res
         }
 
+        def task=Task.get(params.taskId)
+        if(!task){
+            res.msg="任务不存在"
+            return res
+        }
+
         def bid=Bid.get(params.bidId)
         if(!bid){
             res.msg="中标不存在"
             return res
         }
 
-        if(!(bid.status in [BidStatus.BID_WIN.code,BidStatus.BID_LOSE.code] && bid.evaluated==false)){
+
+        if(!(task.status in [TaskStatus.TASK_COMPLETE.code,TaskStatus.TASK_FAILURE.code]  && bid.evaluated==false)){
             res.msg="不能评价"
             return res
         }
 
+
         bid.evaluated=true
         params.valuer=member.username
-        println params
+
         def bidEvalution=new BidEvaluation(params)
         bidEvalution.evaluationTime=new Date()
         bidEvalution.save(flush:true)
         bid.save(flush: true)
+
+        println bidEvalution.errors
+        println bid.errors
 //
 //        if(bidEvalution.save(flush:true)){
             //记录评价信息

@@ -118,7 +118,7 @@
                     <label class="control-label">&nbsp;</label>
                     <div class="controls">
                         <button type="submit" class="button button-primary button-large ">
-                            ${message(code: 'default.button.save.label', default: 'Save')}
+                            发布
                         </button>
                     </div>
                 </div>

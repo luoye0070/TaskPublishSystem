@@ -58,11 +58,13 @@
                             <div class="news-list">
                                 <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;color:red">
                                     <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
-                                    <span class="label label-success"><g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/>前完成</span>
+                                    <g:if test="${!(taskInstance.status in [TaskStatus.TASK_COMPLETE.code,TaskStatus.TASK_FAILURE.code])}">
+                                        <span class="label label-success"><g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/>前完成</span>
+                                    </g:if>
                                 </div>
                                 <div class="clearfix pt-3">
                                     <div class="index-news-img span16 pull-left pt-5" style="color:red">
-                                        ¥&nbsp;&nbsp;${taskInstance.price}&nbsp;&nbsp;
+                                        ¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" />&nbsp;&nbsp;
                                         <a  target="_blank"  style="font-weight: bold" href="${createLink(action: "showMySelector",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
                                     </div>
 

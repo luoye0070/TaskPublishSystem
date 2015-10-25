@@ -735,8 +735,9 @@ button.close {
 .top-div {
 	/*background: #FFF;*/
 	width: 100%;
-	height: auto;
-	padding: 10px 0 20px;
+
+	padding-top:0 ;
+
 }
 .logo-img {padding-left: 2.6em;}
 .logo-lib {padding-left: 1em;}

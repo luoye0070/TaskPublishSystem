@@ -42,8 +42,13 @@
                 <div class="label-div b-10 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
                     <div class="news-list">
                         <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;color:red">
-                            <span class="label label-success">${BidStatus.getLabel(bidInstance.status)}</span>
-                            <span class="label label-success">保证完成日期：<g:formatDate date="${bidInstance.gcd}" format="yyyy-MM-dd"/></span>
+                            <g:if test="${bidInstance.status==BidStatus.BID_WIN.code && bidInstance.task?.status in [TaskStatus.TASK_COMPLETE.code,TaskStatus.TASK_FAILURE.code]}">
+                                <span class="label label-success">${TaskStatus.getLabel(bidInstance.task?.status)}</span>
+                            </g:if>
+                            <g:else>
+                                <span class="label label-success">${BidStatus.getLabel(bidInstance.status)}</span>
+                                <span class="label label-success">保证完成日期：<g:formatDate date="${bidInstance.gcd}" format="yyyy-MM-dd"/></span>
+                            </g:else>
                         </div>
                         <div class="clearfix pt-3">
                             <div class="index-news-img span14 pull-left pt-5" style="color:red">
@@ -65,7 +70,7 @@
         <g:else>
             <div class="tips tips-large tips-info tips-no-icon" style="text-align: center">
                 <div class="tips-content">
-                    <h4>还没有参与竞标哦</h4>
+                    还没有参与竞标哦
                 </div>
             </div>
         </g:else>
