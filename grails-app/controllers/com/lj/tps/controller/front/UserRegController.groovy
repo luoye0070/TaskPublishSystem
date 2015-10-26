@@ -48,7 +48,7 @@ class UserRegController {
                     }
                 }
                 flash.success = message(code: 'default.updated.message', args: [message(code: 'tpsUser.label', default: 'TpsUser'), tpsUserInstance.id])
-                redirect(controller: "user",action: "show");//转到登录页面进行登录
+                redirect(controller: "login",action: "auth");//转到登录页面进行登录
                 return;
 //                isSaveOk = true;
             }
