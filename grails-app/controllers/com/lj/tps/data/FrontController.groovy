@@ -89,6 +89,8 @@ class FrontController {
                 res << [myBid:myBid]
                 res << [canJoin:false]
             } else{
+                //只有竞标中状态才可以参与竞标
+                if(res.taskInstance.status==TaskStatus.TASK_BIDING.code)
                 res << [canJoin:true]
             }
         }
@@ -244,5 +246,13 @@ class FrontController {
         }
     }
 
+
+    def getTasks4Bui(){
+        render taskService.getTasks4Bui(params) as JSON
+    }
+
+    def delTask(){
+        render taskService.delTask(params) as JSON
+    }
 
 }

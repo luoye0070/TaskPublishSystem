@@ -732,13 +732,7 @@ button.close {
 	background: #FFF;
 	padding: 10px 15px 15px 0;
 }
-.top-div {
-	/*background: #FFF;*/
-	width: 100%;
 
-	padding-top:0 ;
-
-}
 .logo-img {padding-left: 2.6em;}
 .logo-lib {padding-left: 1em;}
 .label-main .video-list {width: 166px;}
@@ -810,14 +804,7 @@ a.backToTop:hover {background-color: #333;}
 	.modal-header .close {padding: 10px;margin: -10px;}
 	.carousel-caption {position: static;}
 	.logo-img {padding-left: 0em;}
-	.top-div {
-		background: #FFF;
-		width: 100%;
-		height: auto;
-		padding: 18px 20px 20px;
-		margin-left: -20px;
-		margin-right: -20px;
-	}
+
    .label-main .video-list {width: 100%;margin-bottom: 20px;}
    .home-index .news-list {margin-left: 15px;}
    .news-list .clearfix.pt-5 .offset3.intro .pull-right  {display: none;}
@@ -966,12 +953,12 @@ a.backToTop:hover {background-color: #333;}
 	.modal.fade.in {top: 20px;}
 	.logo-img {padding-left: 0em;}
 	.top-div {
-		background: #FFF;
+		background: #fff;
 		width: 100%;
 		height: auto;
-		padding: 18px 20px 20px;
-		margin-left: -20px;
-		margin-right: -20px;
+		padding:0;
+        margin: 0;
+        margin-top: 5px;
 	}
 	.label-main .video-list {width: 100%;margin-bottom: 20px;}
 	.home-index .news-list {margin-left: 15px;}

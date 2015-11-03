@@ -1,5 +1,6 @@
 package com.lj.tps.service
 
+import com.lj.csp.enumCustom.ReCode
 import com.lj.tps.data.Bid
 import com.lj.tps.data.Task
 import com.lj.tps.data.TpsUser
@@ -8,6 +9,8 @@ import com.lj.tps.status.TaskStatus
 import com.lj.utils.I18nError
 import com.lj.utils.TypeConversion
 import grails.converters.JSON
+
+import java.text.SimpleDateFormat
 
 class TaskService {
     def springSecurityService
@@ -422,5 +425,65 @@ class TaskService {
          }
 
         return null
+    }
+
+    def getTasks4Bui(def params){
+
+        int max=com.lj.utils.Number.toInteger(params.limit);
+        int offset=com.lj.utils.Number.toInteger(params.start);
+        def conditions = {
+            if (params.username) {
+                like("username", "%" + params.username + "%");
+            }
+
+            if (params.simpleDesc) {
+                like("simpleDesc", "%" + params.simpleDesc + "%");
+            }
+
+            if (params.status) {
+                eq("status",  params.status);
+            }
+        }
+
+        params.max=max
+        params.offset=offset
+        def taskInstanceList = Task.createCriteria().list(params, conditions)
+        //状态转换
+        for(Task task in taskInstanceList){
+            convertStatus(task)
+        }
+        def totalCount = Task.createCriteria().count(conditions)
+
+        def result=[rows:taskInstanceList?.collect{it->
+             [
+                     id:it.id,
+                     simpleDesc:it.simpleDesc,
+                     price:it.price,
+                     crcd:new SimpleDateFormat("yyyy-MM-dd").format(it.crcd),
+                     status:TaskStatus.getLabel(it.status),
+                     contactInfo:it.contactInfo,
+                     username:it.username
+             ]
+        },results:totalCount]
+        return result
+    }
+
+    def delTask(def params){
+        def task = Task.get(params.ids)
+        if (!task) {
+            return ReCode.NO_RECORD
+        }
+
+
+        Task.withTransaction{status->
+            try{
+                task.delete(flush: true)
+                return ReCode.DEL_SUCCESS
+            }catch(Exception ex){
+                status.setRollbackOnly()
+                println ex
+                return ReCode.DEL_FAIL
+            }
+        }
     }
 }
