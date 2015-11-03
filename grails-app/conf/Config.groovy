@@ -71,6 +71,7 @@ grails.plugins.springsecurity.apf.passwordParameter = 'password' //前台提交�
 grails.plugins.springsecurity.logout.filterProcessesUrl = '/logout' //退出验证的路径, 前台要与此一致
 
 grails.plugins.springsecurity.securityConfigType = "Requestmap"
+grails.plugins.securityConfig.successHandler.defaultTargetUrl="/"
 
 environments {
     development {
