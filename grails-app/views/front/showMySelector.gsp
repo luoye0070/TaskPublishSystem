@@ -209,6 +209,7 @@
                 <div class="clearfix pb-5" style=" position:relative;">
                     <div class="pull-left classifyDIV pt-10">
                         <span class="label label-success">竞标人：${winBid.username}</span>
+                        <span class="label label-success">联系方式：${winBid.contactInfo}</span>
                         <span class="label label-success">保证完成日期：<g:formatDate date="${winBid.gcd}" format="yyyy-MM-dd"/></span>
                         %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(winBid.status ?: -1)}</span>--}%
                         <span class="label label-important">¥&nbsp;&nbsp; <g:formatNumber number="${winBid.price}" format="#.##" /></span>
@@ -256,6 +257,7 @@
                     <div class="clearfix pb-5" style=" position:relative;">
                         <div class="pull-left classifyDIV pt-5">
                             <span class="label label-success">竞标人：${myBid.username}</span>
+                            <span class="label label-success">联系方式：${myBid.contactInfo}</span>
                             <span class="label label-success">保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></span>
                             %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%
                             <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></span>

@@ -1,5 +1,6 @@
 package com.lj.tps.data
 
+import com.lj.tps.status.BidStatus
 import com.lj.tps.status.TaskStatus
 import com.lj.utils.TypeConversion
 import grails.converters.JSON
@@ -83,17 +84,25 @@ class FrontController {
         def bidList=bidService.list(params)
         res << bidList
         def isSelfTask=taskService.isSelfTask(res.taskInstance)
+
+        res<<[isWin:false]
         if(!isSelfTask){
             def myBid=bidService.getMyBid4Task(taskId)
             if(myBid){
                 res << [myBid:myBid]
                 res << [canJoin:false]
+                //判断是否中标
+                if(myBid.status== BidStatus.BID_WIN.code){
+                    res << [isWin:true]
+                }
             } else{
                 //只有竞标中状态才可以参与竞标
                 if(res.taskInstance.status==TaskStatus.TASK_BIDING.code)
                 res << [canJoin:true]
             }
         }
+
+        res << [isSelfTask:isSelfTask]
 
         res << [params:params]
 

@@ -81,6 +81,9 @@
 <div class="clearfix pb-5" style=" position:relative;">
     <div class="pull-left classifyDIV pt-10">
         <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
+        <g:if test="${isWin}">
+            <span class="label label-success">联系方式：${taskInstance.contactInfo}</span>
+        </g:if>
         <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
         <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
         <br/>
@@ -172,6 +175,9 @@
             <div class="clearfix pb-5" style=" position:relative;">
                 <div class="pull-left classifyDIV pt-5">
                     <span class="label label-success">竞标人：${curBid.username}</span>
+                    <g:if test="${isSelfTask}">
+                        <span class="label label-success">联系方式：${curBid.contactInfo}</span>
+                    </g:if>
                     <span class="label label-success">保证完成日期：<g:formatDate date="${curBid.gcd}" format="yyyy-MM-dd"/></span>
                     <g:if test="${curBid.status!=-1}">
                         <span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(curBid.status ?: -1)}</span>

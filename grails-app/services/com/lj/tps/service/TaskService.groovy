@@ -477,7 +477,11 @@ class TaskService {
 
         Task.withTransaction{status->
             try{
+                Bid.findByTask(task).collect{
+                    it.delete(flush:true)
+                }
                 task.delete(flush: true)
+
                 return ReCode.DEL_SUCCESS
             }catch(Exception ex){
                 status.setRollbackOnly()
