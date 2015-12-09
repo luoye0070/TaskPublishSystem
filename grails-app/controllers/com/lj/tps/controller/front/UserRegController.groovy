@@ -55,4 +55,12 @@ class UserRegController {
         }
         render(view: "/front/user/register", model: [success: success, errors: errors]);
     }
+    def userExist(){
+        def userTemp=TpsUser.findByUsername(params.username);
+        if(userTemp){
+            render(text: "true",contentType: "text/html");
+        }else{
+            render(text: "",contentType: "text/html");
+        }
+    }
 }
