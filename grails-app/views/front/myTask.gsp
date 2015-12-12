@@ -66,6 +66,9 @@
                         <div class="index-news-img span14 pull-left pt-5" style="color:red">
                             ¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /> &nbsp;&nbsp;
                             <a  target="_blank"  style="font-weight: bold" href="${createLink(action: "showMyTask",params: [id:taskInstance.id])}">${taskInstance.simpleDesc}</a>
+                            <g:if test="${taskInstance.bidderCount && taskInstance.status==com.lj.tps.status.TaskStatus.TASK_BIDING.code}">
+                                <span style="color:#3399cc;font-weight: bold;font-size:16px">[${taskInstance.bidderCount}人竞标]</span>
+                            </g:if>
                         </div>
                     </div>
                 </div>

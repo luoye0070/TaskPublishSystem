@@ -85,8 +85,8 @@
 
 <g:form action="saveBid" method="post" class="form-horizontal">
     <input type="hidden" name="task.id" value="${taskInstance.id}"/>
-
-
+    <div class="panel">
+    <br>
     <div class="control-group">
         <label class="control-label" for="contactWay">竞标任务：</label>
         <div class="controls">
@@ -144,7 +144,7 @@
         </div>
         <div class="mmclear"></div>
     </div>
-
+    </div>
     <g:textArea name="skillDesc" maxlength="10240" required="">
         请详细说明您的技术与优势。愈真实中标率愈高哦！
     </g:textArea>
@@ -175,6 +175,7 @@
             }, callback: function (data) {
                 $.Hidemsg();
                 if (data.success) {
+                    alert("竞标成功");
                     window.location.href = "${createLink(controller: "front",action:"showTask",params:[id:taskInstance.id])}";
                 } else {
                     alert(data.msg);

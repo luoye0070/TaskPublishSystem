@@ -46,7 +46,9 @@
                                 <span class="label label-success">${TaskStatus.getLabel(bidInstance.task?.status)}</span>
                             </g:if>
                             <g:else>
-                                <span class="label label-success">${BidStatus.getLabel(bidInstance.status)}</span>
+                                <g:if test="${bidInstance.status!=BidStatus.BID_WIN.code}">
+                                   <span class="label label-success">${BidStatus.getLabel(bidInstance.status)}</span>
+                                </g:if>
                                 <span class="label label-success">保证完成日期：<g:formatDate date="${bidInstance.gcd}" format="yyyy-MM-dd"/></span>
                             </g:else>
                         </div>
@@ -54,6 +56,9 @@
                             <div class="index-news-img span14 pull-left pt-5" style="color:red">
                                 ¥&nbsp;&nbsp;<g:formatNumber number="${bidInstance.price}" format="#.##" />&nbsp;&nbsp;
                                 <a  target="_blank"  style="font-weight: bold" href="${createLink(action: "showTask",params: [id:bidInstance.task?.id])}">${bidInstance.task?.simpleDesc?:""}</a>
+                                <g:if test="${bidInstance.status==BidStatus.BID_WIN.code && !(bidInstance.task?.status in [TaskStatus.TASK_COMPLETE.code,TaskStatus.TASK_FAILURE.code])}">
+                                    <span style="color:#3399cc;font-weight: bold;font-size:16px">[竞标成功] </span>
+                                </g:if>
                             </div>
 
                         </div>

@@ -2,9 +2,10 @@
 
 
 
-
+<div class="panel">
+    <br>
 <div class="control-group">
-    <label class="control-label" for="simpleDesc">标题：</label>
+    <label class="control-label" for="simpleDesc"><s>*</s>标题：</label>
     <div class="controls">
         <g:textField name="simpleDesc" maxlength="150"  value="${taskInstance?.simpleDesc}" class="input-large"
                      placeholder="请用一句话概括您要做什么？比如打车App开发"
@@ -44,7 +45,7 @@
 
 
 <div class="control-group">
-    <label class="control-label" for="contactWay"><s>*</s><g:message code="task.contactWay.label" default="Contact Way"/></label>
+    <label class="control-label" for="contactWay"><s>*</s><g:message code="task.contactWay.label" default="Contact Way"/>：</label>
     <div class="controls">
         <g:select name="contactWay" from="${ContactWay.getOptions()}" required="" optionKey="code"
                   optionValue="label"
@@ -64,7 +65,7 @@
     <div class="mmclear"></div>
 </div>
 
-
+</div>
 <g:textArea name="detailDesc"  maxlength="10240"  id="detailDesc">
     ${null==taskInstance?.detailDesc?"请把任务再补充详细些吧。越清晰越具体，任务完成质量越高哦！您也可以插入图片和上传附件！":taskInstance.detailDesc}
 </g:textArea>

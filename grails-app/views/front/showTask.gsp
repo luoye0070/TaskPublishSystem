@@ -15,13 +15,6 @@
     <script type="text/javascript" src="${resource(dir: 'js', file: 'Validform_v5.3.2_min.js')}"></script>
     <script type="text/javascript">
         BUI.use('common/page');
-        $(function () {
-            var timeOut = setTimeout(function () {
-                if($("#msg").html()!='')
-                $("#msg").hide(1000);
-            }, 10000);
-        });
-
 
     </script>
 </head>

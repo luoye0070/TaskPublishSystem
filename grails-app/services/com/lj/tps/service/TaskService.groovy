@@ -111,7 +111,23 @@ class TaskService {
     def myTasks(def params){
         params.showMyTask=true
         params.statusList=TaskStatus.getMyTaskStatus()
-        return list(params)
+        def tasks=list(params)
+        tasks.taskInstanceList=tasks.taskInstanceList.collect{task->
+             [
+                     id:task.id,
+                     simpleDesc:task.simpleDesc,
+                     detailDesc:task.detailDesc,
+                     price:task.price,
+                     crcd:task.crcd,
+                     contactWay:task.contactWay,
+                     contactInfo:task.contactInfo,
+                     username:task.username,
+                     status:task.status,
+                     bidderCount:Bid.countByTask(task)
+             ]
+        }
+
+        return tasks
     }
 
     /**
