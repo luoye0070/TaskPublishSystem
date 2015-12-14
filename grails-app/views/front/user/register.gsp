@@ -206,8 +206,7 @@
          //alert(exist);
          return exist;
      }
-    //网站后台登录
-    adminLogin = function(){
+    function validUserName(){
         //用户名验证
         if($('#username').attr("value") == ''){
             $(".username_msg").html('请输入您的用户名');
@@ -222,7 +221,9 @@
             setTimeout(function(){$(".username_msg").html('用户名将用于登录，请牢记');$(".username_msg").css("color","#999");},3000);
             return false;
         }
-
+        return true;
+    }
+    function validID(){
         if($('#IDNumber').attr("value") == ''){
             $(".IDNumber_msg").html('请输入您的身份证号码');
             $(".IDNumber_msg").css("color","#CF261F");
@@ -236,6 +237,9 @@
             setTimeout(function(){$(".IDNumber_msg").html('身份证号码将用于验证用户的真实性');$(".IDNumber_msg").css("color","#999");},3000);
             return false;
         }
+        return true;
+    }
+    function validPhone(){
         if($('#mobileNumber').attr("value") == ''){
             $(".mobileNumber_msg").html('请输入您的手机号码');
             $(".mobileNumber_msg").css("color","#CF261F");
@@ -254,6 +258,9 @@
                 return false;
             }
         }
+        return true;
+    }
+    function validPwd(){
         if($('#password').attr("value") == ''){
             $(".password_msg").html('请输入您的设置的密码');
             $(".password_msg").css("color","#CF261F");
@@ -261,6 +268,9 @@
             setTimeout(function(){$(".password_msg").html('密码最小值为6位（字母区分大小写）');$(".password_msg").css("color","#999");},3000);
             return false;
         }
+        return true;
+    }
+    function validRePwd(){
         if($('#rePassword').attr("value") == ''){
             $(".rePassword_msg").html('请输入再次输入密码');
             $(".rePassword_msg").css("color","#CF261F");
@@ -275,11 +285,45 @@
             setTimeout(function(){$(".rePassword_msg").html('请输入再次输入密码');$(".rePassword_msg").css("color","#999");},3000);
             return false;
         }
-
+        return true;
+    }
+    //网站后台登录
+    adminLogin = function(){
+         if(!validUserName()){
+             return false;
+         }
+         if(!validID()){
+             return false;
+         }
+         if(!validPhone()){
+             return false;
+         }
+         if(!validPwd()){
+             return false;
+         }
+         if(!validRePwd()){
+             return false;
+         }
         document.getElementById("register-form").submit();
         return true;
     };
-
+    $(function(){
+        $('#username').blur(function(){
+            validUserName();
+        });
+        $('#IDNumber').blur(function(){
+            validID();
+        });
+        $('#mobileNumber').blur(function(){
+            validPhone();
+        });
+        $('#password').blur(function(){
+            validPwd();
+        });
+        $('#rePassword').blur(function(){
+            validRePwd();
+        });
+    });
 </script>
 </body>
 </html>
