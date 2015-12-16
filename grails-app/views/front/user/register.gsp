@@ -321,7 +321,13 @@
             validPwd();
         });
         $('#rePassword').blur(function(){
-            validRePwd();
+            if($('#password').attr("value") !=$('#rePassword').attr("value")){
+                $(".rePassword_msg").html('确认密码输入不正确');
+                $(".rePassword_msg").css("color","#CF261F");
+                $("#rePassword").focus();
+                setTimeout(function(){$(".rePassword_msg").html('请输入再次输入密码');$(".rePassword_msg").css("color","#999");},3000);
+                return false;
+            }
         });
     });
 </script>
