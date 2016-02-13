@@ -54,8 +54,11 @@ class SystemInitService {
         }
 
         if(!Requestmap.findByUrl("/front/createTask/**")){
-            new Requestmap(url:'/front/createTask/**',configAttribute:"authenticated").save(flush: true);
+            new Requestmap(url:'/front/createTask/**',configAttribute:"hasRole('R_ADMIN')").save(flush: true);
             log.info("初始化之任务管理权限配置：/front/createTask/**");
+        } else{
+           def map=Requestmap.findByUrl("/front/createTask/**");
+           map.setConfigAttribute("hasRole('R_ADMIN')");
         }
 
 

@@ -35,6 +35,8 @@ class UserRegController {
             //设置权限
             def roles=Roles.findByName('普通用户');
             tpsUserInstance.addToRoles(roles);
+            //设置为无效
+            tpsUserInstance.enabled=false;
             if (!tpsUserInstance.save(flush: true)) {
                 errors = I18nError.getMessage(g, tpsUserInstance.errors.allErrors).replaceAll("\n","<br/>");
             }else{
