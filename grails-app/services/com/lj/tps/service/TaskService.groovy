@@ -347,7 +347,7 @@ class TaskService {
      */
     def setupWinner(Long bidId,Long taskId){
 
-        def res=[success:false,errors:'']
+        def res=[success:false,errors:'',id:taskId]
 
         def taskInstance = Task.get(taskId)
         if (!taskInstance) {

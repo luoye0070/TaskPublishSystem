@@ -35,7 +35,7 @@
     <r:layoutResources />
 </head>
 <body>
-<script type="text/javascript" src="js/borsertocss.js"> </script><!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->
+<script type="text/javascript" src="${resource(dir:"pageTemplate/js",file:"borsertocss.js")}"> </script><!-- 判断在IE9以下浏览器中根据像素的不同而设置的样式 -->
 <!--头部代码开始-->
 <div class="navbar navbar-fixed-top" style="_position: relative;_z-index: 10000;">
     <div class="navbar-inner">
@@ -103,9 +103,9 @@
 
 
 <!--头部代码结束-->
-
+<div style="margin-bottom:30px">
 <g:layoutBody/>
-
+</div>
  <!--底部开始-->
 <div class="footer navbar-fixed-bottom">
 

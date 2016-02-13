@@ -20,7 +20,6 @@
 </head>
 
 <body>
-<!--消息-->
 <div style="margin: 10px;">
     <div id="msg">
         <g:if test="${errors || flash.errors}">
@@ -72,19 +71,19 @@
 </div>
 
 <div class="clearfix pb-5" style=" position:relative;">
-    <div class="pull-left classifyDIV pt-10">
+    <div class="pull-left classifyDIV">
+        <g:if test="${canJoin}">
+            <a href="${createLink(controller: 'front',action:'joinBid',params:[id:taskInstance.id])}" target="_self" class="type-button pull-left">
+                参与竞标
+            </a>
+        </g:if>
+        <div style="clear:both"></div>
         <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
         <g:if test="${isWin}">
             <span class="label label-success">联系方式：${taskInstance.contactInfo}</span>
         </g:if>
         <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
         <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
-        <br/>
-        <g:if test="${canJoin}">
-            <a href="${createLink(controller: 'front',action:'joinBid',params:[id:taskInstance.id])}" target="_self" class="type-button pull-left">
-                参与竞标
-            </a>
-        </g:if>
     </div>
 </div>
 
@@ -125,13 +124,11 @@
             <g:if test="${myBid.status!=-1}">
                 <span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>
             </g:if>
-            %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%
             <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></span>
         </div>
     </div>
 
-    %{--${myBid.skillDesc ?: ""}--}%
-    %{--<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>--}%
+
     <textarea name="myBidArea">
         ${myBid.skillDesc ?: ""}
     </textarea>
@@ -167,6 +164,8 @@
 
             <div class="clearfix pb-5" style=" position:relative;">
                 <div class="pull-left classifyDIV pt-5">
+                    <a  class=" type-button pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:curBid.username])}" target="_blank">查看评价</a>
+                    <div style="clear:both"></div>
                     <span class="label label-success">竞标人：${curBid.username}</span>
                     <g:if test="${isSelfTask}">
                         <span class="label label-success">联系方式：${curBid.contactInfo}</span>
@@ -176,9 +175,6 @@
                         <span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(curBid.status ?: -1)}</span>
                     </g:if>
                     <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${curBid.price}" format="#.##" /></span>
-
-                    <br/>
-                    <a  class=" type-button pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:curBid.username])}" target="_blank">查看评价</a>
 
                 </div>
             </div>

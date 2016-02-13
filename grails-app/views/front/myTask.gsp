@@ -14,12 +14,16 @@
 
         var max=${params.max?:10},sort="${params.sort?:''}",order="${params.order?:''}";
         function _search(condition){
+            var lastSort=sort;
             if(condition.hasOwnProperty('max'))
                 max=condition.max;
             if(condition.hasOwnProperty('sort'))
                 sort=condition.sort;
-            if(condition.hasOwnProperty('order'))
-                order=condition.order;
+
+            if(lastSort==sort)
+                order=(order=='desc'?'asc':'desc');
+            else
+                order='desc';
 
             window.location.href="${createLink(controller: 'front',action:'myTask')}?max="+max+"&sort="+sort+"&order="+order+"&simpleDesc="+$("#search-input").val();
 
@@ -43,8 +47,12 @@
 <div class="span12">
     <div class="clearfix pb-10" style=" position:relative;">
         <div class="pull-left classifyDIV pt-10">
-            <a  class="pull-left type-css tags ${params.sort=='crcd'?'selected':''}" readonly="true" href="javascript:void(0)" onclick="_search({sort:'crcd',order:'desc'})">要求完成日期↓</a>
-            <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}" href="javascript:void(0)" onclick="_search({sort:'price',order:'desc'})">价格↓</a>
+            <a  class="pull-left type-css tags ${params.sort=='crcd'?'selected':''}" readonly="true" href="javascript:void(0)" onclick="_search({sort:'crcd'})">要求完成日期
+                <g:if test="${params.sort=='crcd'&& params.order=='asc'}">↑</g:if><g:else>↓</g:else>
+            </a>
+            <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}" href="javascript:void(0)" onclick="_search({sort:'price'})">价格
+                <g:if test="${params.sort=='price'&& params.order=='asc'}">↑</g:if><g:else>↓</g:else>
+            </a>
         </div>
         <div style="position: absolute; right:0px; background:#06f;" class="pull-right t-20 classifySearch" >
             <input type="text" class="search-input pull-left span4" id="search-input" value="${params.simpleDesc?:''}">

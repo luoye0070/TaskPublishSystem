@@ -241,7 +241,7 @@ ul.dropdown-bio li a:hover {background: #E6E6E6;}
 .label-public-title ul li.selected a {background: #1F6ACF;color: #FFF;}
 .label-public-title ul li.selected a:hover {color:#FFF;}
 .label-public .public-login {margin-left: 0;min-height: 360px;_height: 360px;_overflow: visible;}
-.label-public .public-login .title {width: 76px;line-height: 31px;text-align: right;}
+.label-public .public-login .title {width: 176px;line-height: 31px;text-align: right;}
 .label-public .public-login input {padding: 6px;margin-bottom: 0;font-family: '微软雅黑';}
 .label-public .public-login .info {line-height: 35px;}
 .edu-css {background: #F2F2F2;padding: 10px 15px;}
