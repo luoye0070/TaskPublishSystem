@@ -164,7 +164,7 @@
 
             <div class="clearfix pb-5" style=" position:relative;">
                 <div class="pull-left classifyDIV pt-5">
-                    <a  class=" type-button pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:curBid.username])}" target="_blank">查看评价</a>
+                    <a  class=" type-button pull-left" href="${createLink(controller:"front",action:'showOtherEvaluation',params:[evaluatedPerson:curBid.username])}" target="_blank">查看评价</a>
                     <div style="clear:both"></div>
                     <span class="label label-success">竞标人：${curBid.username}</span>
                     <g:if test="${isSelfTask}">

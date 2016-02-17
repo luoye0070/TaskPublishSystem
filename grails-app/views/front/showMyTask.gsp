@@ -238,7 +238,7 @@
                 <g:if test="${(taskInstance.status in [TaskStatus.TASK_BIDING.code])}">
                     <a href="javascript:void(0)" class="type-button  pull-left" onclick="setupWinner('${myBid.id}')">中标</a>
                 </g:if>
-                <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
+                <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showOtherEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
                 <div style="clear:both"></div>
                 <span class="label label-success">竞标人：${myBid.username}</span>
                 <span class="label label-success">联系方式：${myBid.contactInfo}</span>

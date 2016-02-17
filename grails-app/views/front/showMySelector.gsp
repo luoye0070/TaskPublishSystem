@@ -210,7 +210,7 @@
                             <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'createEvaluation',params:[evaluatedPerson:winBid.username,taskId:taskInstance.id,bidId:winBid.id,simpleDesc:taskInstance.simpleDesc])}" >评价</a>
                         </g:if>
                         <g:else>
-                            <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:winBid.username])}" target="_blank">查看评价</a>
+                            <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showOtherEvaluation',params:[evaluatedPerson:winBid.username])}" target="_blank">查看评价</a>
                         </g:else>
                         <div style="clear:both"></div>
                         <span class="label label-success">竞标人：${winBid.username}</span>
@@ -252,7 +252,7 @@
                 <g:each in="${otherBids}" status="i" var="myBid">
                     <div class="clearfix" style=" position:relative;">
                         <div class="pull-left classifyDIV pt-5">
-                            <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
+                            <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showOtherEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
                             <div style="clear:both"></div>
                             <span class="label label-success">竞标人：${myBid.username}</span>
                             <span class="label label-success">联系方式：${myBid.contactInfo}</span>

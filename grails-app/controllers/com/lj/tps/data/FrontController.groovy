@@ -209,6 +209,12 @@ class FrontController {
         bidEvaluationService.getEvaluations(params)
     }
 
+    def showOtherEvaluation(){
+        if(!params.evaluationLevel)
+            params.evaluationLevel=1
+        bidEvaluationService.getEvaluations(params)
+    }
+
     //发表评价
     def createEvaluation(){
         def task=Task.get(params.taskId)
