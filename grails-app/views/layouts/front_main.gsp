@@ -88,7 +88,7 @@
         </div>
     </div>
 </div>
-<div class="top-div">
+<div class="top-div" style="background: #F8F8F8;">
     <div class="container clearfix">
 
         <div class="span16" style="position: relative;_float: right;_height: 80px;_overflow: hidden;margin-left:0 ">
@@ -103,7 +103,7 @@
 
 
 <!--头部代码结束-->
-<div style="margin-bottom:30px">
+<div style="margin-bottom:30px;background: #F8F8F8;">
 <g:layoutBody/>
 </div>
  <!--底部开始-->

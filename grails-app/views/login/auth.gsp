@@ -7,7 +7,12 @@
 <head>
     <meta name="layout" content="front_main"/>
     <title>任务发布平台登录</title>
+    <link href="${resource(dir: "css")}/Wopop_files/style_log.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "css")}/Wopop_files/style.css">
+    <link rel="stylesheet" type="text/css" href="${resource(dir: "css")}/Wopop_files/userpanel.css">
+    %{--<link rel="stylesheet" type="text/css" href="${resource(dir: "css")}/Wopop_files/jquery.ui.all.css">--}%
     <link rel="stylesheet" type="text/css" href="${resource(dir: "pageTemplate")}/style/login.css"/>
+
     <script type='text/javascript'>
         if(window.parent!=window){
             parent.location.reload();
@@ -38,40 +43,94 @@
             </div>
             <div class="label-div t-15 border-all" style="padding: 0;">
                 <div class="label-main">
-                    <div class="clearfix label-public">
+                    <div class="clearfix label-public login">
 
-                        <form id="login_form1" action='${postUrl}' method='POST' autocomplete="on">
-                            <div class="pull-left border-l public-login span7" style="min-height: 385px;float: left">
-                                <div class="t-25 pl-30 fc333">
-                                    <g:if test='${flash.message}'>
-                                        <p style="color:red;text-align:left" id="msg">
-                                            ${flash.message}
-                                        </p>
-                                    </g:if>
-                                </div>
-                                <div class="clearfix pt-25">
-                                    <div class="title pull-left fc999" style="width: 60px;">用户名</div>
-                                    <div class="pull-left l-20" style="_margin-left: 0;width: 100px;">
-                                        <input type="text" id="username" name="username" required="required" value="" class="span4"/></div>
-                                    <span class="pull-left l-20 fcCF261F info username_msg"></span>
-                                </div>
-                                <div class="clearfix pt-25">
-                                    <div class="title pull-left fc999" style="width: 60px;">密码</div>
-                                    <div class="pull-left l-20" style="_margin-left: 0;width: 100px;">
-                                        <input type="password" id="password" name="password" required="required" value="" class="span4"/></div>
-                                    <span class="pull-left l-20 fcCF261F info password_msg"></span>
-                                </div>
-                                <div class="clearfix pt-25">
-                                    <div class="title pull-left" style="margin-left: 6px;_margin-left: 3px;">&nbsp;</div>
-                                    <a href="javascript:void(0);" title="登录" onclick="submit_form(this)"  class="pull-left login-register-btn">登&nbsp;录</a>
-                                    %{--<button type="submit" title="登录"  class="pull-left login-register-btn">登&nbsp;录</button>--}%
-                                    <div class="pull-left l-20 t-8" style="_width: auto;_margin-left: 15px;">
-                                        <input type="checkbox" name="${rememberMeParameter}" <g:if test='${hasCookie}'>checked='checked' </g:if> style="_width: 20px;_margin: 0;"/>
-                                    </div>
-                                    <span class="pull-left l-5 info fc999" style="_width: auto;_margin: 0;">下次自动登录<!-- <span class="l-10 fcccc">|</span><a class="fc999 l-10" href="" title="忘记密码">忘记密码</a> --></span>
-                                </div>
+                        <div  class="login">
+
+                        <div class="login_m">
+                            <div class="t-25 pl-30 fc333">
+                                <g:if test='${flash.message}'>
+                                    <p style="color:red;text-align:left" id="msg">
+                                        ${flash.message}
+                                    </p>
+                                </g:if>
                             </div>
-                        </form>
+                            <div class="login_boder">
+
+
+
+                                <form id="login_form1" action='${postUrl}' method='POST' autocomplete="on">
+                                <div class="login_padding" id="login_model">
+
+                                    <h2>用户名</h2>
+                                    <label>
+                                        <input type="text" id="username" name="username" class="txt_input txt_input2" value="">
+                                    </label>
+                                    <h2>密码</h2>
+                                    <label>
+                                        <input type="password" name="password" id="password" class="txt_input" value="">
+                                    </label>
+
+
+                                    <div class="rem_sub">
+                                        <div class="rem_sub_l">
+                                            <input type="checkbox" name="${rememberMeParameter}" <g:if test='${hasCookie}'>checked='checked' </g:if> style="_width: 20px;_margin: 0;"/>
+                                            <label for="checkbox">记住我</label>
+                                        </div>
+                                        <label>
+                                            <input type="submit" class="sub_button" name="button" id="button" value="登录" style="opacity: 0.7;">
+                                        </label>
+                                    </div>
+                                </div>
+                                </form>
+
+
+
+
+
+
+
+
+
+                                <!--login_padding  Sign up end-->
+                            </div><!--login_boder end-->
+                        </div>
+
+                        </div>
+
+
+                        %{--<form id="login_form1" action='${postUrl}' method='POST' autocomplete="on">--}%
+                            %{--<div class="pull-left border-l public-login span7" style="min-height: 385px;float: left">--}%
+                                %{--<div class="t-25 pl-30 fc333">--}%
+                                    %{--<g:if test='${flash.message}'>--}%
+                                        %{--<p style="color:red;text-align:left" id="msg">--}%
+                                            %{--${flash.message}--}%
+                                        %{--</p>--}%
+                                    %{--</g:if>--}%
+                                %{--</div>--}%
+                                %{--<div class="clearfix pt-25">--}%
+                                    %{--<div class="title pull-left fc999" style="width: 60px;">用户名</div>--}%
+                                    %{--<div class="pull-left l-20" style="_margin-left: 0;width: 100px;">--}%
+                                        %{--<input type="text" id="username" name="username" required="required" value="" class="span4"/></div>--}%
+                                    %{--<span class="pull-left l-20 fcCF261F info username_msg"></span>--}%
+                                %{--</div>--}%
+                                %{--<div class="clearfix pt-25">--}%
+                                    %{--<div class="title pull-left fc999" style="width: 60px;">密码</div>--}%
+                                    %{--<div class="pull-left l-20" style="_margin-left: 0;width: 100px;">--}%
+                                        %{--<input type="password" id="password" name="password" required="required" value="" class="span4"/></div>--}%
+                                    %{--<span class="pull-left l-20 fcCF261F info password_msg"></span>--}%
+                                %{--</div>--}%
+                                %{--<div class="clearfix pt-25">--}%
+                                    %{--<div class="title pull-left" style="margin-left: 6px;_margin-left: 3px;">&nbsp;</div>--}%
+                                    %{--<a href="javascript:void(0);" title="登录" onclick="submit_form(this)"  class="pull-left login-register-btn">登&nbsp;录</a>--}%
+                                    %{--<button type="submit" title="登录"  class="pull-left login-register-btn">登&nbsp;录</button>--}%
+                                    %{--<div class="pull-left l-20 t-8" style="_width: auto;_margin-left: 15px;">--}%
+                                        %{--<input type="checkbox" name="${rememberMeParameter}" <g:if test='${hasCookie}'>checked='checked' </g:if> style="_width: 20px;_margin: 0;"/>--}%
+                                    %{--</div>--}%
+                                    %{--<span class="pull-left l-5 info fc999" style="_width: auto;_margin: 0;">下次自动登录<!-- <span class="l-10 fcccc">|</span><a class="fc999 l-10" href="" title="忘记密码">忘记密码</a> --></span>--}%
+                                %{--</div>--}%
+                            %{--</div>--}%
+                        %{--</form>--}%
                     </div>
                 </div>
             </div>
