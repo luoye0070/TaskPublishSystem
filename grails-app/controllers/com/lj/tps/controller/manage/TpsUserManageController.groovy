@@ -307,7 +307,8 @@ class TpsUserManageController {
                         roles:member.roles.collect{it.id}.join(','),
                         IDNumber:member.IDNumber,
                         mobileNumber:member.mobileNumber,
-                        unitName:member.unitName
+                        unitName:member.unitName,
+                        remark:member.remark
                 ]
             }
         }
