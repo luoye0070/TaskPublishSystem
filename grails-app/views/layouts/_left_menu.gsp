@@ -129,25 +129,26 @@
                 </div>
             </div>
             <div class="menuList">
-                <div> <a class="${(controllerName=="front"&&actionName=="myTask")?"active":""}" href="${createLink(controller:"front",action:'myTask')}">我的任务</a></div>
-                <div> <a class="${(controllerName=="front"&&actionName=="mySelector")?"active":""}" href="${createLink(controller:"front",action:'mySelector')}">我的中标</a></div>
-                <div> <a class="${(controllerName=="front"&&actionName=="myBid")?"active":""}" href="${createLink(controller:"front",action:'myBid')}">我参与的竞标</a></div>
-                <div> <a class="${(controllerName=="front"&&actionName=="showEvaluation")?"active":""}" href="${createLink(controller:"front",action:'showEvaluation')}">我的评价</a></div>
-                <div> <a class="${(controllerName=="front"&&actionName=="createTask")?"active":""}" href="${createLink(controller:"front",action:'createTask')}">发布任务</a></div>
+                <div><a style="padding-left:40px;text-align: left;">发布任务包</a></div>
+                <div> <a class="${(controllerName=="front"&&actionName=="myTask")?"active":""}" href="${createLink(controller:"front",action:'myTask')}">&nbsp;&nbsp;&nbsp;&nbsp;任务包</a></div>
+                <div> <a class="${(controllerName=="front"&&actionName=="createTask")?"active":""}" href="${createLink(controller:"front",action:'createTask')}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布任务</a></div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="front"&&actionName=="mySelector")?"active":""}" href="${createLink(controller:"front",action:'mySelector')}">我的中标</a></div>
+                <div> <a style="padding-left:40px;text-align: left;"  class="${(controllerName=="front"&&actionName=="myBid")?"active":""}" href="${createLink(controller:"front",action:'myBid')}">我参与的竞标</a></div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="front"&&actionName=="showEvaluation")?"active":""}" href="${createLink(controller:"front",action:'showEvaluation')}">我的评价</a></div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="front"&&actionName=="createTask")?"active":""}" href="${createLink(controller:"front",action:'createTask')}">发布任务</a></div>
             </div>
         </div>
 
         <div class="menuParent">
             <div class="ListTitlePanel">
                 <div class="ListTitle">
-                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;个人中心</strong>
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;<img src="${resource(dir:"图片目录",file:"文件名称")}"/>个人中心</strong>
                     <div class="leftbgbt"> </div>
                 </div>
             </div>
             <div class="menuList">
-                %{--<div> <a href="${createLink(controller: "user",action: "show")}">我的信息</a></div>--}%
-                <div> <a class="${(controllerName=="user"&&actionName=="changePW")?"active":""}" href="${createLink(controller: "user",action: "changePW")}">密码修改 </a> </div>
-                <div> <a class="${(controllerName=="user"&&actionName=="edit")?"active":""}" href="${createLink(controller: "user",action: "edit")}">信息修改</a></div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="user"&&actionName=="changePW")?"active":""}" href="${createLink(controller: "user",action: "changePW")}">密码修改 </a> </div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="user"&&actionName=="edit")?"active":""}" href="${createLink(controller: "user",action: "edit")}">信息修改</a></div>
             </div>
         </div>
         <div class="menuParent">
@@ -158,8 +159,8 @@
                 </div>
             </div>
             <div class="menuList">
-                <div> <a class="${(controllerName=="tpsResourceFile"&&actionName=="list")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "list")}">文件列表</a></div>
-                <div> <a class="${(controllerName=="tpsResourceFile"&&actionName=="diyUploadPage")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "diyUploadPage")}">上传文件</a></div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="tpsResourceFile"&&actionName=="list")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "list")}">文件列表</a></div>
+                <div> <a style="padding-left:40px;text-align: left;" class="${(controllerName=="tpsResourceFile"&&actionName=="diyUploadPage")?"active":""}" href="${createLink(controller: "tpsResourceFile",action: "diyUploadPage")}">上传文件</a></div>
             </div>
         </div>
     </div>

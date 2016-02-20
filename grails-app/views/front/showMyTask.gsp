@@ -87,6 +87,40 @@
                     }
                 });
             }
+
+            function setupWinner(bidId){
+                $.ajax({
+                    dataType:'json',
+                    type:'post',
+                    url:"${createLink(controller: 'front',action:'setupWinner',params:[id:taskInstance.id])}",
+                    data:{bidId:bidId},
+                    success:function(data){
+                        if(data.success){
+                            alert("操作成功");
+                            window.location.href="${createLink(controller:'front',action:'showMyTask',params:[id:taskInstance.id])}";
+                        }else{
+                            alert("操作失败");
+                        }
+                    }
+                });
+            }
+
+            var max=${params.max?:10},sort="${params.sort?:''}",order="${params.order?:''}";
+            function _search(condition){
+                var lastSort=sort;
+                if(condition.hasOwnProperty('max'))
+                    max=condition.max;
+                if(condition.hasOwnProperty('sort'))
+                    sort=condition.sort;
+
+                if(lastSort==sort)
+                    order=(order=='desc'?'asc':'desc');
+                else
+                    order='desc';
+
+                window.location.href="${createLink(controller: 'front',action:'showMyTask',params:[id:taskInstance.id])}?max="+max+"&sort="+sort+"&order="+order+"&simpleDesc="+$("#search-input").val();
+
+            }
         </script>
     </head>
 
@@ -142,12 +176,8 @@
     </div>
 </div>
 
-<div class="clearfix pb-5" style=" position:relative;">
-    <div class="pull-left classifyDIV pt-10">
-        <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
-        <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
-        <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
-        <br/>
+<div class="clearfix" style=" position:relative;">
+    <div class="pull-left classifyDIV">
         <g:if test="${taskInstance.status==com.lj.tps.status.TaskStatus.TASK_INIT.code}">
             <a href="${createLink(controller: 'front',action:'editTask',params:[id:taskInstance.id])}" target="_self" class="type-button pull-left">
                 编辑
@@ -161,20 +191,12 @@
                 取消任务
             </a>
         </g:if>
-        %{--<g:if  test="${ taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">--}%
-            %{--<a href="javascript:void(0)"   id="taskSuccess"  class="type-button  pull-left" onclick="taskSuccess(${taskInstance.id});">--}%
-                %{--任务成功--}%
-            %{--</a>--}%
-        %{--</g:if>--}%
-        %{--<g:if  test="${taskInstance.status ==com.lj.tps.status.TaskStatus.TASK_BIDED.code}">--}%
-            %{--<a href="javascript:void(0)"   id="taskFailure"  class="type-button  pull-left" onclick="taskFailure(${taskInstance.id});">--}%
-                %{--任务失败--}%
-            %{--</a>--}%
-        %{--</g:if>--}%
+        <div style="clear:both"></div>
+        <span class="label label-success">要求完成日期：<g:formatDate date="${taskInstance.crcd}" format="yyyy-MM-dd"/></span>
+        <span class="label label-success">${TaskStatus.getLabel(taskInstance.status)}</span>
+        <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${taskInstance.price}" format="#.##" /></span>
     </div>
 </div>
-
-    %{--${taskInstance?.detailDesc}--}%
 <textarea name="taskArea">
     ${taskInstance?.detailDesc}
 </textarea>
@@ -202,32 +224,32 @@
         <div class="pull-left classifyDIV pt-10">
             <a class="pull-left  nosel">所有竞标</a>
             <br/>
-            <a  class="pull-left type-css tags ${params.sort=='gcd'?'selected':''}" readonly="true" href="${createLink(controller: 'front',action:'showMyTask',params: [id:taskInstance.id,sort:'gcd',order:'asc'])}">保证完成日期↑</a>
-            <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}" href="${createLink(controller: 'front',action:'showMyTask',params: [id:taskInstance.id,sort:'price',order:'asc'])}">价格↑</a>
-
+            <a  class="pull-left type-css tags ${params.sort=='gcd'?'selected':''}" readonly="true" href="javascript:void(0)" onclick="_search({sort:'gcd'})">保证完成日期
+            <g:if test="${params.sort=='gcd'&& params.order=='asc'}">↑</g:if><g:else>↓</g:else>
+            </a>
+            <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}"  href="javascript:void(0)" onclick="_search({sort:'price'})">价格
+            <g:if test="${params.sort=='price'&& params.order=='asc'}">↑</g:if><g:else>↓</g:else>
+            </a>
         </div>
     </div>
     <g:each in="${bidInstanceList}" status="i" var="myBid">
-        <div class="clearfix pb-5" style=" position:relative;">
-            <div class="pull-left classifyDIV pt-5">
+        <div class="clearfix" style=" position:relative;">
+            <div class="pull-left classifyDIV">
+                <g:if test="${(taskInstance.status in [TaskStatus.TASK_BIDING.code])}">
+                    <a href="javascript:void(0)" class="type-button  pull-left" onclick="setupWinner('${myBid.id}')">中标</a>
+                </g:if>
+                <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showOtherEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
+                <div style="clear:both"></div>
                 <span class="label label-success">竞标人：${myBid.username}</span>
                 <span class="label label-success">联系方式：${myBid.contactInfo}</span>
                 <span class="label label-success">保证完成日期：<g:formatDate date="${myBid.gcd}" format="yyyy-MM-dd"/></span>
                 <g:if test="${myBid.status!=-1}">
                     <span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>
                 </g:if>
-                %{--<span class="label label-success">${com.lj.tps.status.BidStatus.getLabel(myBid.status ?: -1)}</span>--}%
                 <span class="label label-important">¥&nbsp;&nbsp;<g:formatNumber number="${myBid.price}" format="#.##" /></span>
-                <br/>
-                <g:if test="${(taskInstance.status in [TaskStatus.TASK_BIDING.code])}">
-                    <a href="${createLink(action: "setupWinner", params: [bidId: myBid.id,id:taskInstance.id])}" class="type-button  pull-left">中标</a>
-                </g:if>
-                <a  class="type-button  pull-left" href="${createLink(controller:"front",action:'showEvaluation',params:[evaluatedPerson:myBid.username])}" target="_blank">查看评价</a>
-
             </div>
         </div>
 
-        %{--${myBid.skillDesc ?: ""}--}%
         <textarea name="myBidArea_${i}">
             ${myBid.skillDesc ?: ""}
         </textarea>
@@ -259,9 +281,5 @@
 </div>
 </div>
 </div>
-
-
-
-%{--<g:render template="/layouts/comment_do_and_list"/>--}%
 	</body>
 </html>

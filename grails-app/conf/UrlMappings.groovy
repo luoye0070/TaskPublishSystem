@@ -9,5 +9,6 @@ class UrlMappings {
 
 		"/"(controller: "front",action: "index")
 		"500"(view:'/error')
+        "/down.myapp.com/android"(controller:"front",action:"download")
 	}
 }

@@ -47,19 +47,6 @@ class FrontController {
         params.setProperty("task.id",params.id)
         res << bidService.list(params)
         res << [params:params]
-
-//        //获取评论
-//        def taskId=params.id as Long
-//        def taskComments=commentService.getTaskComment([taskId:taskId])
-//        res << [taskComments:taskComments.taskComments]
-//        if(res.taskInstance?.username!=springSecurityService.currentUser?.username){
-//            res<<[canComment:true];
-//        }else{
-//            res<<[canComment:false];
-//        }
-//        //获取提交评论地址
-//        def doTaskCommentUrl=createLink(controller: "comment",action: "doTaskComment",params: [backUrl:createLink(absolute: true,controller: "front",action: "showTask",params: [id:taskId])+"#pl"]);
-//        res << [doTaskCommentUrl:doTaskCommentUrl]
     }
 
     /**
@@ -195,12 +182,7 @@ class FrontController {
     }
 
     def setupWinner(Long bidId,Long id){
-
-        def res=taskService.setupWinner(bidId,id)
-        if(!res.success)
-        flash.errors=res.errors
-        params.remove(bidId)
-        redirect(action:"showMyTask",params:params)
+        render taskService.setupWinner(bidId,id) as JSON
     }
 
     /**
@@ -222,6 +204,12 @@ class FrontController {
      * @return
      */
     def showEvaluation(){
+        if(!params.evaluationLevel)
+            params.evaluationLevel=1
+        bidEvaluationService.getEvaluations(params)
+    }
+
+    def showOtherEvaluation(){
         if(!params.evaluationLevel)
             params.evaluationLevel=1
         bidEvaluationService.getEvaluations(params)
@@ -264,4 +252,24 @@ class FrontController {
         render taskService.delTask(params) as JSON
     }
 
+
+    def download(){
+        def filePath=servletContext.getRealPath("/")+"/uploadFile/ZTLT_Mamsf.apk";
+        println filePath
+        response.setContentType("application/octet-stream")
+        response.setHeader("Content-disposition", "attachment;filename=ZTLT_Mamsf.apk")
+        def out = response.outputStream
+        def inputStream = new FileInputStream(filePath)
+        byte[] buffer = new byte[1024]
+        int i = -1
+        while ((i = inputStream.read(buffer)) != -1) {
+            out.write(buffer, 0, i)
+        }
+        out.flush()
+        out.close()
+        inputStream.close()
+
+        response.outputStream << new File(filePath).newInputStream()
+        return
+    }
 }

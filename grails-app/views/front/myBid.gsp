@@ -12,7 +12,22 @@
                 $("#msg").hide(1000);
             },10000);
         });
+        var max=${params.max?:10},sort="${params.sort?:''}",order="${params.order?:''}";
+        function _search(condition){
+            var lastSort=sort;
+            if(condition.hasOwnProperty('max'))
+                max=condition.max;
+            if(condition.hasOwnProperty('sort'))
+                sort=condition.sort;
 
+            if(lastSort==sort)
+                order=(order=='desc'?'asc':'desc');
+            else
+                order='desc';
+
+            window.location.href="${createLink(controller: 'front',action:'myBid')}?max="+max+"&sort="+sort+"&order="+order+"&simpleDesc="+$("#search-input").val();
+
+        }
     </script>
 </head>
 
@@ -31,8 +46,12 @@
             <div class="span12">
                 <div class="clearfix pb-10" style=" position:relative;">
                     <div class="pull-left classifyDIV pt-10">
-                        <a  class="pull-left type-css tags ${params.sort=='gcd'?'selected':''}" readonly="true" href="${createLink(controller: 'front',action:'myBid',params: [sort:'gcd',order:'asc'])}">保证完成日期↑</a>
-                        <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}" href="${createLink(controller: 'front',action:'myBid',params: [sort:'price',order:'asc'])}">价格↑</a>
+                        <a  class="pull-left type-css tags ${params.sort=='gcd'?'selected':''}" readonly="true" href="javascript:void(0)" onclick="_search({sort:'gcd'})">要求完成日期
+                           <g:if test="${params.sort=='gcd'&& params.order=='asc'}">↑</g:if><g:else>↓</g:else>
+                        </a>
+                        <a  class="pull-left type-css tags ${params.sort=='price'?'selected':''}"  href="javascript:void(0)" onclick="_search({sort:'price'})">价格
+                            <g:if test="${params.sort=='price'&& params.order=='asc'}">↑</g:if><g:else>↓</g:else>
+                        </a>
                     </div>
 
             </div>
