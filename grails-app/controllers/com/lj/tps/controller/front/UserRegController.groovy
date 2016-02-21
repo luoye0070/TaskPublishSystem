@@ -14,15 +14,50 @@ class UserRegController {
     def register(){
         def success = null;
         def errors = null;
-//        boolean isSaveOk = false;
+
+        if(params.isEdit=="true" && params.username){
+            def userTemp=TpsUser.findByUsername(params.username);
+            if(userTemp){
+                params.IDNumber=userTemp.getIDNumber()
+                params.mobileNumber=userTemp.getMobileNumber()
+                params.unitName=userTemp.getUnitName()
+                params.realName=userTemp.getRealName()
+                render(view: "/front/user/register",params:params)
+                return;
+            }
+        }
+
+        if(params.isUpdate=="true"){
+            def userTemp=TpsUser.findByUsername(params.username);
+            if(!userTemp){
+                render(view: "/front/user/register");
+                return;
+            }
+            if(userTemp && userTemp.getEnabled()){
+                errors ="用户名已经被注册了，请修改用户名后重试";
+                render(view: "/front/user/register", model: [success: success, errors: errors],params:params);
+                return;
+            }
+
+            userTemp.properties=params
+            userTemp.remark=""
+            def roles=Roles.findByName('普通用户');
+            userTemp.addToRoles(roles);
+            if (!userTemp.save(flush: true)) {
+                errors = I18nError.getMessage(g, userTemp.errors.allErrors).replaceAll("\n","<br/>");
+                render(view: "/front/user/register", model: [success: success, errors: errors]);
+            }else{
+                flash.success = message(code: 'default.updated.message', args: [message(code: 'tpsUser.label', default: 'TpsUser'), userTemp.id])
+                redirect(controller: "login",action: "auth");//转到登录页面进行登录
+            }
+        }
+
         if (request.method == "POST") {
-            //检查两次输入密码是否一致
             if(params.rePassword!=params.password){
                 errors ="两次输入的密码不一致";
                 render(view: "/front/user/register", model: [success: success, errors: errors]);
                 return;
             }
-            //检查用户名是否已经注册过
             def userTemp=TpsUser.findByUsername(params.username);
             if(userTemp){
                 errors ="用户名已经被注册了，请修改用户名后重试";
@@ -52,14 +87,13 @@ class UserRegController {
                 flash.success = message(code: 'default.updated.message', args: [message(code: 'tpsUser.label', default: 'TpsUser'), tpsUserInstance.id])
                 redirect(controller: "login",action: "auth");//转到登录页面进行登录
                 return;
-//                isSaveOk = true;
             }
         }
         render(view: "/front/user/register", model: [success: success, errors: errors]);
     }
     def userExist(){
         def userTemp=TpsUser.findByUsername(params.username);
-        if(userTemp){
+        if((userTemp&& params.isEdit=="true" && userTemp.enabled) || (!params.isEdit &&userTemp)){
             render(text: "true",contentType: "text/html");
         }else{
             render(text: "",contentType: "text/html");

@@ -101,6 +101,12 @@ class LoginController {
                 TpsUser tpsUser=TpsUser.findByUsername(username);
                 if(tpsUser&&tpsUser.remark){
                     msg=tpsUser.remark;
+                    if(msg==null || msg.length()==0){
+                        msg="正在审核中..."
+                    }else{
+                        flash.disabled=true
+                        flash.username=username
+                    }
                 }
             } else if (exception instanceof LockedException) {
                 msg = g.message(code: "springSecurity.errors.login.locked")

@@ -36,7 +36,7 @@
                                 <div id="msg" style="color: red;margin-left: 25px;">
                                     <g:render template="/layouts/msgs_and_errors"/>
                                 </div>
-
+                                <input type="hidden" name="isUpdate" value="${params.isEdit}">
                                 <div class="clearfix pl-25 pt-25">
                                     <div class="title pull-left fc999">
                                         <s>*</s><g:message code="member.username.label" default="Username" />
@@ -195,7 +195,7 @@
      function isUserExist(username){
          var exist=false;
          $.ajax({
-             data:{username:username},
+             data:{username:username,isEdit:${params.isEdit?true:false}},
              url:"${createLink(controller:"userReg",action: "userExist",absolute: true)}",
              async:false,
              success:function(data){

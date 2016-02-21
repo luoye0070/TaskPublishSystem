@@ -2,7 +2,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    %{--<meta name="layout" content="_manage_bui"/>--}%
     <title> 用户</title>
     <link href="${resource(dir:'js/bui/css',file:'dpl-min.css')}" rel="stylesheet" type="text/css" />
     <link href="${resource(dir:'js/bui/css',file:'bui-min.css')}" rel="stylesheet" type="text/css" />
@@ -13,35 +12,18 @@
 <div class="container">
     <div class="row">
         <form id="searchForm" class="form-horizontal span24">
-            %{--<div class="row">--}%
-                %{--<div class="control-group span8">--}%
-                    %{--<label class="control-label">${message(code: 'member.username.label', default: 'username')}</label>--}%
-                    %{--<div class="controls">--}%
-                        %{--<input type="text" class="control-text" name="username"/>--}%
-                    %{--</div>--}%
-                %{--</div>--}%
-                %{--<div class="control-group span8">--}%
-                   %{--<button  type="button" id="btnSearch" class="button button-primary">搜索</button>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-
             <div class="row">
-
                 <div class="control-group span12">
                     <label class="control-label">${message(code: 'member.username.label', default: 'Username')}：</label>
                     <div class="controls control-row-auto">
-
                         <g:textField name="username"/>
-
                     </div>
                 </div>
 
             <div class="control-group span12">
                 <label class="control-label">${message(code: 'member.realName.label', default: 'Real Name')}：</label>
                 <div class="controls control-row-auto">
-
                     <g:textField name="realName"/>
-
                 </div>
             </div>
 
@@ -52,18 +34,14 @@
                 <div class="control-group span12">
                     <label class="control-label">${message(code: 'tpsUser.IDNumber.label', default: 'IDN umber')}：</label>
                     <div class="controls control-row-auto">
-
                         <g:textField name="IDNumber" maxlength="24"/>
-
                     </div>
                 </div>
 
                 <div class="control-group span12">
                     <label class="control-label">${message(code: 'tpsUser.mobileNumber.label', default: 'Mobile Number')}：</label>
                     <div class="controls control-row-auto">
-
                         <g:textField name="mobileNumber" maxlength="16"/>
-
                     </div>
                 </div>
 
@@ -72,16 +50,14 @@
             <div class="row">
 
                 <div class="control-group span12">
-                    <label class="control-label">${message(code: 'tpsUser.unitName.label', default: 'Unit Name')}：</label>
+                    <label class="control-label">单位名称：</label>
                     <div class="controls control-row-auto">
-
                         <g:textField name="unitName" maxlength="128"/>
-
                     </div>
                 </div>
 
                 <div class="control-group span12">
-                    <label class="control-label">${message(code: 'member.enabled.label', default: 'Enabled')}：</label>
+                    <label class="control-label">是否审核通过：</label>
                     <div class="controls control-row-auto">
 
                         <select name="enabled">
@@ -134,46 +110,7 @@
                  </div>
             </div>
         </div>
-        <div class="row">
-            <div class="control-group span8">
-                <label class="control-label ">${message(code: 'member.enabled.label', default: 'enabled')}</label>
-                <div class="controls">
-                    <label class="checkbox" for=""><input type="checkbox" name="enabled" checked=""/></label>
-                </div>
-            </div>
 
-            <div class="control-group">
-                <label class="control-label">${message(code: 'member.remark.label', default: 'remark')}</label>
-                <div class="controls">
-                    <input name="remark" type="text" class="input-normal control-text" style="width: 300px;"/>
-                </div>
-            </div>
-
-            %{--<div class="control-group span8">--}%
-                %{--<label class="control-label">${message(code: 'member.accountLocked.label', default: 'accountLocked')}</label>--}%
-                %{--<div class="controls">--}%
-                    %{--<label class="checkbox" for=""><input type="checkbox" name="accountLocked" checked=""/></label>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-
-
-        </div>
-        %{--<div class="row">--}%
-            %{--<div class="control-group span8">--}%
-                %{--<label class="control-label">${message(code: 'member.accountExpired.label', default: 'accountExpired')}</label>--}%
-                %{--<div class="controls">--}%
-                    %{--<label class="checkbox" for=""><input type="checkbox" name="accountExpired" checked=""/></label>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-
-            %{--<div class="control-group span8">--}%
-                %{--<label class="control-label">${message(code: 'member.passwordExpired.label', default: 'passwordExpired')}</label>--}%
-                %{--<div class="controls">--}%
-                    %{--<label class="checkbox" for=""><input type="checkbox" name="passwordExpired" checked=""/></label>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-
-        %{--</div>--}%
         <div class="row">
             <div class="control-group">
                 <label class="control-label">角色：</label>
@@ -201,7 +138,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="control-group span24">
                 <label class="control-label">
@@ -212,10 +148,31 @@
                 </div>
             </div>
         </div>
+    </form>
+</div>
+<div id="auditContent" class="hide">
+    <form id="J_Form1" class="form-horizontal" action="${createLink(controller: 'tpsUserManage',action:'updMember')}">
+        <input type="hidden" name="id" value="">
+        <input name="roles" type="hidden" value="1">
+        <div class="row">
+            <div class="control-group">
+                <label class="control-label">&nbsp;&nbsp;</label>
+                <div class="controls bui-form-field-radiolist" data-items="{'on':'通过','off' : '未通过'}">
+                    <input name="enabled" type="hidden" value="on">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">审核备注：</label>
+                <div class="controls control-row-auto">
+                    <textarea name="remark" >
+
+                    </textarea>
+                </div>
+            </div>
+        </div>
 
     </form>
 </div>
-%{--<script type="text/javascript" src="${resource(dir:'js/bui/common',file:'search-min.js')}"></script>--}%
 <script type="text/javascript" src="${resource(dir:'js',file:'jquery-1.8.1.min.js')}"></script>
 <script type="text/javascript" src="${resource(dir:'js/bui',file:'bui-min.js')}"></script>
 <script type="text/javascript">
@@ -272,20 +229,54 @@
                         }
                     }
                 }),
+
+                auditing = new BUI.Grid.Plugins.DialogEditing({
+                    contentId : 'auditContent', //设置隐藏的Dialog内容
+                    triggerCls : 'btn-audit',
+                    width:500,
+                    editor : {
+                        success : function(){
+                            var edtor = this,form = edtor.get('form'),url='${createLink(controller:"tpsUserManage",action:'updMember')}';
+                            form.ajaxSubmit({
+                                url : url,
+                                success : function(data){
+                                    if(!data.success){
+                                        var field = data.field;
+                                        if(field){
+                                            form.getField(field).showErrors([data.error]);
+                                        }else{
+                                            BUI.Message.Alert(data.msg);
+                                        }
+                                    }else{
+                                        edtor.accept();
+                                        search.load();
+                                        if(top.topManager){
+                                            top.topManager.reloadPage("certificateReceive_menu","certificateManage");
+                                            top.topManager.reloadPage("certificateBack_menu","certificateManage");
+                                            top.topManager.reloadPage("certificateBackNoUse_menu","certificateManage");
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }),
+
                 columns = [
                     {title:"${message(code: 'member.username.label', default: 'username')}",dataIndex:'username',width:200},
                     {title:"${message(code: 'member.realName.label', default: 'realName')}",dataIndex:'realName',width:200},
-                    {title:"${message(code: 'member.remark.label', default: 'remark')}",dataIndex:'remark',width:200},
-                    {title:"${message(code: 'member.enabled.label', default: 'enabled')}",dataIndex:'enabled',width:100,renderer : function(value,obj){if(value=='on')return "是";else return "否"; }},
-                    %{--{title:"${message(code: 'member.accountLocked.label', default: 'accountLocked')}",dataIndex:'accountLocked',width:100,renderer : function(value,obj){if(value=='on')return "是";else return "否"; }},--}%
-                    %{--{title:"${message(code: 'member.accountExpired.label', default: 'accountExpired')}",dataIndex:'accountExpired',width:100,renderer : function(value,obj){if(value=='on')return "是";else return "否"; }},--}%
-                    %{--{title:"${message(code: 'member.passwordExpired.label', default: 'passwordExpired')}",dataIndex:'passwordExpired',width:100,renderer : function(value,obj){if(value=='on')return "是";else return "否"; }},--}%
+                    {title:"是否审核通过",dataIndex:'enabled',width:100,renderer : function(value,obj){if(value=='on')return "是";else return "否"; }},
+                    {title:"审核备注",dataIndex:'remark',width:200},
                     {title:'角色',dataIndex:'roles',renderer : Grid.Format.multipleItemsRenderer(enumObj1)},
                     {title:'操作',dataIndex:'',width:200,renderer : function(value,obj){
                         var
                              editStr1 = '<span class="grid-command btn-edit" title="编辑用户信息">编辑</span>',
                                 delStr = '<span class="grid-command btn-del" title="删除用户信息">删除</span>';//页面操作不需要使用Search.createLink
-                        return  editStr1 + delStr;
+                        var auditStr='';
+                        if(obj.enabled!='on'){
+                           auditStr='<span class="grid-command btn-audit" title="审核">审核</span>';
+                        }
+                        return  editStr1 + delStr+auditStr;
                     }}
                 ],
                 store = Search.createStore('${createLink(controller: "tpsUserManage",action:"findMember")}', { autoLoad:true }),
@@ -295,7 +286,7 @@
                             {text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addFunction}
                         ]
                     },
-                    plugins : [editing,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
+                    plugins : [editing,auditing,BUI.Grid.Plugins.AutoFit] // 插件形式引入多选表格
                 });
 
         var  search = new Search({
